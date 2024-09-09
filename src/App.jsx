@@ -1,13 +1,23 @@
 import { Button } from "flowbite-react";
+import AuthProvider from "./Authentication/AuthProvider/AuthProvider";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Homepage from "./Pages/Homepage/Homepage";
+import Header from "./Pages/Shared/Header/Header";
 
 function App() {
 
   return (
     <div>
-      <h1 className="text-4xl underline">
-      Hello world!
-      <Button>Click me</Button>
-      </h1>
+        <AuthProvider>
+            <BrowserRouter>
+              <Header></Header>
+              <Routes>
+                <Route path="/" element={ <Homepage></Homepage> } ></Route>
+
+              </Routes>
+              
+            </BrowserRouter>
+        </AuthProvider>
     </div>
   )
 }

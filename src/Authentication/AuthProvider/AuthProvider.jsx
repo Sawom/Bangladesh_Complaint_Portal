@@ -5,7 +5,7 @@ export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
     return (
-        <AuthContext.Provider value={allContexts}>
+        <AuthContext.Provider >
             {children}
         </AuthContext.Provider>
     );
