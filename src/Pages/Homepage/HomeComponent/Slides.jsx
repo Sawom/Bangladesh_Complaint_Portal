@@ -1,17 +1,32 @@
 import React from 'react';
-import { Carousel } from "flowbite-react";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import img1 from '../../../assets/banner/banner1.jpg'
-
+import img2 from '../../../assets/banner/banner2.jpg'
+import img3 from '../../../assets/banner/banner3.jpg'
+import img4 from '../../../assets/banner/banner4.jpg'
+import img5 from '../../../assets/banner/banner5.jpg'
 
 const Slides = () => {
     return (
-        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 container mx-auto">
-            <Carousel slideInterval={5000}>
-                <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-                <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
+        <div className="container mx-auto ">
+            <Carousel infiniteLoop autoPlay={true} loop={true} >
+                <div>
+                    <img src={img1} />
+                </div>
+                <div>
+                    <img src={img2} />
+                </div>
+                <div>
+                    <img src={img3} />
+                    
+                </div>
+                <div>
+                    <img src={img4} />
+                </div>
+                <div>
+                    <img src={img5} />
+                </div>
             </Carousel>
         </div>
     );

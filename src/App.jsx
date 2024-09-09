@@ -15,7 +15,7 @@ function App() {
                 <Route path="/" element={ <Homepage></Homepage> } ></Route>
 
               </Routes>
-              
+
             </BrowserRouter>
         </AuthProvider>
     </div>
