@@ -60,7 +60,7 @@ const Header = () => {
 
           {/* nav center */}
           <div className="navbar-center hidden lg:flex md:flex">
-            {/* menues */}
+            {/* menus */}
             <ul className="menu menu-horizontal px-5 font-bold">
               <li>
                 <Link to="/">Home</Link>

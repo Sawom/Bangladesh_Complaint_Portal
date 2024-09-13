@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import img1 from "../../../assets/banner/banner1.jpg";
+import pic1 from "../../../assets/banner/banner1.jpg";
 import img2 from "../../../assets/banner/banner2.jpg";
 import img3 from "../../../assets/banner/banner3.jpg";
 import img4 from "../../../assets/banner/banner4.jpg";
@@ -11,13 +11,13 @@ const Slides = () => {
   return (
     <div className="container mx-auto">
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-4" >
         {/* 1st column */}
-        {/* Carousel (Full width on small screens, 8 columns on large screens) */}
+        {/* Carousel (Full width on small screens, 7 columns on large screens) */}
         <div className="lg:col-span-7 md:col-span-7 col-span-12">
           <Carousel infiniteLoop autoPlay={true} loop={true}>
             <div>
-              <img src={img1} />
+              <img src={pic1} />
             </div>
             <div>
               <img src={img2} />
