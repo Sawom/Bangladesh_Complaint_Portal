@@ -8,12 +8,12 @@ const Faqs = () => {
       <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-7 ">সচরাচর জিজ্ঞাসা</h1>
       <div className="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-4" >
         {/* 1st column */}
-        <div className="lg:col-span-5 md:col-span-5 col-span-12">
+        <div className="lg:col-span-4 md:col-span-4 col-span-12">
             <img src={faqs} alt=""  className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-lg" />
         </div>
 
         {/* 2nd column */}
-        <div className="lg:col-span-7 md:col-span-7 col-span-12">
+        <div className="lg:col-span-8 md:col-span-8 col-span-12">
           <Accordion>
             {/* 1 */}
             <Accordion.Panel>
@@ -34,7 +34,7 @@ const Faqs = () => {
                 </p>
               </Accordion.Content>
             </Accordion.Panel>
-            
+
             {/* 3 */}
             <Accordion.Panel>
               <Accordion.Title>আমি কি একাধিক অভিযোগ দায়ের করতে পারি?</Accordion.Title>
