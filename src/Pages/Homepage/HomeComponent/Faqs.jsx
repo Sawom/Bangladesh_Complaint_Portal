@@ -17,7 +17,7 @@ const Faqs = () => {
           <Accordion>
             {/* 1 */}
             <Accordion.Panel>
-              <Accordion.Title>অভিযোগ জমা দেওয়ার পর কতক্ষণ সময় লাগবে সমাধান পেতে? </Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >অভিযোগ জমা দেওয়ার পর কতক্ষণ সময় লাগবে সমাধান পেতে? </Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   প্রতিটি অভিযোগের ধরণ ও জটিলতার উপর নির্ভর করে সমাধানের সময় ভিন্ন হতে পারে। আমরা সংশ্লিষ্ট কর্তৃপক্ষের সাথে সমন্বয় করি এবং যত দ্রুত সম্ভব আপনার অভিযোগ সমাধান করার চেষ্টা করি। অভিযোগের অবস্থা আপনি আপনার ড্যাশবোর্ড থেকে দেখতে পারবেন।
@@ -27,7 +27,7 @@ const Faqs = () => {
 
             {/* 2 */}
             <Accordion.Panel>
-              <Accordion.Title>আমি কীভাবে আমার অভিযোগের অগ্রগতি দেখতে পারি? </Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >আমি কীভাবে আমার অভিযোগের অগ্রগতি দেখতে পারি? </Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   আপনার অভিযোগ জমা দেওয়ার পর, আপনার প্রোফাইলে আপনার অভিযোগের স্ট্যাটাস দেখতে পারবেন। এখানে সমাধানের সব আপডেট পাবেন।
@@ -37,7 +37,7 @@ const Faqs = () => {
 
             {/* 3 */}
             <Accordion.Panel>
-              <Accordion.Title>আমি কি একাধিক অভিযোগ দায়ের করতে পারি?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >আমি কি একাধিক অভিযোগ দায়ের করতে পারি?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                    হ্যাঁ, আপনি একাধিক অভিযোগ দায়ের করতে পারবেন। প্রতিটি সমস্যা বা ইস্যুর জন্য আলাদা আলাদা অভিযোগ ফর্ম পূরণ করতে হবে। প্রতিটি অভিযোগের জন্য আপনি আলাদা ট্র্যাকিং নম্বর পাবেন, যা দিয়ে প্রতিটি অভিযোগের অগ্রগতি ট্র্যাক করা যাবে।
@@ -47,7 +47,7 @@ const Faqs = () => {
 
             {/* 4 */}
             <Accordion.Panel>
-              <Accordion.Title> অভিযোগের প্রমাণপত্র (ছবি, ভিডিও) কীভাবে যোগ করবো?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" > অভিযোগের প্রমাণপত্র (ছবি, ভিডিও) কীভাবে যোগ করবো?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   অভিযোগ ফর্ম পূরণের সময়, আপনি ‘প্রমাণপত্র যুক্ত করুন’ অপশনে ক্লিক করে ছবি, ভিডিও বা অন্যান্য প্রমাণপত্র আপলোড করতে পারবেন। এটি আপনার অভিযোগের দ্রুত সমাধানে সহায়ক হবে।
@@ -57,7 +57,7 @@ const Faqs = () => {
 
             {/* 5 */}
             <Accordion.Panel>
-              <Accordion.Title>আমি কীভাবে জানবো যে আমার অভিযোগ গ্রহণ করা হয়েছে?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >আমি কীভাবে জানবো যে আমার অভিযোগ গ্রহণ করা হয়েছে?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   অভিযোগ দায়ের করার পর, আপনি একটি নিশ্চিতকরণ মেসেজ পাবেন। এছাড়াও, আপনার প্রোফাইলে অভিযোগের ট্র্যাকিং নম্বর সহ অভিযোগের বিস্তারিত তথ্য দেখতে পারবেন।
@@ -67,7 +67,7 @@ const Faqs = () => {
 
             {/* 6 */}
             <Accordion.Panel>
-              <Accordion.Title>আমার অভিযোগ সরাসরি সংশ্লিষ্ট কর্তৃপক্ষের কাছে যাবে কি?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >আমার অভিযোগ সরাসরি সংশ্লিষ্ট কর্তৃপক্ষের কাছে যাবে কি?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   হ্যাঁ, আপনার অভিযোগ যাচাইয়ের পর, এটি সংশ্লিষ্ট কর্তৃপক্ষের কাছে পাঠানো হবে। প্রতিটি অভিযোগ সুনির্দিষ্ট বিভাগে প্রেরণ করা হয়, যাতে আপনার সমস্যার দ্রুত সমাধান সম্ভব হয়।
@@ -77,7 +77,7 @@ const Faqs = () => {
 
             {/* 7 */}
             <Accordion.Panel>
-              <Accordion.Title>অভিযোগ জমা দেওয়ার জন্য কি কোনো ফি দিতে হবে?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >অভিযোগ জমা দেওয়ার জন্য কি কোনো ফি দিতে হবে?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   না, আমাদের প্ল্যাটফর্মে অভিযোগ জমা দেওয়ার জন্য কোনো ফি প্রয়োজন নেই। এটি সম্পূর্ণ বিনামূল্যে এবং সকল নাগরিকের জন্য উন্মুক্ত।
@@ -87,7 +87,7 @@ const Faqs = () => {
 
             {/* 8 */}
             <Accordion.Panel>
-              <Accordion.Title>আমি যদি আমার পাসওয়ার্ড ভুলে যাই, তাহলে কী করবো?</Accordion.Title>
+              <Accordion.Title className="font-bold lg:text-lg md:text-lg text-sm text-black" >আমি যদি আমার পাসওয়ার্ড ভুলে যাই, তাহলে কী করবো?</Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 ">
                   পাসওয়ার্ড ভুলে গেলে, লগইন পৃষ্ঠায় 'পাসওয়ার্ড ভুলে গেছেন?' লিঙ্কে ক্লিক করুন। এরপর আপনার ইমেইল ঠিকানা প্রদান করুন এবং আপনার ইমেইলে পাসওয়ার্ড রিসেট করার নির্দেশাবলী পাঠানো হবে। সেটি অনুসরণ করে আপনি একটি নতুন পাসওয়ার্ড তৈরি করতে পারবেন।
