@@ -14,7 +14,7 @@ const Slides = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-4">
         {/* 1st column */}
         {/* Carousel (Full width on small screens, 8 columns on large screens) */}
-        <div className="lg:col-span-8 md:col-span-8 col-span-12">
+        <div className="lg:col-span-7 md:col-span-7 col-span-12">
           <Carousel infiniteLoop autoPlay={true} loop={true}>
             <div>
               <img src={img1} />
@@ -36,7 +36,7 @@ const Slides = () => {
 
         {/* 2nd column */}
         {/* User Guide (Full width on small screens, 4 columns on large screens) */}
-        <div className="lg:col-span-4 md:col-span-4 col-span-12">
+        <div className="lg:col-span-5 md:col-span-5 col-span-12">
           <div className="p-4 ">
             <h2 className="text-xl font-bold mb-4">User Guide</h2>
             <p>Here is some information on how to use the carousel...</p>
