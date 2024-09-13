@@ -6,26 +6,29 @@ const Header = () => {
   return (
     <div>
       {/* 1st part */}
-      <div className="container mx-auto">
-        <div className="navbar">
-          {/* nav start */}
-          <div className="flex navbar-start">
-            <img style={{ width: "60px" }} src={logo} alt="" />
-            <p className="font-bold normal-case lg:text-2xl md:text-xl text-sm">
-              Bangladesh Complaint Portal
-            </p>
+      <div className="shadow-md">
+        <div className="container mx-auto ">
+          <div className="navbar">
+            {/* nav start */}
+            <div className="flex navbar-start">
+              <img style={{ width: "60px" }} src={logo} alt="" />
+              <p className="font-bold normal-case lg:text-2xl md:text-xl text-sm">
+                Bangladesh Complaint Portal
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      
 
       {/* 2nd part */}
-      <div>
+      <div style={{backgroundColor: '#043927'}}>
 
         <div className="navbar container mx-auto">
           {/* nav start */}
           <div className="navbar-start">
             <div className="dropdown">
-              <div tabIndex={0} className="btn btn-ghost lg:hidden md:hidden ">
+              <div tabIndex={0} className="btn btn-ghost  text-white lg:hidden md:hidden ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -61,20 +64,20 @@ const Header = () => {
           {/* nav center */}
           <div className="navbar-center hidden lg:flex md:flex">
             {/* menus */}
-            <ul className="menu menu-horizontal px-5 font-bold">
+            <ul className="menu text-white menu-horizontal px-5 font-bold">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/"> <span className='text-white' >Home</span> </Link>
               </li>
               
               <li>
-                <a>Item 3</a>
+                <Link to="/"> <span className='text-white' >later</span> </Link>
               </li>
             </ul>
           </div>
 
           {/* nav end */}
-          <div className="navbar-end">
-            <a className="btn">login</a>
+          <div className="navbar-end  text-white">
+            <Link className=" ">login</Link>
           </div>
 
         </div>
