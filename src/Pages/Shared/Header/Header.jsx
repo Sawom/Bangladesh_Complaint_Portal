@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="shadow-md">
-      {/* 2nd part */}
+    <div className="shadow-md" style={{backgroundColor: "#FFFFFF"}}>
+      {/* 1st part */}
       <div className="navbar container mx-auto">
         {/* nav start */}
         <div className="navbar-start">
@@ -39,7 +39,6 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
           <img style={{ width: "170px" }} src={logo} alt="" />
         </div>
 
@@ -57,11 +56,10 @@ const Header = () => {
 
         {/* nav end */}
         <div className="navbar-end">
-          <Link >login</Link>
+          <Link > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
         </div>
       </div>
-
-      <hr className=" " style={{ borderWidth: "2px" }} />
+      <hr style={{ borderWidth: "2px" }} />
     </div>
   );
 };
