@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div>
-      <hr className="border-gray-500  " />
-      <div className="container mx-auto">
+    <div className=" mt-10">
+      <hr className=" "  style={{ borderWidth: '5px' }} />
+      <div className="footer-center">
         {/* 1st part */}
-        <footer className="footer p-10">
+        <footer className="footer p-8 text-left">
           <aside>
             <p>
               ACME Industries Ltd.
@@ -54,7 +54,9 @@ const Footer = () => {
           </nav>
         </footer>
 
-        <div></div>
+        <div>
+
+        </div>
       </div>
     </div>
   );
