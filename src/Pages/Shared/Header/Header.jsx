@@ -4,85 +4,64 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div>
-      {/* 1st part */}
-      <div className="shadow-md">
-        <div className="container mx-auto ">
-          <div className="navbar">
-            {/* nav start */}
-            <div className="flex navbar-start">
-              <img style={{ width: "60px" }} src={logo} alt="" />
-              <p className="font-bold normal-case lg:text-2xl md:text-xl text-sm">
-                Bangladesh Complaint Portal
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-
+    <div className="shadow-md">
       {/* 2nd part */}
-      <div style={{backgroundColor: '#043927'}}>
-
-        <div className="navbar container mx-auto">
-          {/* nav start */}
-          <div className="navbar-start">
-            <div className="dropdown">
-              <div tabIndex={0} className="btn btn-ghost  text-white lg:hidden md:hidden ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </div>
-
-               {/* responsive part */}
-              <ul
-                tabIndex={0}
-                className="menu font-bold menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-40 p-2 shadow" >
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
-              </ul>
-
+      <div className="navbar container mx-auto">
+        {/* nav start */}
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
             </div>
-            
-          </div>
-
-          {/* nav center */}
-          <div className="navbar-center hidden lg:flex md:flex">
-            {/* menus */}
-            <ul className="menu text-white menu-horizontal px-5 font-bold">
+            {/* responsive part */}
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
+            >
               <li>
-                <Link to="/"> <span className='text-white' >Home</span> </Link>
+                <a>Item 1</a>
               </li>
-              
               <li>
-                <Link to="/"> <span className='text-white' >later</span> </Link>
+                <a>Item 3</a>
               </li>
             </ul>
           </div>
-
-          {/* nav end */}
-          <div className="navbar-end  text-white">
-            <Link className=" ">login</Link>
-          </div>
-
+          {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
+          <img style={{ width: "170px" }} src={logo} alt="" />
         </div>
 
+        {/* nav center */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 3</a>
+            </li>
+          </ul>
+        </div>
+
+        {/* nav end */}
+        <div className="navbar-end">
+          <Link >login</Link>
+        </div>
       </div>
+
+      <hr className=" " style={{ borderWidth: "2px" }} />
     </div>
   );
 };
