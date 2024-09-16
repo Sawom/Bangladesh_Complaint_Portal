@@ -6,7 +6,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className=" mt-10" style={{backgroundColor: "#FFFFFF"}} >
+    <div style={{backgroundColor: "#FFFFFF"}} >
       <hr className=" "  style={{ borderWidth: '5px' }} />
       <div className="footer-center">
         {/* 1st part */}

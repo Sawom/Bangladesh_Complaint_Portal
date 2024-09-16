@@ -39,7 +39,10 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <img style={{ width: "170px" }} src={logo} alt="" />
+          <Link to="/">
+            <img style={{ width: "180px" }} src={logo} alt="" />
+          </Link>
+          
         </div>
 
         {/* nav center */}
@@ -55,8 +58,9 @@ const Header = () => {
         </div>
 
         {/* nav end */}
-        <div className="navbar-end">
-          <Link > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
+        <div className="navbar-end gap-3">
+          <Link to='/login' > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
+          <Link to='/register' > <span style={{color: "#016A4E"}} className="font-bold" >Registration</span> </Link>
         </div>
       </div>
       <hr style={{ borderWidth: "2px" }} />
