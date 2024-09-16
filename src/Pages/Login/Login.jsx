@@ -11,7 +11,7 @@ const Login = () => {
           {/* 1st part  */}
           <div className="text-center lg:text-left">
             <h1 className="text-xl font-bold">Login now!</h1>
-            <img src={login} alt="" style={{maxWidth: '80%', height: 'auto'}} />
+            <img src={login} alt="" style={{maxWidth: '90%', height: 'auto'}} />
           </div>
 
           {/* 2nd part  */}

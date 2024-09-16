@@ -11,7 +11,7 @@ const Registration = () => {
           {/* 1st part  */}
           <div className="text-center lg:text-left">
             <h1 className="text-xl font-bold">Signup now!</h1>
-            <img src={reg} alt="" style={{ maxWidth: "80%", height: "auto" }} />
+            <img src={reg} alt="" style={{ maxWidth: "90%", height: "auto" }} />
           </div>
 
           {/* 2nd part  */}
@@ -39,6 +39,19 @@ const Registration = () => {
                   type="text"
                   placeholder="address"
                   className="input input-bordered"
+                  required
+                />
+              </div>
+
+              {/* img */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text"> Upload your picture </span>
+                </label>
+                <input
+                  type="file"
+                  placeholder="upload your pic"
+                  className="file-input file-input-ghost input-bordered"
                   required
                 />
               </div>
@@ -110,7 +123,7 @@ const Registration = () => {
                 </button>
               </div>
             </form>
-            
+
           </div>
         </div>
       </div>
