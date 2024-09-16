@@ -26,10 +26,11 @@ const Header = () => {
                 />
               </svg>
             </div>
-            {/* responsive part */}
+
+            {/* responsive menu part */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
+              className=" menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
             >
               <li>
                 <a>Item 1</a>
@@ -47,7 +48,7 @@ const Header = () => {
 
         {/* nav center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className=" menu-horizontal gap-4">
             <li>
               <a>Item 1</a>
             </li>
@@ -62,6 +63,7 @@ const Header = () => {
           <Link to='/login' > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
           <Link to='/register' > <span style={{color: "#016A4E"}} className="font-bold" >Registration</span> </Link>
         </div>
+        
       </div>
       <hr style={{ borderWidth: "2px" }} />
     </div>
