@@ -75,7 +75,7 @@ const Footer = () => {
 
         {/* 2nd part */}
         <aside className="mb-2 px-4">
-          <p>Copyright © {new Date().getFullYear()} - All right reserved by আব্দুর রশীদ সাওম </p>
+          <p  >Copyright © {new Date().getFullYear()} - All right reserved by আব্দুর রশীদ সাওম </p>
         </aside>
       </div>
     </div>
