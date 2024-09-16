@@ -25,11 +25,11 @@ const Problems = () => {
       <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-7 ">এক ঠিকানায় আপনার সব অভিযোগ</h1>
 
       {/* problems grid */}
-      <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-5 my-5 px-3">
+      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-5 px-3">
         {/* 1 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p1} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center">দুর্নীতি </h2>
@@ -39,7 +39,7 @@ const Problems = () => {
         {/* 2 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p2} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center">বেকারত্ব </h2>
@@ -49,7 +49,7 @@ const Problems = () => {
         {/* 3 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p3} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> দারিদ্র্য </h2>
@@ -59,7 +59,7 @@ const Problems = () => {
         {/* 4 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p4} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> স্বাস্থ্যসেবা </h2>
@@ -69,7 +69,7 @@ const Problems = () => {
         {/* 5 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p5} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> পরিবেশ দূষণ </h2>
@@ -79,7 +79,7 @@ const Problems = () => {
         {/* 6 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p6} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> শিক্ষা ব্যবস্থা </h2>
@@ -89,7 +89,7 @@ const Problems = () => {
         {/* 7 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p7} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> সড়ক নিরাপত্তা ও যানজট </h2>
@@ -99,7 +99,7 @@ const Problems = () => {
         {/* 8 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p8} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> নারী নির্যাতন </h2>
@@ -109,7 +109,7 @@ const Problems = () => {
         {/* 9 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p9} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> বিদ্যুৎ </h2>
@@ -119,7 +119,7 @@ const Problems = () => {
         {/* 10 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p10} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> কৃষি </h2>
@@ -129,7 +129,7 @@ const Problems = () => {
         {/* 11 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p11} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> পানি সংকট  </h2>
@@ -139,7 +139,7 @@ const Problems = () => {
         {/* 12 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p12} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> প্রাকৃতিক দুর্যোগ </h2>
@@ -149,7 +149,7 @@ const Problems = () => {
         {/* 13 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p13} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> জঙ্গিবাদ ও নিরাপত্তা ঝুঁকি </h2>
@@ -159,7 +159,7 @@ const Problems = () => {
         {/* 14 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p14} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> মাদক </h2>
@@ -169,7 +169,7 @@ const Problems = () => {
         {/* 15 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p15} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> তথ্যপ্রযুক্তির সমস্যা </h2>
@@ -179,7 +179,7 @@ const Problems = () => {
         {/* 16 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p16} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> প্রযুক্তির মাধ্যমে প্রতারণা </h2>
@@ -189,7 +189,7 @@ const Problems = () => {
         {/* 17 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p17} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> শিশু শ্রম </h2>
@@ -199,7 +199,7 @@ const Problems = () => {
         {/* 18 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
-            <img src={p1} alt="" style={{width:'100px'}} />
+            <img src={p18} alt="" style={{width:'80px'}} />
           </figure>
           <div className="card-body">
             <h2 className="text-sm font-bold text-center"> অন্যান্য </h2>
