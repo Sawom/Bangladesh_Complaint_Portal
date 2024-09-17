@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import reg from "../../assets/others/signup.png";
+import eyeClosed from "../../assets/others/eye_closed.svg";
+import eyeOpen from "../../assets/others/eye_open.svg";
 
 const Registration = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  // password visible or not
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <div className="hero min-h-screen px-3">
@@ -82,32 +91,47 @@ const Registration = () => {
                 />
               </div>
 
-               {/* password */}
-              <div className="form-control">
+              {/* password */}
+              <div >
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
+
+                <label style={{backgroundColor: "#E8F0FE"}} className=" input input-bordered flex items-center gap-2">
+                  <button type="button" onClick={togglePasswordVisibility}>
+                    <img
+                      src={isPasswordVisible ? eyeOpen : eyeClosed}
+                      alt="Show Password" style={{width:'20px'}}
+                    />
+                  </button>
+                  <input
+                    type={isPasswordVisible ? "text" : "password"}
+                    placeholder="password"
+                    className="border-none focus:outline-none focus:ring-0"
+                    required
+                  />
+                </label>
               </div>
 
               {/* retype password */}
-              <div className="form-control">
+              <div >
                 <label className="label">
                   <span className="label-text">Retype Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="retype password"
-                  className="input input-bordered"
-                  required
-                />
-                <label className="label">
-                  <p className="label-text-alt ">Forgot password?</p>
+
+                <label style={{backgroundColor: "#E8F0FE"}} className=" input input-bordered flex items-center gap-2">
+                  <button type="button" onClick={togglePasswordVisibility}>
+                    <img
+                      src={isPasswordVisible ? eyeOpen : eyeClosed}
+                      alt="Show Password" style={{width:'20px'}}
+                    />
+                  </button>
+                  <input
+                    type={isPasswordVisible ? "text" : "password"}
+                    placeholder="retype password"
+                    className="border-none focus:outline-none focus:ring-0"
+                    required
+                  />
                 </label>
               </div>
 
