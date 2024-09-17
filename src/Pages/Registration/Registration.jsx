@@ -20,7 +20,7 @@ const Registration = () => {
           {/* 1st part  */}
           <div className="text-center lg:text-left">
             <h1 className="text-xl font-bold">Signup now!</h1>
-            <img src={reg} alt="" style={{ maxWidth: "90%", height: "auto" }} />
+            <img src={reg} alt="" style={{ width: "90%" }} />
           </div>
 
           {/* 2nd part  */}
@@ -57,12 +57,7 @@ const Registration = () => {
                 <label className="label">
                   <span className="label-text"> Upload your picture </span>
                 </label>
-                <input
-                  type="file"
-                  placeholder="upload your pic"
-                  className="file-input file-input-ghost input-bordered"
-                  required
-                />
+                <input type="file" className="file-input file-input-bordered file-input-sm w-full max-w-xs" />
               </div>
 
               {/* nid */}
@@ -149,6 +144,7 @@ const Registration = () => {
             </form>
 
           </div>
+          
         </div>
       </div>
     </div>

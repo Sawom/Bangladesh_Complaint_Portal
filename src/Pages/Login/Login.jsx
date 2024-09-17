@@ -13,20 +13,16 @@ const Login = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
+      
       {/* login form */}
       <div className="hero min-h-screen px-3">
         <div
           className="hero-content flex-col mt-8 mb-8 rounded-box lg:flex-row-reverse md:flex-row-reverse "
-          style={{ backgroundColor: "#FFFFFF" }}
-        >
+          style={{ backgroundColor: "#FFFFFF" }} >
           {/* 1st part  */}
           <div className="text-center lg:text-left">
             <h1 className="text-xl font-bold">Login now!</h1>
-            <img
-              src={login}
-              alt=""
-              style={{ maxWidth: "90%", height: "auto" }}
-            />
+            <img src={login} alt="" style={{ width: "90%" }} />
           </div>
 
           {/* 2nd part  */}
@@ -85,6 +81,7 @@ const Login = () => {
               </div>
             </form>
           </div>
+          
         </div>
       </div>
     </div>
