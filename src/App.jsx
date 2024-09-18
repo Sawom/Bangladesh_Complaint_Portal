@@ -7,6 +7,8 @@ import Footer from "./Pages/Shared/Footer/Footer";
 import Login from "./Pages/Login/Login";
 import Registration from "./Pages/Registration/Registration";
 import Hotlines from "./Pages/Hotlines/Hotlines";
+import DashboardPage from "./Pages/DashboardPages/DashboardPage/DashboardPage";
+import UserHome from "./Pages/DashboardPages/UserHomePage/UserHome";
 
 function App() {
 
@@ -19,7 +21,16 @@ function App() {
                 <Route path="/" element={ <Homepage></Homepage> } ></Route>
                 <Route path="/login" element={ <Login></Login> } ></Route>
                 <Route path="/register" element={ <Registration></Registration> } ></Route>
-                <Route path='/hotlines' element={ <Hotlines></Hotlines> } ></Route>
+                <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
+
+                {/* nested route: dashboard */}
+                <Route path="/dashboard" element={ <DashboardPage></DashboardPage> } >
+                  <Route path="userhome"  element={ <UserHome></UserHome> } ></Route>
+
+                </Route>
+
+
+
               </Routes>
               <Footer></Footer>
             </BrowserRouter>
