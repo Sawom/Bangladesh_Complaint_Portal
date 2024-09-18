@@ -12,7 +12,7 @@ const Registration = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#E5E5E5" }}>
+    <div style={{ backgroundColor: "#E5E5E5" }} >
       <div className="hero min-h-screen px-3">
         <div
           className="hero-content flex-col mt-8 mb-8 rounded-box lg:flex-row md:flex-row "

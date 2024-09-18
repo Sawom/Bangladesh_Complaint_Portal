@@ -6,6 +6,7 @@ import Header from "./Pages/Shared/Header/Header";
 import Footer from "./Pages/Shared/Footer/Footer";
 import Login from "./Pages/Login/Login";
 import Registration from "./Pages/Registration/Registration";
+import Hotlines from "./Pages/Hotlines/Hotlines";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
                 <Route path="/" element={ <Homepage></Homepage> } ></Route>
                 <Route path="/login" element={ <Login></Login> } ></Route>
                 <Route path="/register" element={ <Registration></Registration> } ></Route>
-
+                <Route path='/hotlines' element={ <Hotlines></Hotlines> } ></Route>
               </Routes>
               <Footer></Footer>
             </BrowserRouter>
