@@ -7,7 +7,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div style={{backgroundColor: "#FFFFFF"}} >
-      <hr className=" "  style={{ borderWidth: '5px' }} />
+      <hr  style={{ borderWidth: '5px' }} />
       <div className="footer-center">
         {/* 1st part */}
         <footer className="footer p-8 text-left">
