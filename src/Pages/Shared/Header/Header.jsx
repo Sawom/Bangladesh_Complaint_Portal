@@ -55,6 +55,9 @@ const Header = () => {
             <li>
               <Link to='/hotlines' > Hotlines </Link>
             </li>
+            <li>
+              <Link to='/dashboard/userhome' > <span style={{color: "#016A4E"}} className="font-bold" > Dashboard </span> </Link>
+            </li>
           </ul>
         </div>
 
@@ -62,7 +65,7 @@ const Header = () => {
         <div className="navbar-end gap-3">
           <Link to='/login' > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
           <Link to='/register' > <span style={{color: "#016A4E"}} className="font-bold" >Registration</span> </Link>
-          <Link to='/dashboard/userhome' > <span style={{color: "#016A4E"}} className="font-bold" > Dashboard </span> </Link>
+          
         </div>
         
       </div>

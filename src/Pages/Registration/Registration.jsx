@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import reg from "../../assets/others/signup.png";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
+import initializeFirebase from "../../Authentication/Firebase/firebase.init";
+
+initializeFirebase();
 
 const Registration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const [user, setUser] = useState({});
+
 
   // password visible or not
   const togglePasswordVisibility = () => {
@@ -35,7 +41,7 @@ const Registration = () => {
                   type="text"
                   placeholder="name"
                   className="input input-bordered"
-                  required
+                  
                 />
               </div>
 
@@ -48,7 +54,7 @@ const Registration = () => {
                   type="text"
                   placeholder="address"
                   className="input input-bordered"
-                  required
+                  
                 />
               </div>
 
@@ -69,7 +75,7 @@ const Registration = () => {
                   type="number"
                   placeholder="nid"
                   className="input input-bordered"
-                  required
+                  
                 />
               </div>
 
@@ -82,7 +88,7 @@ const Registration = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
+                  
                 />
               </div>
 
@@ -103,7 +109,7 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="password"
                     className="border-none focus:outline-none focus:ring-0"
-                    required
+                    
                   />
                 </label>
               </div>
@@ -125,7 +131,7 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="retype password"
                     className="border-none focus:outline-none focus:ring-0"
-                    required
+                    
                   />
                 </label>
               </div>
