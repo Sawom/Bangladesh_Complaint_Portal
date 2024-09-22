@@ -9,6 +9,7 @@ import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
 import initializeFirebase from "../../Authentication/Firebase/firebase.init";
+// import { useAuthState } from 'react-firebase-hooks/auth';
 
 initializeFirebase();
 
@@ -23,6 +24,7 @@ const Registration = () => {
   const [confirmpass, setConfirmpass] = useState("");
 
   const auth = getAuth();
+
   const navigate = useNavigate();
   // navigate
   if (user?.email) {
@@ -108,7 +110,7 @@ const Registration = () => {
 
           {/* 2nd part  */}
           <div className="card w-full max-w-sm shrink-0 ">
-            <form className="card-body">
+            <form className="card-body" onSubmit={handleRegistration}  >
               {/* name */}
               <div className="form-control">
                 <label className="label">
@@ -234,7 +236,8 @@ const Registration = () => {
                   Signup
                 </button>
               </div>
-
+              {/* error */}
+              <p className='text-red-600' > {error} </p>
             </form>
           </div>
         </div>
