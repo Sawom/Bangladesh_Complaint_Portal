@@ -3,9 +3,12 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import initializeFirebase from "../Firebase/firebase.init";
 
 initializeFirebase();
@@ -52,16 +55,70 @@ const useFirebase = () => {
     });
   }, [auth]);
 
-  // logout user
-  const logoutUser = ()=>{
-    signOut(auth).then( ()=>{
+  // handle login with email
+  const handleLogin = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+      })
+      .then(() => {
+        Swal.fire({
+          title: "User Login Successful!",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
-    } ).catch( (error)=>{
+  // reset password
+  const resetPassword = async () => {
+    if (email) {
+      await sendPasswordResetEmail(auth, email)
+        .then((result) => {
+          Swal.fire({
+            title: "Email sent. Check your email.",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    } else {
+      Swal.fire({
+        title: "Please enter your email address",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+    }
+  };
+
+  // logout user
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
         const errorMessage = error.message;
         setError(error.message);
-    } )
-  }
-
+      });
+  };
 
   return {
     user,
@@ -72,6 +129,8 @@ const useFirebase = () => {
     setLoading,
     logoutUser,
     registerNewUser,
+    handleLogin,
+    resetPassword,
   };
 };
 
