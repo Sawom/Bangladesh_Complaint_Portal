@@ -33,6 +33,16 @@ const useFirebase = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
+        //post to db
+        const formData = new FormData();
+        formData.append('image', data.img[0])
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        } )
+        .then(res => res.json())
+        
+
         setError("");
         verifyEmail();
       })

@@ -10,14 +10,15 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpass, setConfirmpass] = useState("");
-  const {user,registerNewUser, error, setError} = useFirebase(); 
+  const { user, registerNewUser, error, setError } = useFirebase();
 
-  
   const navigate = useNavigate();
   // navigate
   if (user?.email) {
     navigate("/");
   }
+
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
   // password visible or not
   const togglePasswordVisibility = () => {
@@ -56,6 +57,9 @@ const Registration = () => {
       return;
     }
     registerNewUser(email, password);
+    const form = document.getElementById("myform");
+    form.reset();
+    // swal msg
   };
 
   return (
@@ -73,7 +77,7 @@ const Registration = () => {
 
           {/* 2nd part  */}
           <div className="card w-full max-w-sm shrink-0 ">
-            <form className="card-body" onSubmit={handleRegistration}  >
+            <form className="card-body" onSubmit={handleRegistration}>
               {/* name */}
               <div className="form-control">
                 <label className="label">
@@ -83,7 +87,6 @@ const Registration = () => {
                   type="text"
                   placeholder="name"
                   className="input input-bordered"
-                  
                 />
               </div>
 
@@ -131,7 +134,7 @@ const Registration = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  onBlur={handleEmail} 
+                  onBlur={handleEmail}
                 />
               </div>
 
@@ -200,7 +203,7 @@ const Registration = () => {
                 </button>
               </div>
               {/* error */}
-              <p className='text-red-600' > {error} </p>
+              <p className="text-red-600"> {error} </p>
             </form>
           </div>
         </div>
