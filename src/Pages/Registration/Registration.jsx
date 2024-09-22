@@ -1,34 +1,22 @@
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  sendEmailVerification,
-} from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
-import initializeFirebase from "../../Authentication/Firebase/firebase.init";
-// import { useAuthState } from 'react-firebase-hooks/auth';
-
-initializeFirebase();
+import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const Registration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const [user, setUser] = useState({});
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpass, setConfirmpass] = useState("");
+  const {user,registerNewUser, error, setError} = useFirebase(); 
 
-  const auth = getAuth();
-
+  
   const navigate = useNavigate();
   // navigate
   if (user?.email) {
-    navigate("/home");
+    navigate("/");
   }
 
   // password visible or not
@@ -49,31 +37,6 @@ const Registration = () => {
   // handle confirm password
   const handleConfirmpass = (event) => {
     setConfirmpass(event.target.value);
-  };
-
-  // verify email
-  const verifyEmail = () => {
-    sendEmailVerification(auth.currentUser)
-      .then(() => {})
-      .catch((error) => {
-        setError(error.message);
-      });
-  };
-
-  // register new user
-  const registerNewUser = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        // Signed up
-        const user = result.user;
-        setError("");
-        verifyEmail();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
   };
 
   // create a register user
