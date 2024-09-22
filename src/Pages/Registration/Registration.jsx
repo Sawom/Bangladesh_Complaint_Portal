@@ -10,29 +10,10 @@ import reg from "../../assets/others/signup.png";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const Registration = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmpass, setConfirmpass] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
-
   const { user, auth, error, setError, verifyEmail } = useFirebase();
-
-  // email
-  // const handleEmail = (event) => {
-  //   setEmail(event.target.value);
-  // };
-
-  // // password
-  // const handlePassword = (event) => {
-  //   setPassword(event.target.value);
-  // };
-
-  // // confirm password
-  // const handleConfirmpass = (event) => {
-  //   setConfirmpass(event.target.value);
-  // };
 
   const navigate = useNavigate();
   // navigate
@@ -45,17 +26,16 @@ const Registration = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  // register new user
-
-  // create a register user
+  // create a new register user. with *react hook form*
+  // user data with profile picture, without password 
   const onSubmit = (data) => {
-    const { password, confirmpass, email} = data;
-    // event.preventDefault();
+    // destructure here
+    const { password, confirmpass, email } = data;
     if (password !== confirmpass) {
       setError("Your password did not match! ");
       return;
     }
-    // must two upper case
+    // must two upper case condition
     if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
       setError("Password Must contain 2 upper case");
       return;
@@ -64,65 +44,60 @@ const Registration = () => {
       setError("Password Must be at least 6 characters long.");
       return;
     }
-    
 
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-          const user = result.user;
-          //post to db
-          const formData = new FormData();
-          formData.append("image", data.img[0]);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        //post to db
+        const formData = new FormData();
+        formData.append("image", data.img[0]);
 
-          fetch(img_hosting_url, {
-            method: "POST",
-            body: formData,
-          })
-            .then((res) => res.json())
-            .then((imgResponse) => {
-              if (imgResponse.success) {
-                const imgUrl = imgResponse.data.display_url;
-                console.log(imgUrl);
-                const { name, address, nid, email, password, confirmpass } =
-                  data;
-                const newUser = {
-                  name: name,
-                  address: address,
-                  img: imgUrl,
-                  nid: nid,
-                  email: email,
-                };
-                axios
-                  .post("http://localhost:5000/users", newUser)
-                  .then((data) => {
-                    if (data.data.insertedId) {
-                      // reset();
-                      // swal msg
-                      Swal.fire({
-                        title:
-                          "Now you are registered. Congratulations! Check your email to verify your email address.",
-                        showClass: {
-                          popup: "animate__animated animate__fadeInDown",
-                        },
-                        hideClass: {
-                          popup: "animate__animated animate__fadeOutUp",
-                        },
-                      });
-                      console.log(data);
-                    }
-                  });
-              }
-            });
-
-          setError("");
-          verifyEmail();
+        fetch(img_hosting_url, {
+          method: "POST",
+          body: formData,
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setError(errorMessage);
-        });
+          .then((res) => res.json())
+          .then((imgResponse) => {
+            if (imgResponse.success) {
+              const imgUrl = imgResponse.data.display_url;
+              console.log(imgUrl);
+              const { name, address, nid, email, password, confirmpass } = data;
+              const newUser = {
+                name: name,
+                address: address,
+                img: imgUrl,
+                nid: nid,
+                email: email,
+              };
+              axios.post("http://localhost:5000/users", newUser)
+                .then((data) => {
+                  if (data.data.insertedId) {
+                    reset();
+                    // swal register user confirm msg
+                    Swal.fire({
+                      title:
+                        "Now you are registered. Congratulations! Check your email to verify your email address.",
+                      showClass: {
+                        popup: "animate__animated animate__fadeInDown",
+                      },
+                      hideClass: {
+                        popup: "animate__animated animate__fadeOutUp",
+                      },
+                    });
+                    console.log(data);
+                  }
+                });
+            }
+          });
 
-    
+        setError("");
+        verifyEmail();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   return (
