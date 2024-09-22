@@ -3,8 +3,11 @@ import pics1 from "../../../assets/logo/cabinet.png";
 import pics2 from "../../../assets/logo/ict.png";
 import pics3 from "../../../assets/logo/gov.png";
 import "./Footer.css";
+import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
 const Footer = () => {
+  const {user} = useFirebase();
+
   return (
     <div style={{backgroundColor: "#FFFFFF"}} >
       <hr  style={{ borderWidth: '5px' }} />
@@ -27,11 +30,12 @@ const Footer = () => {
                 <img src={pics3} className="imgSize" alt="" />
               </a>
             </div>
+            <p style={{color: '#05694E', fontWeight:'bold' }}> User: {user?.email && user.email} </p>
           </aside>
           {/* logos */}
-          <nav>
-            <h6> যোগাযোগ <br /> support@demo.com </h6>
-            <h6 className="footer-title" > সাথে থাকুন </h6>
+          <nav  >
+            <h6 style={{fontWeight:'bold'}}> যোগাযোগ <br /> support@demo.com </h6>
+            <h6 className="footer-title " style={{fontWeight:'bold'}} > সাথে থাকুন </h6>
             <div className="grid grid-flow-col gap-4" >
               {/* twitter */}
               <a>

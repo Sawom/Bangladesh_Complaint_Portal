@@ -1,8 +1,35 @@
 import React from "react";
 import logo from "../../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
+import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import Swal from "sweetalert2";
 
 const Header = () => {
+  const {user, logoutUser} = useFirebase();
+
+   // logout function
+    const logoutFunction =() =>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be signed out.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Signed Out!'
+        }).then(result =>{
+            if (result.isConfirmed){
+                logoutUser();
+                Swal.fire(
+                        'Signed out!',
+                        'You are signed out.',
+                        'success'
+                )
+            }
+        }) 
+    }
+
+
   return (
     <div className="shadow-md" style={{backgroundColor: "#FFFFFF"}}>
       {/* 1st part */}
@@ -63,8 +90,14 @@ const Header = () => {
 
         {/* nav end */}
         <div className="navbar-end gap-3">
-          <Link to='/login' > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
-          <Link to='/register' > <span style={{color: "#016A4E"}} className="font-bold" >Registration</span> </Link>
+          {
+            user?.email ? 
+            <button onClick={logoutFunction} > <span style={{color: "#016A4E"}} className="font-bold" >Logout</span> </button>
+            :
+            <Link to='/login' > <span style={{color: "#016A4E"}} className="font-bold" >Login</span> </Link>
+          }
+          
+          
           
         </div>
         
