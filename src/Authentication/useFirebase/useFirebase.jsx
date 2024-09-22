@@ -28,31 +28,6 @@ const useFirebase = () => {
       });
   };
 
-  // register new user
-  const registerNewUser = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        const user = result.user;
-        //post to db
-        const formData = new FormData();
-        formData.append('image', data.img[0])
-        fetch(img_hosting_url, {
-            method: 'POST',
-            body: formData
-        } )
-        .then(res => res.json())
-        
-
-        setError("");
-        verifyEmail();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  };
-
   // observer: if user signin or not
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -138,9 +113,9 @@ const useFirebase = () => {
     loading,
     setLoading,
     logoutUser,
-    registerNewUser,
     handleLogin,
     resetPassword,
+    verifyEmail,
   };
 };
 

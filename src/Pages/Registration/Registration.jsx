@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import eyeClosed from "../../assets/others/eye_closed.svg";
@@ -7,10 +8,14 @@ import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const Registration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [propic, setPropic] = useState("");
+  const [nid, setNid] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpass, setConfirmpass] = useState("");
-  const { user, registerNewUser, error, setError } = useFirebase();
+  const { user, error, setError, verifyEmail } = useFirebase();
 
   const navigate = useNavigate();
   // navigate
@@ -25,6 +30,26 @@ const Registration = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  // handle name
+  const handleName = (event)=>{
+    setName(event.target.value);
+  }
+
+  // handle address
+  const handleAddress = (event)=>{
+    setAddress(event.target.value);
+  }
+
+  // handle propic
+  const handlePropic = (event)=>{
+    setPropic(event.target.files);
+  }
+
+  // handle nid
+  const handleNid = (event)=>{
+    setNid(event.target.value);
+  }
+
   // handle email
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -38,6 +63,37 @@ const Registration = () => {
   // handle confirm password
   const handleConfirmpass = (event) => {
     setConfirmpass(event.target.value);
+  };
+
+  // register new user
+  const registerNewUser = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        //post to db
+        const formData = new FormData();
+        formData.append("image", data.img[0]);
+        fetch(img_hosting_url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((imgResponse) => {
+            if (imgResponse.success) {
+              const imgUrl = imgResponse.data.display_url;
+              console.log(imgUrl);
+              //***** */
+            }
+          });
+
+        setError("");
+        verifyEmail();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   // create a register user
@@ -57,6 +113,7 @@ const Registration = () => {
       return;
     }
     registerNewUser(email, password);
+    // clear form
     const form = document.getElementById("myform");
     form.reset();
     // swal msg
@@ -87,6 +144,7 @@ const Registration = () => {
                   type="text"
                   placeholder="name"
                   className="input input-bordered"
+                  name="name"
                 />
               </div>
 
@@ -99,6 +157,7 @@ const Registration = () => {
                   type="text"
                   placeholder="address"
                   className="input input-bordered"
+                  name="address"
                 />
               </div>
 
@@ -110,6 +169,8 @@ const Registration = () => {
                 <input
                   type="file"
                   className="file-input file-input-bordered file-input-sm w-full max-w-xs"
+                  placeholder="upload your picture"
+                  name="propic"
                 />
               </div>
 
@@ -122,6 +183,7 @@ const Registration = () => {
                   type="number"
                   placeholder="nid"
                   className="input input-bordered"
+                  name="nid"
                 />
               </div>
 
@@ -135,6 +197,7 @@ const Registration = () => {
                   placeholder="email"
                   className="input input-bordered"
                   onBlur={handleEmail}
+                  name="email"
                 />
               </div>
 
@@ -159,7 +222,7 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="password"
                     className="border-none focus:outline-none focus:ring-0"
-                    onBlur={handlePassword}
+                    onBlur={handlePassword}  name="password"
                   />
                 </label>
               </div>
@@ -185,7 +248,7 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="retype password"
                     className="border-none focus:outline-none focus:ring-0"
-                    onBlur={handleConfirmpass}
+                    onBlur={handleConfirmpass} name="password2"
                   />
                 </label>
               </div>
