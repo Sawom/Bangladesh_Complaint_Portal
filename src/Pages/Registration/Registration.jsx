@@ -202,7 +202,7 @@ const Registration = () => {
                   className="file-input file-input-bordered file-input-sm w-full max-w-xs"
                   placeholder="upload your picture"
                   name="propic"
-                  onBlur={handlePropic}
+                  onChange={handlePropic}
                 />
               </div>
 
