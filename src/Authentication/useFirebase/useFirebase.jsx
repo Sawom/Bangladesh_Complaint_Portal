@@ -107,6 +107,7 @@ const useFirebase = () => {
 
   return {
     user,
+    auth,
     setUser,
     error,
     setError,
