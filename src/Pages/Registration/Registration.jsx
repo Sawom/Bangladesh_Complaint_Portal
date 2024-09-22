@@ -1,5 +1,7 @@
+import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import eyeClosed from "../../assets/others/eye_closed.svg";
@@ -8,15 +10,29 @@ import reg from "../../assets/others/signup.png";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const Registration = () => {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmpass, setConfirmpass] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [propic, setPropic] = useState("");
-  const [nid, setNid] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmpass, setConfirmpass] = useState("");
-  const { user,auth, error, setError, verifyEmail } = useFirebase();
+  const { register, handleSubmit, reset } = useForm();
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
+
+  const { user, auth, error, setError, verifyEmail } = useFirebase();
+
+  // email
+  // const handleEmail = (event) => {
+  //   setEmail(event.target.value);
+  // };
+
+  // // password
+  // const handlePassword = (event) => {
+  //   setPassword(event.target.value);
+  // };
+
+  // // confirm password
+  // const handleConfirmpass = (event) => {
+  //   setConfirmpass(event.target.value);
+  // };
 
   const navigate = useNavigate();
   // navigate
@@ -24,112 +40,17 @@ const Registration = () => {
     navigate("/");
   }
 
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
-
   // password visible or not
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  // handle name
-  const handleName = (event) => {
-    setName(event.target.value);
-  };
-
-  // handle address
-  const handleAddress = (event) => {
-    setAddress(event.target.value);
-  };
-
-  // handle propic
-  const handlePropic = (event) => {
-    setPropic(event.target.files);
-  };
-
-  // handle nid
-  const handleNid = (event) => {
-    setNid(event.target.value);
-  };
-
-  // handle email
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  // handle password
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  // handle confirm password
-  const handleConfirmpass = (event) => {
-    setConfirmpass(event.target.value);
-  };
-
   // register new user
-  const registerNewUser = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        const user = result.user;
-        //post to db
-        const formData = new FormData();
-        formData.append("image", data.img[0]);
-        fetch(img_hosting_url, {
-          method: "POST",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((imgResponse) => {
-            if (imgResponse.success) {
-              const imgUrl = imgResponse.data.display_url;
-              console.log(imgUrl);
-
-              const saveUser = {
-                name: name,
-                address: address,
-                propic: imgUrl,
-                nid: nid,
-                email: email,
-              };
-              fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(saveUser),
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  if (data.insertedId) {
-                    Swal.fire({
-                      title:
-                        "Now you are registered. Congratulations! Check your email to verify your email address.",
-                      showClass: {
-                        popup: "animate__animated animate__fadeInDown",
-                      },
-                      hideClass: {
-                        popup: "animate__animated animate__fadeOutUp",
-                      },
-                    });
-
-                  }
-                });
-            }
-          });
-
-        setError("");
-        verifyEmail();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  };
 
   // create a register user
-  const handleRegistration = (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
+    const { password, confirmpass, email} = data;
+    // event.preventDefault();
     if (password !== confirmpass) {
       setError("Your password did not match! ");
       return;
@@ -143,8 +64,64 @@ const Registration = () => {
       setError("Password Must be at least 6 characters long.");
       return;
     }
-    registerNewUser(email, password);
-    // clear form later
+    
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+          const user = result.user;
+          //post to db
+          const formData = new FormData();
+          formData.append("image", data.img[0]);
+
+          fetch(img_hosting_url, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((imgResponse) => {
+              if (imgResponse.success) {
+                const imgUrl = imgResponse.data.display_url;
+                console.log(imgUrl);
+                const { name, address, nid, email, password, confirmpass } =
+                  data;
+                const newUser = {
+                  name: name,
+                  address: address,
+                  img: imgUrl,
+                  nid: nid,
+                  email: email,
+                };
+                axios
+                  .post("http://localhost:5000/users", newUser)
+                  .then((data) => {
+                    if (data.data.insertedId) {
+                      // reset();
+                      // swal msg
+                      Swal.fire({
+                        title:
+                          "Now you are registered. Congratulations! Check your email to verify your email address.",
+                        showClass: {
+                          popup: "animate__animated animate__fadeInDown",
+                        },
+                        hideClass: {
+                          popup: "animate__animated animate__fadeOutUp",
+                        },
+                      });
+                      console.log(data);
+                    }
+                  });
+              }
+            });
+
+          setError("");
+          verifyEmail();
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorMessage);
+        });
+
     
   };
 
@@ -163,7 +140,7 @@ const Registration = () => {
 
           {/* 2nd part  */}
           <div className="card w-full max-w-sm shrink-0 ">
-            <form className="card-body" onSubmit={handleRegistration}>
+            <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
               {/* name */}
               <div className="form-control">
                 <label className="label">
@@ -174,7 +151,7 @@ const Registration = () => {
                   placeholder="name"
                   className="input input-bordered"
                   name="name"
-                  onBlur={handleName}
+                  {...register("name", { required: true })}
                 />
               </div>
 
@@ -188,7 +165,7 @@ const Registration = () => {
                   placeholder="address"
                   className="input input-bordered"
                   name="address"
-                  onBlur={handleAddress}
+                  {...register("address", { required: true })}
                 />
               </div>
 
@@ -202,7 +179,7 @@ const Registration = () => {
                   className="file-input file-input-bordered file-input-sm w-full max-w-xs"
                   placeholder="upload your picture"
                   name="propic"
-                  onChange={handlePropic}
+                  {...register("img", { required: true })}
                 />
               </div>
 
@@ -216,7 +193,7 @@ const Registration = () => {
                   placeholder="nid"
                   className="input input-bordered"
                   name="nid"
-                  onBlur={handleNid}
+                  {...register("nid", { required: true })}
                 />
               </div>
 
@@ -229,8 +206,8 @@ const Registration = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  onBlur={handleEmail}
                   name="email"
+                  {...register("email", { required: true })}
                 />
               </div>
 
@@ -255,8 +232,8 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="password"
                     className="border-none focus:outline-none focus:ring-0"
-                    onBlur={handlePassword}
                     name="password"
+                    {...register("password", { required: true })}
                   />
                 </label>
               </div>
@@ -282,8 +259,8 @@ const Registration = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="retype password"
                     className="border-none focus:outline-none focus:ring-0"
-                    onBlur={handleConfirmpass}
-                    name="password2"
+                    name="confirmpass"
+                    {...register("confirmpass", { required: true })}
                   />
                 </label>
               </div>
