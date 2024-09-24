@@ -17,19 +17,9 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 const Header = () => {
   const { user, logoutUser } = useFirebase();
 
-  const [isOpen, setIsOpen] = useState(false); // Drawer is closed by default
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Function to open the drawer
-  const handleOpen = () => {
-    console.log("Opening drawer...");
-    setIsOpen(true);
-  };
-
-  // Function to close the drawer
-  const handleClose = () => {
-    console.log("Closing drawer...");
-    setIsOpen(false);
-  };
+  const handleClose = () => setIsOpen(false);
 
   // logout function
   const logoutFunction = () => {
@@ -123,7 +113,7 @@ const Header = () => {
                   className="btn btn-ghost btn-circle avatar"
                 >
                   {/* main button part */}
-                  <div onClick={handleOpen} className="w-10 rounded-full">
+                  <div onClick={() => setIsOpen(true)} className="w-10 rounded-full">
                     <button>
                       <img
                         alt="Tailwind CSS Navbar component"
