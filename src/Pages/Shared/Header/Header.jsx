@@ -19,10 +19,6 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false); // Drawer is closed by default
 
-  useEffect(() => {
-    setIsOpen(false); // Ensure drawer is closed when the component mounts
-  }, []); 
-
   // Function to open the drawer
   const handleOpen = () => {
     console.log("Opening drawer...");
