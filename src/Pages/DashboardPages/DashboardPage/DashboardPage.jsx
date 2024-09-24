@@ -9,7 +9,7 @@ import {
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, Link  } from "react-router-dom";
 
 const DashboardPage = () => {
   return (
