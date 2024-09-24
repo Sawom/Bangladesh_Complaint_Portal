@@ -1,4 +1,14 @@
-import React from "react";
+import { Drawer, Sidebar } from "flowbite-react";
+import React, { useState } from "react";
+import {
+  HiArrowSmRight,
+  HiChartPie,
+  HiInbox,
+  HiShoppingBag,
+  HiTable,
+  HiUser,
+  HiViewBoards,
+} from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
@@ -6,6 +16,10 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
 const Header = () => {
   const { user, logoutUser } = useFirebase();
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => setIsOpen(false);
 
   // logout function
   const logoutFunction = () => {
@@ -78,11 +92,9 @@ const Header = () => {
             </li>
             <li>
               <Link to="/dashboard/userhome">
-                {" "}
                 <span style={{ color: "#016A4E" }} className="font-bold">
-                  {" "}
-                  Dashboard{" "}
-                </span>{" "}
+                  Dashboard
+                </span>
               </Link>
             </li>
           </ul>
@@ -92,41 +104,88 @@ const Header = () => {
         <div className="navbar-end gap-3">
           {user?.email ? (
             <>
+              {/* start */}
               <div className="dropdown dropdown-end">
+                {/* toggle btn */}
                 <div
                   tabIndex={0}
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
                 >
+                  {/* main button part */}
                   <div className="w-10 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    />
+                    <button onClick={() => setIsOpen(true)}>
+                      <img
+                        alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      />
+                    </button>
                   </div>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
+
+                {/* menu  */}
+                <Drawer
+                  className="w-auto"
+                  open={isOpen}
+                  onClose={handleClose}
+                  position="right"
                 >
-                  <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
-                  <li>
-                    <button onClick={logoutFunction}>
-                      <span style={{ color: "#016A4E" }} className="font-bold">
-                        Logout
-                      </span>
-                    </button>
-                  </li>
-                </ul>
+                  <Drawer.Header title="Drawer" />
+                  <Drawer.Items>
+                    {/* sidebar */}
+                    <Sidebar
+                      className=" w-auto "
+                      aria-label="Default sidebar example"
+                    >
+                      <Sidebar.Items>
+                        <Sidebar.ItemGroup>
+                          {/* 1 */}
+                          <Sidebar.Item icon={HiChartPie}>
+                            <Link to="/dashboard/userhome"> User Home </Link>
+                          </Sidebar.Item>
+                          {/* 2 */}
+                          <Sidebar.Item
+                            href="#"
+                            icon={HiViewBoards}
+                            label="Pro"
+                            labelColor="dark"
+                          >
+                            Kanban
+                          </Sidebar.Item>
+                          {/* 3 */}
+                          <Sidebar.Item href="#" icon={HiInbox} label="3">
+                            Inbox
+                          </Sidebar.Item>
+                          {/* 4 */}
+                          <Sidebar.Item href="#" icon={HiUser}>
+                            Users
+                          </Sidebar.Item>
+                          {/* 5 */}
+                          <Sidebar.Item href="#" icon={HiShoppingBag}>
+                            Products
+                          </Sidebar.Item>
+                          {/* 6 */}
+                          <Sidebar.Item href="#" icon={HiArrowSmRight}>
+                            Sign In
+                          </Sidebar.Item>
+                          {/* 7 */}
+                          <Sidebar.Item href="#" icon={HiTable}>
+                            <button onClick={logoutFunction}>
+                              <span
+                                style={{ color: "#016A4E" }}
+                                className="font-bold"
+                              >
+                                Logout
+                              </span>
+                            </button>
+                          </Sidebar.Item>
+                        </Sidebar.ItemGroup>
+                      </Sidebar.Items>
+                    </Sidebar>
+                  </Drawer.Items>
+                </Drawer>
               </div>
+              {/* end */}
             </>
           ) : (
             <Link to="/login">
