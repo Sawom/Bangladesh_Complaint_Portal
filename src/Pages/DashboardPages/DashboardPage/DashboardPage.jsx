@@ -23,7 +23,7 @@ const DashboardPage = () => {
 
           {/* sidebar content here */}
           <div className="mt-4 mb-4 " >
-            <Sidebar className=" w-auto border-box " aria-label="Default sidebar example">
+            <Sidebar className=" w-auto border-box shadow-lg" aria-label="Default sidebar example">
               <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     {/* 1 */}
