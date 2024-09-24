@@ -7,7 +7,6 @@ import Footer from "./Pages/Shared/Footer/Footer";
 import Login from "./Pages/Login/Login";
 import Registration from "./Pages/Registration/Registration";
 import Hotlines from "./Pages/Hotlines/Hotlines";
-import DashboardPage from "./Pages/DashboardPages/DashboardPage/DashboardPage";
 import UserHome from "./Pages/DashboardPages/UserHomePage/UserHome";
 
 function App() {
@@ -23,11 +22,10 @@ function App() {
                 <Route path="/register" element={ <Registration></Registration> } ></Route>
                 <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
 
+                {/* user home */}
+                <Route path="/userhome"  element={ <UserHome></UserHome> } ></Route>
                 {/* nested route: dashboard */}
-                <Route path="/dashboard" element={ <DashboardPage></DashboardPage> } >
-                  <Route path="userhome"  element={ <UserHome></UserHome> } ></Route>
-
-                </Route>
+                
 
 
 

@@ -3,21 +3,18 @@ import { Link } from "react-router-dom";
 
 const UserHome = () => {
   return (
-    <div
-      className="container mx-auto mt-4 mb-4 bg-white"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className=" ">
+    <div style={{  backgroundColor: "#E5E5E5"  }} className="p-3" >
+      <br />
+      <div className="container mx-auto mt-4 mb-4 "  style={{ backgroundColor: "#FFFFFF", minHeight:'70vh' }} >
         <div className="p-4 flex justify-between" style={{ backgroundColor: "#016A4E" }}>
           <h1 className="lg:text-lg md:text-lg text-sm text-white"> Profile details </h1>
-          {/* <Link className="lg:text-lg md:text-lg text-sm text-white" > Edit profile </Link> */}
         </div>
         {/* profile info */}
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6 ">
           {/* img */}
           <div className="mb-6">
             <img
-              className=" mb-2 lg:w-[200px] lg:h-[200px] md:w-[200px] md:h-[200px] w-[100px] h-[100px] rounded-full object-cover"
+              className=" mb-2 w-[200px] h-[200px] rounded-full object-cover"
               src="https://via.placeholder.com/200"
               alt="Avatar" />
               <Link className=" text-sm " > Edit profile </Link>
@@ -31,6 +28,7 @@ const UserHome = () => {
           </div>
         </div>
       </div>
+      <br />
     </div>
   );
 };

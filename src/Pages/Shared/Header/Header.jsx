@@ -1,5 +1,5 @@
 import { Drawer, Sidebar } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiArrowSmRight,
   HiChartPie,
@@ -17,9 +17,23 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 const Header = () => {
   const { user, logoutUser } = useFirebase();
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); // Drawer is closed by default
 
-  const handleClose = () => setIsOpen(false);
+  useEffect(() => {
+    setIsOpen(false); // Ensure drawer is closed when the component mounts
+  }, []); 
+
+  // Function to open the drawer
+  const handleOpen = () => {
+    console.log("Opening drawer...");
+    setIsOpen(true);
+  };
+
+  // Function to close the drawer
+  const handleClose = () => {
+    console.log("Closing drawer...");
+    setIsOpen(false);
+  };
 
   // logout function
   const logoutFunction = () => {
@@ -113,8 +127,8 @@ const Header = () => {
                   className="btn btn-ghost btn-circle avatar"
                 >
                   {/* main button part */}
-                  <div className="w-10 rounded-full">
-                    <button onClick={() => setIsOpen(true)}>
+                  <div onClick={handleOpen} className="w-10 rounded-full">
+                    <button>
                       <img
                         alt="Tailwind CSS Navbar component"
                         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
@@ -141,7 +155,7 @@ const Header = () => {
                         <Sidebar.ItemGroup>
                           {/* 1 */}
                           <Sidebar.Item icon={HiChartPie}>
-                            <Link to="/dashboard/userhome"> User Home </Link>
+                            <Link to="/userhome"> User Home </Link>
                           </Sidebar.Item>
                           {/* 2 */}
                           <Sidebar.Item
@@ -153,23 +167,21 @@ const Header = () => {
                             Kanban
                           </Sidebar.Item>
                           {/* 3 */}
-                          <Sidebar.Item href="#" icon={HiInbox} label="3">
+                          <Sidebar.Item icon={HiInbox} label="3">
                             Inbox
                           </Sidebar.Item>
                           {/* 4 */}
-                          <Sidebar.Item href="#" icon={HiUser}>
-                            Users
-                          </Sidebar.Item>
+                          <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
                           {/* 5 */}
-                          <Sidebar.Item href="#" icon={HiShoppingBag}>
+                          <Sidebar.Item icon={HiShoppingBag}>
                             Products
                           </Sidebar.Item>
                           {/* 6 */}
-                          <Sidebar.Item href="#" icon={HiArrowSmRight}>
+                          <Sidebar.Item icon={HiArrowSmRight}>
                             Sign In
                           </Sidebar.Item>
                           {/* 7 */}
-                          <Sidebar.Item href="#" icon={HiTable}>
+                          <Sidebar.Item icon={HiTable}>
                             <button onClick={logoutFunction}>
                               <span
                                 style={{ color: "#016A4E" }}
