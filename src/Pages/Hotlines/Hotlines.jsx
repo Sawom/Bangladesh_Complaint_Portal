@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 
-const Hotlines = ({ numbersInfo }) => {
+const Hotlines = () => {
   const [numbers, setNumbers] = useState([]);
 
   useEffect(() => {
@@ -19,8 +19,8 @@ const Hotlines = ({ numbersInfo }) => {
       <div
         className="mt-5 mb-5 container mx-auto rounded-box px-5"
         style={{ backgroundColor: "#FFFFFF" }}  >
-        <div className="overflow-x-auto px-4">
-          <Table>
+        <div className="overflow-x-auto px-2">
+          <Table hoverable  >
             {/* table head */}
             <Table.Head className="bg-base-content "  >
               <Table.HeadCell> # </Table.HeadCell>
@@ -29,21 +29,19 @@ const Hotlines = ({ numbersInfo }) => {
               <Table.HeadCell> Details </Table.HeadCell>
             </Table.Head>
 
+            {/* table body. map operation */}
             {numbers.map((numberInfo, index) => (
-              <Table.Body className="divide-y" key={numberInfo._id}>
-                
-                <Table.Row className="bg-white hover dark:border-gray-700 dark:bg-gray-800">
+              <Table.Body key={numberInfo._id} >
+                <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800" >
                   <Table.Cell> {index + 1} </Table.Cell>
                   <Table.Cell>
-                    {" "}
                     <a href={numberInfo.weblink} target="_blank">
                       {numberInfo.weblink}
-                    </a>{" "}
+                    </a>
                   </Table.Cell>
                   <Table.Cell> {numberInfo.hotline} </Table.Cell>
                   <Table.Cell> {numberInfo.details} </Table.Cell>
                 </Table.Row>
-
               </Table.Body>
             ))}
           </Table>
