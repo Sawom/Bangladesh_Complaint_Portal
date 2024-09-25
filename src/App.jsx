@@ -7,7 +7,8 @@ import Footer from "./Pages/Shared/Footer/Footer";
 import Login from "./Pages/Login/Login";
 import Registration from "./Pages/Registration/Registration";
 import Hotlines from "./Pages/Hotlines/Hotlines";
-import UserHome from "./Pages/DashboardPages/UserHomePage/UserHome";
+import UserHome from "./Pages/UserHomePage/UserHome";
+import ManageUsers from "./Pages/ManageUsers/ManageUsers";
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
 
                 {/* user home */}
                 <Route path="/userhome"  element={ <UserHome></UserHome> } ></Route>
-                {/* nested route: dashboard */}
+                <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
                 
 
 

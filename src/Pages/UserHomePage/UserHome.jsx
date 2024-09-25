@@ -5,7 +5,7 @@ const UserHome = () => {
   return (
     <div style={{  backgroundColor: "#E5E5E5"  }} className="p-3" >
       <br />
-      <div className="container mx-auto mt-4 mb-4 "  style={{ backgroundColor: "#FFFFFF", minHeight:'70vh' }} >
+      <div className="container mx-auto mt-4 mb-4"  style={{ backgroundColor: "#FFFFFF", minHeight:'70vh' }} >
         <div className="p-4 flex justify-between" style={{ backgroundColor: "#016A4E" }}>
           <h1 className="lg:text-lg md:text-lg text-sm text-white"> Profile details </h1>
         </div>

@@ -161,34 +161,23 @@ const Header = () => {
                       >
                         <Sidebar.Items>
                           <Sidebar.ItemGroup>
-                            {/* 1 */}
+                            {/* 1 user home */}
                             <Sidebar.Item icon={HiChartPie}>
-                              <Link to="/userhome"> User Home </Link>
+                              <Link to="/userhome"> <span style={{ color: "#016A4E" }} className="font-bold" >User Home</span>  </Link>
                             </Sidebar.Item>
-                            {/* 2 */}
-                            <Sidebar.Item
-                              href="#"
-                              icon={HiViewBoards}
-                              label="Pro"
-                              labelColor="dark"
-                            >
-                              Kanban
+                            {/* 2 manage user */}
+                            <Sidebar.Item icon={HiUser} >
+                              <Link to="/manageuser"> <span style={{ color: "#016A4E" }} className="font-bold" >Manage User</span> </Link>
                             </Sidebar.Item>
                             {/* 3 */}
-                            <Sidebar.Item icon={HiInbox} label="3">
-                              Inbox
-                            </Sidebar.Item>
-                            {/* 4 */}
-                            <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
-                            {/* 5 */}
                             <Sidebar.Item icon={HiShoppingBag}>
                               Products
                             </Sidebar.Item>
-                            {/* 6 */}
+                            {/* 4 */}
                             <Sidebar.Item icon={HiArrowSmRight}>
                               Sign In
                             </Sidebar.Item>
-                            {/* 7 */}
+                            {/* 5 */}
                             <Sidebar.Item icon={HiTable}>
                               <button onClick={logoutFunction}>
                                 <span

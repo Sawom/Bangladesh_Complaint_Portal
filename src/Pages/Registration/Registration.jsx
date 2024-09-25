@@ -127,6 +127,7 @@ const Registration = () => {
                   className="input input-bordered"
                   name="name"
                   {...register("name", { required: true })}
+                  required
                 />
               </div>
 
@@ -141,6 +142,7 @@ const Registration = () => {
                   className="input input-bordered"
                   name="address"
                   {...register("address", { required: true })}
+                  required
                 />
               </div>
 
@@ -155,6 +157,7 @@ const Registration = () => {
                   placeholder="upload your picture"
                   name="propic"
                   {...register("img", { required: true })}
+                  required
                 />
               </div>
 
@@ -169,6 +172,7 @@ const Registration = () => {
                   className="input input-bordered"
                   name="nid"
                   {...register("nid", { required: true })}
+                  required
                 />
               </div>
 
@@ -183,6 +187,7 @@ const Registration = () => {
                   className="input input-bordered"
                   name="email"
                   {...register("email", { required: true })}
+                  required
                 />
               </div>
 
@@ -209,6 +214,7 @@ const Registration = () => {
                     className="border-none focus:outline-none focus:ring-0"
                     name="password"
                     {...register("password", { required: true })}
+                    required
                   />
                 </label>
               </div>
@@ -236,6 +242,7 @@ const Registration = () => {
                     className="border-none focus:outline-none focus:ring-0"
                     name="confirmpass"
                     {...register("confirmpass", { required: true })}
+                    required
                   />
                 </label>
               </div>
