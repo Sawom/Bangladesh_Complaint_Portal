@@ -1,5 +1,5 @@
-import { Drawer, Sidebar } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import { Sidebar } from "flowbite-react";
+import React, { useState } from "react";
 import {
   HiArrowSmRight,
   HiChartPie,
@@ -91,7 +91,7 @@ const Header = () => {
               <Link to="/hotlines"> Hotlines </Link>
             </li>
             <li>
-              <Link to="/dashboard/userhome">
+              <Link to="/userhome">
                 <span style={{ color: "#016A4E" }} className="font-bold">
                   Dashboard
                 </span>
@@ -100,90 +100,114 @@ const Header = () => {
           </ul>
         </div>
 
-        {/* nav end */}
+        {/* nav end side */}
         <div className="navbar-end gap-3">
           {user?.email ? (
             <>
-              {/* start */}
+              {/* start responsive sidebar for user menu */}
               <div className="dropdown dropdown-end">
-                {/* toggle btn */}
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  {/* main button part */}
-                  <div onClick={() => setIsOpen(true)} className="w-10 rounded-full">
-                    <button>
-                      <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      />
-                    </button>
+                <div className="drawer drawer-end">
+                  <input
+                    id="my-drawer-4"
+                    type="checkbox"
+                    className="drawer-toggle"
+                  />
+                  <div className="drawer-content">
+                    {/* Page content here */}
+                    <div>
+                      <label
+                        style={{
+                          background: "none",
+                          border: "none",
+                          padding: 0,
+                          margin: 0,
+                          outline: "none",
+                        }}
+                        htmlFor="my-drawer-4"
+                        className="drawer-button btn btn-ghost"
+                      >
+                        <img
+                          className="w-10 rounded-full"
+                          alt="Tailwind CSS Navbar component"
+                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="drawer-side z-[10]">
+                    <label
+                      htmlFor="my-drawer-4"
+                      aria-label="close sidebar"
+                      className="drawer-overlay"
+                    ></label>
+                    <ul className=" bg-white  min-h-full w-auto p-3">
+                      {/* Cross sign button */}
+                      <div >
+                        <label
+                          htmlFor="my-drawer-4"
+                          className="cursor-pointer  p-3"
+                          aria-label="close" >
+                          {/* <span >User menu</span> */}
+                          <span className=" flex justify-between px-5">
+                            <p className="text-2xl " >Menus</p>   <p className="text-3xl" >&times;</p> 
+                          </span>
+                        </label>
+                      </div>
+
+                      {/* Sidebar content here */}
+                      <Sidebar
+                        className=" w-auto "
+                        aria-label="Default sidebar example"
+                      >
+                        <Sidebar.Items>
+                          <Sidebar.ItemGroup>
+                            {/* 1 */}
+                            <Sidebar.Item icon={HiChartPie}>
+                              <Link to="/userhome"> User Home </Link>
+                            </Sidebar.Item>
+                            {/* 2 */}
+                            <Sidebar.Item
+                              href="#"
+                              icon={HiViewBoards}
+                              label="Pro"
+                              labelColor="dark"
+                            >
+                              Kanban
+                            </Sidebar.Item>
+                            {/* 3 */}
+                            <Sidebar.Item icon={HiInbox} label="3">
+                              Inbox
+                            </Sidebar.Item>
+                            {/* 4 */}
+                            <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
+                            {/* 5 */}
+                            <Sidebar.Item icon={HiShoppingBag}>
+                              Products
+                            </Sidebar.Item>
+                            {/* 6 */}
+                            <Sidebar.Item icon={HiArrowSmRight}>
+                              Sign In
+                            </Sidebar.Item>
+                            {/* 7 */}
+                            <Sidebar.Item icon={HiTable}>
+                              <button onClick={logoutFunction}>
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Logout
+                                </span>
+                              </button>
+                            </Sidebar.Item>
+                          </Sidebar.ItemGroup>
+                        </Sidebar.Items>
+                      </Sidebar>
+
+                    </ul>
                   </div>
                 </div>
-
-                {/* menu  */}
-                <Drawer
-                  className="w-auto"
-                  open={isOpen}
-                  onClose={handleClose}
-                  position="right"
-                >
-                  <Drawer.Header title="Drawer" />
-                  <Drawer.Items>
-                    {/* sidebar */}
-                    <Sidebar
-                      className=" w-auto "
-                      aria-label="Default sidebar example"
-                    >
-                      <Sidebar.Items>
-                        <Sidebar.ItemGroup>
-                          {/* 1 */}
-                          <Sidebar.Item icon={HiChartPie}>
-                            <Link to="/userhome"> User Home </Link>
-                          </Sidebar.Item>
-                          {/* 2 */}
-                          <Sidebar.Item
-                            href="#"
-                            icon={HiViewBoards}
-                            label="Pro"
-                            labelColor="dark"
-                          >
-                            Kanban
-                          </Sidebar.Item>
-                          {/* 3 */}
-                          <Sidebar.Item icon={HiInbox} label="3">
-                            Inbox
-                          </Sidebar.Item>
-                          {/* 4 */}
-                          <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
-                          {/* 5 */}
-                          <Sidebar.Item icon={HiShoppingBag}>
-                            Products
-                          </Sidebar.Item>
-                          {/* 6 */}
-                          <Sidebar.Item icon={HiArrowSmRight}>
-                            Sign In
-                          </Sidebar.Item>
-                          {/* 7 */}
-                          <Sidebar.Item icon={HiTable}>
-                            <button onClick={logoutFunction}>
-                              <span
-                                style={{ color: "#016A4E" }}
-                                className="font-bold"
-                              >
-                                Logout
-                              </span>
-                            </button>
-                          </Sidebar.Item>
-                        </Sidebar.ItemGroup>
-                      </Sidebar.Items>
-                    </Sidebar>
-                  </Drawer.Items>
-                </Drawer>
               </div>
-              {/* end */}
+              {/* end sidebar */}
             </>
           ) : (
             <Link to="/login">
