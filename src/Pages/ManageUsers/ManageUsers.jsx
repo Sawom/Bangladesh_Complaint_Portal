@@ -1,5 +1,6 @@
-import { Table } from "flowbite-react";
+import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -19,16 +20,15 @@ const ManageUsers = () => {
     >
       <br />
       <div
-        className="container mx-auto mt-4 mb-4 p-2"
+        className="container mx-auto mt-4 mb-4 p-3"
         style={{ backgroundColor: "#FFFFFF" }}
       >
-        <h3 className="lg:text-3xl md:text-2xl text-xl font-bold ml-4 ">
-          {" "}
-          Total users: {users.length}{" "}
+        <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
+          Total users: {users.length}
         </h3>
 
         {/* table */}
-        <div className="overflow-x-auto px-2">
+        <div className="overflow-x-auto px-3">
           <Table hoverable>
             {/* table head */}
             <Table.Head className="bg-base-content ">
@@ -44,28 +44,41 @@ const ManageUsers = () => {
             </Table.Head>
 
             {/* table body. map operation */}
-            { users.map((usersInfo, index)=> (
-                <Table.Body  key={usersInfo._id} >
-                    <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800" >
-                        <Table.Cell> {index + 1} </Table.Cell>
-                        <Table.Cell> {usersInfo._id} </Table.Cell>
-                        <Table.Cell> 
-
-                        </Table.Cell>
-                        <Table.Cell> {usersInfo.name} </Table.Cell>
-                        <Table.Cell> {usersInfo.address}  </Table.Cell>
-                        <Table.Cell> {usersInfo.nid}  </Table.Cell>
-                        <Table.Cell> {usersInfo.email} </Table.Cell>
-                        <Table.Cell> </Table.Cell>
-                        <Table.Cell> </Table.Cell>
-                    </Table.Row>
-                </Table.Body>
-            )
-
-            )
-
-            }
-
+            {users.map((usersInfo, index) => (
+              <Table.Body key={usersInfo._id}>
+                <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800">
+                  <Table.Cell> {index + 1} </Table.Cell>
+                  <Table.Cell> {usersInfo._id} </Table.Cell>
+                  <Table.Cell>
+                    <div className="avatar">
+                      <div className="w-12 rounded-xl ">
+                      <img src={usersInfo.img} />
+                    </div>
+                    </div>
+                  </Table.Cell>
+                  <Table.Cell> {usersInfo.name} </Table.Cell>
+                  <Table.Cell> {usersInfo.address} </Table.Cell>
+                  <Table.Cell> {usersInfo.nid} </Table.Cell>
+                  <Table.Cell> {usersInfo.email} </Table.Cell>
+                  {/* role */}
+                  <Table.Cell>
+                    <Button
+                      color="gray"
+                      style={{ backgroundColor: "#01864C", color: "white" }} >
+                      <FaUserShield></FaUserShield>
+                    </Button>
+                  </Table.Cell>
+                  {/* delete button */}
+                  <Table.Cell>
+                    <Button
+                      color="gray"
+                      style={{ backgroundColor: "red", color: "white" }} >
+                      <FaTrashAlt></FaTrashAlt>
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            ))}
           </Table>
         </div>
       </div>
