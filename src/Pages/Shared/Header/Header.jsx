@@ -88,7 +88,7 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/">
-            <img style={{ width: "180px" }} src={logo} alt="" />
+            <img style={{ width: "200px" }} src={logo} alt="" />
           </Link>
         </div>
 

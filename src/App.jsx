@@ -9,6 +9,7 @@ import Registration from "./Pages/Registration/Registration";
 import Hotlines from "./Pages/Hotlines/Hotlines";
 import UserHome from "./Pages/UserHomePage/UserHome";
 import ManageUsers from "./Pages/ManageUsers/ManageUsers";
+import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
 
                 {/* user home */}
                 <Route path="/userhome"  element={ <UserHome></UserHome> } ></Route>
+                {/* update user */}
+                <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
+                {/* manage user */}
                 <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
                 
 

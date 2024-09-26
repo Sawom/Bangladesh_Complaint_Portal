@@ -14,14 +14,12 @@ const ManageUsers = () => {
   }, []);
 
   return (
-    <div
-      style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
+    <div style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3" >
       <br />
       <div
         className="container mx-auto mt-4 mb-4 p-3"
-        style={{ backgroundColor: "#FFFFFF" }}
-      >
+        style={{ backgroundColor: "#FFFFFF" }} >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
           Total users: {users.length}
         </h3>

@@ -263,6 +263,7 @@ const Registration = () => {
               <p className="text-red-600"> {error} </p>
             </form>
           </div>
+          
         </div>
       </div>
     </div>
