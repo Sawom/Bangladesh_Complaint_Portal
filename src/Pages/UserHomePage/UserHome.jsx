@@ -53,7 +53,7 @@ const UserHome = () => {
               src={userInfo?.img || "https://via.placeholder.com/200"}
               alt="Avatar"
             />
-            <Link className="text-sm" to={`/userhome/update/${userInfo._id}`} >
+            <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`} >
               Edit profile
             </Link>
           </div>
