@@ -1,25 +1,36 @@
 import { Sidebar } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiArrowSmRight,
   HiChartPie,
-  HiInbox,
   HiShoppingBag,
   HiTable,
   HiUser,
-  HiViewBoards,
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import axios from "axios";
 
 const Header = () => {
   const { user, logoutUser } = useFirebase();
+  const [userInfo, setUserInfo] = useState({});
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClose = () => setIsOpen(false);
+  useEffect(() => {
+    if (user && user.email) {
+      // Fetch user data from the server by email
+      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+        .then(response => {
+          if (response.data.length > 0) {
+            setUserInfo(response.data[0]); // Store the whole user info
+          }
+        })
+        .catch(err => {
+          console.error('Error fetching user data:', err);
+        });
+    }
+  }, [user]);
 
   // logout function
   const logoutFunction = () => {
@@ -127,9 +138,9 @@ const Header = () => {
                         className="drawer-button btn btn-ghost"
                       >
                         <img
-                          className="w-10 rounded-full"
+                          className=" w-[40px] h-[40px] rounded-full object-cover"
                           alt="Tailwind CSS Navbar component"
-                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                          src={userInfo?.img || "https://via.placeholder.com/200"}
                         />
                       </label>
                     </div>

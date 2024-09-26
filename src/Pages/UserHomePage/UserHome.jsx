@@ -11,11 +11,10 @@ const UserHome = () => {
   // Fetch user data by email when component mounts
   useEffect(() => {
     if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/users?email=${user.email}`)
+      axios.get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
-            setUserInfo(response.data[0]); // Assuming user data is in the first index
+            setUserInfo(response.data[0]); // user data is in the first index
           } else {
             setUserInfo({}); // If no data found, keep userInfo as an empty object
           }
@@ -37,6 +36,7 @@ const UserHome = () => {
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
       <br />
+      {/* profile */}
       <div
         className="container mx-auto mt-10 mb-10"
         style={{ backgroundColor: "#FFFFFF", minHeight: "60vh" }} >
@@ -50,7 +50,7 @@ const UserHome = () => {
           <div className="mb-6">
             <img
               className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
-              src={userInfo?.img || "https://via.placeholder.com/200"} // Fallback to placeholder image
+              src={userInfo?.img || "https://via.placeholder.com/200"}
               alt="Avatar"
             />
             <Link className="text-sm" to="/edit-profile">
