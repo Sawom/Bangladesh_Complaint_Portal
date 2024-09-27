@@ -15,9 +15,7 @@ const UserHome = () => {
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
-          } else {
-            setUserInfo({}); // If no data found, keep userInfo as an empty object
-          }
+          } 
         })
         .catch((err) => {
           console.error("Failed to fetch user data:", err);
@@ -54,7 +52,7 @@ const UserHome = () => {
               alt="Avatar"
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`} >
-              Edit profile
+              <span style={{color:'#016A4E', fontWeight: 'bold'}} >Edit profile</span>  
             </Link>
           </div>
 

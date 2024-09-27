@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -63,7 +63,7 @@ const Registration = () => {
               const imgUrl = imgResponse.data.display_url;
               console.log(imgUrl);
               const { name, address, nid, email, password, confirmpass } = data;
-              const newUser = {
+              const newUser = {  //test data
                 name: name,
                 address: address,
                 img: imgUrl,
@@ -73,21 +73,17 @@ const Registration = () => {
               axios.post("http://localhost:5000/users", newUser)
                 .then((data) => {
                   if (data.data.insertedId) {
-                    reset();
-                    // swal register user confirm msg
-                    Swal.fire({
-                      title:
-                        "Now you are registered. Congratulations! Check your email to verify your email address.",
-                      showClass: {
-                        popup: "animate__animated animate__fadeInDown",
-                      },
-                      hideClass: {
-                        popup: "animate__animated animate__fadeOutUp",
-                      },
-                    });
+                    setUser(data);
+                    reset(); 
+
+                    // **Store the registration success flag in localStorage**
+                    localStorage.setItem("showSwal", "true");
+
+                    // reload page for updating header img
+                    window.location.reload();
                     console.log(data);
-                    setUser(newUser); // test
                   }
+
                 });
             }
           });

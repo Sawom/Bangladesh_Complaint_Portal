@@ -35,6 +35,7 @@ const Login = () => {
   const handleUserLogin = (event) => {
     event.preventDefault();
     handleLogin(email, password);
+    setError('');
     navigate(from, {replace: true});
   };
 

@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
 const UpdateUser = () => {
   const [update, setUpdate] = useState({});
   const { id } = useParams();
-
   const { register, handleSubmit, reset } = useForm();
-  
+  const { user, setUser } = useFirebase();
 
   // single user data load
   useEffect(() => {
@@ -56,6 +56,7 @@ const UpdateUser = () => {
       const response = await axios.put(`http://localhost:5000/users/${id}`, updatedUser);
 
       if (response.data.modifiedCount > 0) {
+        
         Swal.fire({
           position: "top-end",
           icon: "success",

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import {
@@ -11,27 +12,55 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
-import axios from "axios";
 
 const Header = () => {
-  const { user,setUser, logoutUser } = useFirebase();
+  const { user, setUser, logoutUser } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
 
+  // load
   useEffect(() => {
-    if (user && user.email) {
-      // Fetch user data from the server by email
-      axios.get(`http://localhost:5000/users?email=${user?.email}`)
-        .then(response => {
+    const fetchUserData = async () => {
+      if (user && user?.email) {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/users?email=${user?.email}`
+          );
           if (response.data.length > 0) {
-            setUserInfo(response.data[0]); // Store the whole user info
+            const updatedUserInfo = response.data[0];
+            setUserInfo(updatedUserInfo); // Update local state with fetched user info
+            setUser((prev) => ({ ...prev, img: updatedUserInfo.img })); // Update global context, only update img
           }
-          
-        })
-        .catch(err => {
-          console.error('Error fetching user data:', err);
-        });
-    }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      } else {
+        setUserInfo({});
+      }
+    };
+
+    fetchUserData();
   }, [user]);
+
+  // flag get from local storage so that swal can be showed
+  useEffect(() => {
+    const showSwal = localStorage.getItem("showSwal");
+
+    if (showSwal === "true") {
+      // Show the Swal message after page reload
+      Swal.fire({
+        text: "Now you are registered. Congratulations! Check your email to verify your email address.",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+
+      // Remove the flag from localStorage to prevent showing the message again
+      localStorage.removeItem("showSwal");
+    }
+  }, []);
 
   // logout function
   const logoutFunction = () => {
@@ -138,10 +167,13 @@ const Header = () => {
                         htmlFor="my-drawer-4"
                         className="drawer-button btn btn-ghost"
                       >
+                        {/*test*/}
                         <img
                           className=" w-[40px] h-[40px] rounded-full object-cover"
                           alt="Tailwind CSS Navbar component"
-                          src={userInfo.img || "https://via.placeholder.com/200"}
+                          src={
+                            userInfo?.img || "https://via.placeholder.com/200"
+                          }
                         />
                       </label>
                     </div>
@@ -154,14 +186,16 @@ const Header = () => {
                     ></label>
                     <ul className=" bg-white  min-h-full w-auto p-3">
                       {/* Cross sign button */}
-                      <div >
+                      <div>
                         <label
                           htmlFor="my-drawer-4"
                           className="cursor-pointer  p-3"
-                          aria-label="close" >
+                          aria-label="close"
+                        >
                           {/* <span >User menu</span> */}
                           <span className=" flex justify-between px-5">
-                            <p className="text-2xl " >Menus</p>   <p className="text-3xl" >&times;</p> 
+                            <p className="text-2xl ">Menus</p>{" "}
+                            <p className="text-3xl">&times;</p>
                           </span>
                         </label>
                       </div>
@@ -175,11 +209,25 @@ const Header = () => {
                           <Sidebar.ItemGroup>
                             {/* 1 user home */}
                             <Sidebar.Item icon={HiChartPie}>
-                              <Link to="/userhome"> <span style={{ color: "#016A4E" }} className="font-bold" >User Home</span>  </Link>
+                              <Link to="/userhome">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  User Home
+                                </span>
+                              </Link>
                             </Sidebar.Item>
                             {/* 2 manage user */}
-                            <Sidebar.Item icon={HiUser} >
-                              <Link to="/manageuser"> <span style={{ color: "#016A4E" }} className="font-bold" >Manage User</span> </Link>
+                            <Sidebar.Item icon={HiUser}>
+                              <Link to="/manageuser">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Manage User
+                                </span>
+                              </Link>
                             </Sidebar.Item>
                             {/* 3 */}
                             <Sidebar.Item icon={HiShoppingBag}>
@@ -203,7 +251,6 @@ const Header = () => {
                           </Sidebar.ItemGroup>
                         </Sidebar.Items>
                       </Sidebar>
-
                     </ul>
                   </div>
                 </div>
@@ -212,10 +259,9 @@ const Header = () => {
             </>
           ) : (
             <Link to="/login">
-              {" "}
               <span style={{ color: "#016A4E" }} className="font-bold">
                 Login
-              </span>{" "}
+              </span>
             </Link>
           )}
         </div>
