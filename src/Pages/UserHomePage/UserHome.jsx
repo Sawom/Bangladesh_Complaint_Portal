@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const UserHome = () => {
-  const { user, setUser } = useFirebase();
+  const { user } = useFirebase();
   const [userInfo, setUserInfo] = useState({}); // To store fetched user info
   const [loading, setLoading] = useState(true); // Loading state
 

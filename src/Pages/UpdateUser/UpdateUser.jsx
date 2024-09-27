@@ -1,20 +1,22 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
+
 const UpdateUser = () => {
+  const { register, handleSubmit, reset } = useForm();
   const [update, setUpdate] = useState({});
   const { id } = useParams();
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
   // single user data load
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUpdate(data);
-      });
-  }, []);
+    axios.get(`http://localhost:5000/users/${id}`)
+      .then((response) => setUpdate(response.data))
+      .catch((err) => console.error("Error loading user data:", err));
+  }, [id]);
 
   // update name
   const handleNameChange = (event) => {
@@ -65,31 +67,53 @@ const UpdateUser = () => {
   };
 
   // update function
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const url = `http://localhost:5000/users/${id}`;
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(update),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Updated!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setUpdate({});
-          event.target.reset();
-        }
+  const handleUpdate = async (data) => {
+    try {
+      let imageUrl = update.img; // Start with the existing image URL
 
-      });
+      // Check if a new image is provided
+      if (data.img && data.img[0]) {
+        const formData = new FormData();
+        formData.append("image", data.img[0]); // Append new image if present
+
+        // Upload the image to Imgbb
+        const uploadResponse = await axios.post(
+          "https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993",
+          formData
+        );
+        if (uploadResponse.data.success) {
+          imageUrl = uploadResponse.data.data.url; // Get the new image URL
+        } else {
+          console.error("Image upload failed:", uploadResponse.data.message);
+          return; // Exit if image upload fails
+        }
+      }
+
+      // Prepare the updated user object
+      const updatedUser = {
+        name: data.name || update.name, // Use new or existing value
+        address: data.address || update.address,
+        img: imageUrl, // Use new image URL (or existing if no new image was uploaded)
+        nid: data.nid || update.nid,
+        email: data.email || update.email,
+      };
+
+      // Perform the PUT operation
+      const response = await axios.put(`http://localhost:5000/users/${id}`, updatedUser);
+
+      if (response.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Updated!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        reset(); // Reset the form after update
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
   return (
@@ -106,7 +130,7 @@ const UpdateUser = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h2 className="text-xl"> Update your profile </h2>
-          <form className="card-body"  onSubmit={handleUpdate} >
+          <form className="card-body" onSubmit={handleSubmit(handleUpdate)}>
             {/* web id */}
             <div className="form-control">
               <label className="label">
@@ -132,7 +156,7 @@ const UpdateUser = () => {
                 placeholder="name"
                 className="input input-bordered"
                 name="name"
-                onChange={handleNameChange}
+                {...register("name")}
                 defaultValue={update.name || ""}
               />
             </div>
@@ -147,7 +171,7 @@ const UpdateUser = () => {
                 placeholder="address"
                 className="input input-bordered"
                 name="address"
-                onChange={handleAddressChange}
+                {...register("address")}
                 defaultValue={update.address || ""}
               />
             </div>
@@ -159,11 +183,12 @@ const UpdateUser = () => {
               </label>
               <input
                 type="file"
+                accept="image/*"
                 className="file-input file-input-bordered  w-full "
                 placeholder="upload your picture"
                 name="propic"
-                onChange={handleImgChange}
-                defaultValue={update.img || ""}
+                {...register("img")}
+                
               />
             </div>
 
@@ -177,7 +202,7 @@ const UpdateUser = () => {
                 placeholder="nid"
                 className="input input-bordered"
                 name="nid"
-                onChange={handleNidChange}
+                {...register("nid")}
                 defaultValue={update.nid || ""}
               />
             </div>
@@ -192,6 +217,7 @@ const UpdateUser = () => {
                 placeholder="email"
                 className="input input-bordered"
                 name="email"
+                {...register("email")}
                 defaultValue={update.email || ""}
                 readOnly
               />

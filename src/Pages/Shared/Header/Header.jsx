@@ -14,7 +14,7 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 import axios from "axios";
 
 const Header = () => {
-  const { user, logoutUser } = useFirebase();
+  const { user,setUser, logoutUser } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const Header = () => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // Store the whole user info
           }
+          
         })
         .catch(err => {
           console.error('Error fetching user data:', err);
@@ -140,7 +141,7 @@ const Header = () => {
                         <img
                           className=" w-[40px] h-[40px] rounded-full object-cover"
                           alt="Tailwind CSS Navbar component"
-                          src={userInfo?.img || "https://via.placeholder.com/200"}
+                          src={userInfo.img || "https://via.placeholder.com/200"}
                         />
                       </label>
                     </div>

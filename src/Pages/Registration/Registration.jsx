@@ -9,11 +9,12 @@ import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
+
 const Registration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { register, handleSubmit, reset } = useForm();
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
-  const { user, auth, error, setError, verifyEmail } = useFirebase();
+  const { user, setUser, auth, error, setError, verifyEmail } = useFirebase();
 
   const navigate = useNavigate();
   // navigate
@@ -85,6 +86,7 @@ const Registration = () => {
                       },
                     });
                     console.log(data);
+                    setUser(newUser); // test
                   }
                 });
             }
