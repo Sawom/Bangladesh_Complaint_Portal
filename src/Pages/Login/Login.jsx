@@ -9,7 +9,7 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, handleLogin, resetPassword,error } = useFirebase();
+  const { user, handleLogin, resetPassword,error, setError } = useFirebase();
 
   // after login load previous page
   const navigate = useNavigate();
