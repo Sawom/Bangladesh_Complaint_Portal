@@ -10,9 +10,9 @@ import Hotlines from "./Pages/Hotlines/Hotlines";
 import UserHome from "./Pages/UserHomePage/UserHome";
 import ManageUsers from "./Pages/ManageUsers/ManageUsers";
 import UpdateUser from "./Pages/UpdateUser/UpdateUser";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
-
   return (
     <div>
         <AuthProvider>
@@ -33,7 +33,7 @@ function App() {
                 
 
 
-
+                <Route path='*' element={ <NotFound></NotFound> } ></Route>
               </Routes>
               <Footer></Footer>
             </BrowserRouter>
