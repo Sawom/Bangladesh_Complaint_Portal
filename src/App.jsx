@@ -11,6 +11,7 @@ import UserHome from "./Pages/UserHomePage/UserHome";
 import ManageUsers from "./Pages/ManageUsers/ManageUsers";
 import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 import NotFound from "./Pages/NotFound/NotFound";
+import AddReview from "./Pages/AddReview/AddReview";
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
                 <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
                 {/* manage user */}
                 <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
-                
+                {/* add review */}
+                <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
 
 
                 <Route path='*' element={ <NotFound></NotFound> } ></Route>

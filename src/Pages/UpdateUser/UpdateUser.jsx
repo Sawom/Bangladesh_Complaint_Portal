@@ -84,7 +84,7 @@ const UpdateUser = () => {
   };
 
   return (
-    <div
+     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3"
     >
