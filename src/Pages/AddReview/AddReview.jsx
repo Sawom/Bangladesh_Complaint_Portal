@@ -1,7 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
-import axios from "axios";
 
 const AddReview = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -9,15 +10,17 @@ const AddReview = () => {
   const { user } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState({});
 
   // load single user by email
   useEffect(() => {
     if (user && user.email) {
-      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+      axios
+        .get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
-          } 
+          }
         })
         .catch((err) => {
           console.error("Failed to fetch user data:", err);
@@ -28,6 +31,25 @@ const AddReview = () => {
         });
     }
   }, []);
+
+  // add review
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    const {name, email,comments,rating} = data;
+    axios.post("http://localhost:5000/reviews", data)
+      .then((data) => {
+        if (data.data.insertedId) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Thanks for your review",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   return (
     <div
@@ -43,7 +65,7 @@ const AddReview = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h2 className="text-xl"> Add your review to update our service </h2>
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
             <div className="form-control">
               <label className="label">
@@ -54,7 +76,8 @@ const AddReview = () => {
                 placeholder="name"
                 className="input input-bordered"
                 name="name"
-                defaultValue={userInfo?.name} readOnly
+                defaultValue={userInfo?.name}
+                readOnly
                 {...register("name", { required: true })}
               />
             </div>
@@ -71,7 +94,7 @@ const AddReview = () => {
                 name="email"
                 defaultValue={userInfo?.email}
                 readOnly
-                {...register("email", { required: true })}  
+                {...register("email", { required: true })}
               />
             </div>
 
@@ -83,7 +106,8 @@ const AddReview = () => {
               <textarea
                 className="textarea textarea-bordered h-32"
                 placeholder="Review"
-                {...register("comments", { required: true })} required 
+                {...register("comments", { required: true })}
+                required
               ></textarea>
             </div>
 
@@ -140,7 +164,8 @@ const AddReview = () => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}>
+                }}
+              >
                 Submit
               </button>
             </div>
