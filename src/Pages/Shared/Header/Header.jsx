@@ -129,12 +129,12 @@ const Header = () => {
               <a>Item 1</a>
             </li>
             <li>
-              <Link to="/hotlines"> Hotlines </Link>
+              <Link to="/hotlines"> <span style={{ color: "#016A4E" }} className="font-bold" >Hotlines</span>  </Link>
             </li>
             <li>
-              <Link to="/userhome">
+              <Link to="/reviews">
                 <span style={{ color: "#016A4E" }} className="font-bold">
-                  Dashboard
+                  Reviews
                 </span>
               </Link>
             </li>

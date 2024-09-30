@@ -30,7 +30,7 @@ const AddReview = () => {
           setLoading(false); // Set loading to false after fetching
         });
     }
-  }, []);
+  }, [user]);
 
   // add review
   const onSubmit = (data) => {
@@ -69,7 +69,7 @@ const AddReview = () => {
             {/* name */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Update Name</span>
+                <span className="label-text">Name</span>
               </label>
               <input
                 type="text"

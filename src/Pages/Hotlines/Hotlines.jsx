@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 
@@ -5,10 +6,12 @@ const Hotlines = () => {
   const [numbers, setNumbers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/hotlines")
-      .then((res) => res.json())
-      .then((data) => {
-        setNumbers(data);
+    axios.get("http://localhost:5000/hotlines")
+      .then((response) => {
+        setNumbers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
   }, []);
 

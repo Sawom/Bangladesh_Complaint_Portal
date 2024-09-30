@@ -77,7 +77,7 @@ const UpdateUser = () => {
         // update user info in reset function
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.log("Error updating user:", error);
     }
   };
 
