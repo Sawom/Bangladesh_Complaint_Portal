@@ -229,6 +229,17 @@ const Header = () => {
                                 </span>
                               </Link>
                             </Sidebar.Item>
+                            {/* manage review */}
+                            <Sidebar.Item icon={HiUser}>
+                              <Link to="/managereview">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Manage Review
+                                </span>
+                              </Link>
+                            </Sidebar.Item>
                             {/* 3 add review */}
                             <Sidebar.Item icon={HiUser}>
                               <Link to="/addreview">

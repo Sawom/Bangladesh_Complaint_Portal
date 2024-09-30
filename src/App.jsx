@@ -13,6 +13,7 @@ import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 import NotFound from "./Pages/NotFound/NotFound";
 import AddReview from "./Pages/AddReview/AddReview";
 import Reviews from "./Pages/Reviews/Reviews";
+import ManageReview from "./Pages/ManageReview/ManageReview";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
                 <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
                 {/* reviews */}
                 <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
+                {/* manage reviews */}
+                <Route path="/managereview" element={ <ManageReview></ManageReview> } ></Route>
 
                 <Route path='*' element={ <NotFound></NotFound> } ></Route>
               </Routes>

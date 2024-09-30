@@ -8,7 +8,7 @@ const ManageUsers = () => {
   // State to store search input and result
   const [searchQuery, setSearchQuery] = useState("");
 
-  //step 1 Fetch users initially to search
+  //step 1: Fetch users initially to search
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:5000/users"); // Fetch all users initially
@@ -22,7 +22,7 @@ const ManageUsers = () => {
     fetchUsers();
   }, []);
 
-  // search function
+  // step 2: search function
   const handleSearch = async () => {
     if (searchQuery.trim() === "") {
       return;

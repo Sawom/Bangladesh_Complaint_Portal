@@ -7,8 +7,7 @@ const Reviews = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/reviews")
+    axios.get("http://localhost:5000/reviews")
       .then((response) => {
         setReview(response.data);
       })
