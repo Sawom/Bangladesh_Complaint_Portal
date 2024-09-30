@@ -1,13 +1,15 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Button, Table } from "flowbite-react";
 import { Rating, ThinStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import axios from "axios";
+import { Button } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ManageReview = () => {
   const [review, setReview] = useState([]);
 
+  //  load all review
   useEffect(() => {
     axios.get("http://localhost:5000/reviews")
       .then((response) => {
@@ -16,7 +18,48 @@ const ManageReview = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [review]);
+
+  // delete review
+  const handleDeleteReview = (review) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform Axios delete operation
+        axios
+          .delete(`http://localhost:5000/reviews/${review._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // Show success message
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Review has been deleted!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting review:", error);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Failed to delete review.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      }
+    });
+  };
 
   const myStyles = {
     itemShapes: ThinStar,
@@ -39,7 +82,7 @@ const ManageReview = () => {
           {/* show reviews */}
           {review.map((refs) => (
             <div
-              key={review._id}
+              key={refs._id}
               className="card w-full bg-base-100 shadow-xl my-4"
             >
               <div className="card-body text-left text-black">
@@ -53,10 +96,13 @@ const ManageReview = () => {
                   readOnly
                 />
                 {/* delete btn */}
-                <Button className="w-16 mt-2"
-                      color="gray"
-                      style={{ backgroundColor: "red", color: "white" }} >
-                      <FaTrashAlt></FaTrashAlt>
+                <Button
+                  className="w-16 mt-2"
+                  onClick={() => handleDeleteReview(refs)}
+                  color="gray"
+                  style={{ backgroundColor: "red", color: "white" }}
+                >
+                  <FaTrashAlt></FaTrashAlt>
                 </Button>
               </div>
             </div>

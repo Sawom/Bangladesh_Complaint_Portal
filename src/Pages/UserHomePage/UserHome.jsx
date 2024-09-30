@@ -41,7 +41,7 @@ const UserHome = () => {
         <div
           className="p-4 flex justify-between"
           style={{ backgroundColor: "#016A4E" }} >
-          <h1 className="lg:text-lg md:text-lg text-sm text-white">Profile details</h1>
+          <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">Profile details</h1>
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">
           {/* Profile Image */}
@@ -57,7 +57,7 @@ const UserHome = () => {
           </div>
 
           {/* User Information */}
-          <div className="text-lg">
+          <div className=" lg:text-lg md:text-lg text-sm ">
             <p className="mb-4 flex">
               <span className="font-bold pr-3">Web id:</span>
               {userInfo?._id || "N/A"}
