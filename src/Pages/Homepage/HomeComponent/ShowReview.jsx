@@ -16,8 +16,7 @@ const ShowReview = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/homereview")
+    axios.get("http://localhost:5000/homereview")
       .then((response) => {
         setReview(response.data);
       })

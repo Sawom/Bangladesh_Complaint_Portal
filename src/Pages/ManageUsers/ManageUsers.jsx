@@ -21,7 +21,7 @@ const ManageUsers = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [users]);
+  }, []);
 
   // step 2: search function
   const handleSearch = async () => {
@@ -63,6 +63,7 @@ const ManageUsers = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              fetchUsers();
             }
           })
           .catch((error) => {
@@ -157,7 +158,8 @@ const ManageUsers = () => {
                   </Table.Cell>
                   {/* delete button */}
                   <Table.Cell>
-                    <Button  onClick={() => handleDeleteUser(usersInfo)}
+                    <Button
+                      onClick={() => handleDeleteUser(usersInfo)}
                       color="gray"
                       style={{ backgroundColor: "red", color: "white" }}
                     >
