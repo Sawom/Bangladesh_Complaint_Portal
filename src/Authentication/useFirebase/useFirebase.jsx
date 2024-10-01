@@ -1,9 +1,7 @@
 import {
-  createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -64,37 +62,6 @@ const useFirebase = () => {
       });
   };
 
-  // reset password
-  const resetPassword = async () => {
-    if (email) {
-      await sendPasswordResetEmail(auth, email)
-        .then((result) => {
-          Swal.fire({
-            title: "Email sent. Check your email.",
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            },
-          });
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
-    } else {
-      Swal.fire({
-        title: "Please enter your email address",
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
-      });
-    }
-  };
-
   // logout user
   const logoutUser = () => {
     signOut(auth)
@@ -116,7 +83,6 @@ const useFirebase = () => {
     setLoading,
     logoutUser,
     handleLogin,
-    resetPassword,
     verifyEmail,
   };
 };

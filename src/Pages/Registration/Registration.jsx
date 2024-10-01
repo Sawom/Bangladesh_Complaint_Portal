@@ -2,8 +2,7 @@ import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
@@ -259,6 +258,7 @@ const Registration = () => {
               </div>
               {/* error */}
               <p className="text-red-600"> {error} </p>
+              <p>Already registered? <Link to='/login'> <span className='font-bold ' style={{ color: "#016A4E" }} >Go to LogIn</span>  </Link> </p>
             </form>
           </div>
           

@@ -1,5 +1,7 @@
+import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import login from "../../assets/others/login.png";
@@ -9,7 +11,7 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, handleLogin, resetPassword,error, setError } = useFirebase();
+  const { user, handleLogin, error, auth, setError } = useFirebase();
 
   // after login load previous page
   const navigate = useNavigate();
@@ -35,14 +37,40 @@ const Login = () => {
   const handleUserLogin = (event) => {
     event.preventDefault();
     handleLogin(email, password);
-    setError('');
-    navigate(from, {replace: true});
+    setError("");
+    navigate(from, { replace: true });
   };
 
   // reset password
-  const handleResetPassword = (event)=>{
-    resetPassword();
-  }
+  const resetPassword = async () => {
+    if (email) {
+      await sendPasswordResetEmail(auth, email)
+        .then((result) => {
+          Swal.fire({
+            title: "Email sent. Check your email.",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    } else {
+      Swal.fire({
+        title: "Please enter your email address",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+    }
+  };
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
@@ -60,7 +88,7 @@ const Login = () => {
 
           {/* 2nd part  */}
           <div className="card w-full max-w-sm shrink-0 ">
-            <form className="card-body" onSubmit={handleUserLogin}   >
+            <form className="card-body" onSubmit={handleUserLogin}>
               {/* email */}
               <div className="form-control">
                 <label className="label">
@@ -70,7 +98,7 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  onBlur={handleEmail} 
+                  onBlur={handleEmail}
                   required
                 />
               </div>
@@ -96,7 +124,7 @@ const Login = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     placeholder="password"
                     className="border-none focus:outline-none focus:ring-0"
-                    onBlur={handlePassword} 
+                    onBlur={handlePassword}
                     required
                   />
                 </label>
@@ -118,8 +146,26 @@ const Login = () => {
                 >
                   Login
                 </button>
-              {/* error */}
-              <p className='text-red-600' > {error} </p>
+                {/* error */}
+                <p className="text-red-600"> {error} </p>
+                <br />
+                <p> New here?
+                  <Link to="/register">
+                    <span className="font-bold px-3" style={{ color: "#016A4E" }}>
+                      Create a New Account
+                    </span>
+                  </Link>
+                </p>
+                {/* reset password */}
+                <p>
+                  Forgot password?
+                  <button
+                    onClick={resetPassword}
+                    className="btn btn-link font-bold "
+                    style={{ textDecoration: "none", color: "#016A4E" }} >
+                    Reset Password
+                  </button>
+                </p>
               </div>
             </form>
           </div>
