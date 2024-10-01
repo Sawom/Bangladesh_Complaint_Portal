@@ -4,7 +4,7 @@ import faqs from "../../../assets/others/faqs.png";
 
 const Faqs = () => {
   return (
-    <div className="container mx-auto mt-8 mb-6">
+    <div className="container mx-auto mt-10">
       <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-7 ">সচরাচর জিজ্ঞাসা</h1>
       <div className="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-12 gap-4" >
         {/* 1st column */}
@@ -13,7 +13,7 @@ const Faqs = () => {
         </div>
 
         {/* 2nd column */}
-        <div className="lg:col-span-8 md:col-span-8 col-span-12">
+        <div className="lg:col-span-8 md:col-span-8 col-span-12 px-2">
           <Accordion>
             {/* 1 */}
             <Accordion.Panel>

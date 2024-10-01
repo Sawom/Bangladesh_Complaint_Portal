@@ -25,7 +25,7 @@ const Problems = () => {
       <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-7 ">এক ঠিকানায় আপনার সব অভিযোগ</h1>
 
       {/* problems grid */}
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-5 px-3">
+      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-5 px-2">
         {/* 1 */}
         <div className="card card-compact bg-base-100 w-full h-full shadow-xl">
           <figure className="px-4">
