@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-// import { Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,7 +17,7 @@ const ShowReview = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/reviews")
+      .get("http://localhost:5000/homereview")
       .then((response) => {
         setReview(response.data);
       })
@@ -42,7 +41,7 @@ const ShowReview = () => {
         <Swiper
           centeredSlides={true}
           autoplay={{
-            delay: 3500,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           pagination={{
