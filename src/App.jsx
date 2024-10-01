@@ -14,6 +14,8 @@ import NotFound from "./Pages/NotFound/NotFound";
 import AddReview from "./Pages/AddReview/AddReview";
 import Reviews from "./Pages/Reviews/Reviews";
 import ManageReview from "./Pages/ManageReview/ManageReview";
+import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
+import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
 
 function App() {
   return (
@@ -27,8 +29,12 @@ function App() {
                 <Route path="/register" element={ <Registration></Registration> } ></Route>
                 <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
 
-                {/* user home */}
-                <Route path="/userhome"  element={ <UserHome></UserHome> } ></Route>
+                {/* user home. nested route */}
+                <Route path="/userhome"  element={ <UserHome></UserHome> } >
+                  <Route path="myreview" element={ <MyReviews></MyReviews> } ></Route>
+                  <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
+                </Route>
+
                 {/* update user */}
                 <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
                 {/* manage user */}

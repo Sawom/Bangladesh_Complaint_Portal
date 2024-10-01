@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
 const UserHome = () => {
@@ -37,7 +37,7 @@ const UserHome = () => {
       {/* profile */}
       <div
         className="container mx-auto mt-10 mb-10"
-        style={{ backgroundColor: "#FFFFFF", minHeight: "60vh" }} >
+        style={{ backgroundColor: "#FFFFFF", minHeight: "50vh" }} >
         <div
           className="p-4 flex justify-between"
           style={{ backgroundColor: "#016A4E" }} >
@@ -46,11 +46,9 @@ const UserHome = () => {
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">
           {/* Profile Image */}
           <div className="mb-6">
-            <img
-              className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
+            <img className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
               src={userInfo?.img || "https://via.placeholder.com/200"}
-              alt="Avatar"
-            />
+              alt="Avatar" />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`} >
               <span style={{color:'#016A4E', fontWeight: 'bold'}} >Edit profile</span>  
             </Link>
@@ -79,6 +77,21 @@ const UserHome = () => {
             </p>
           </div>
         </div>
+      </div>
+      
+      {/* nested route component */}
+      <div className="container mx-auto mt-10" >
+        <div style={{backgroundColor: "#FFFFFF"}} className="p-3" >
+          <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
+            timeline
+          </h1>
+          {/* nested routes tabs */}
+          <div role="tablist" className="tabs tabs-bordered w-50">
+            <Link to="/userhome/myreview" role="tab" className="tab ">My Reviews</Link>
+            <Link to="/userhome/mycomplain" role="tab" className="tab ">My Complain</Link>
+          </div>
+        </div>
+        <Outlet></Outlet>
       </div>
       <br />
     </div>
