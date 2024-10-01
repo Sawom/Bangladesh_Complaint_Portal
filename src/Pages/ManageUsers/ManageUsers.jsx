@@ -2,6 +2,7 @@ import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -20,7 +21,7 @@ const ManageUsers = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [users]);
 
   // step 2: search function
   const handleSearch = async () => {
@@ -36,6 +37,46 @@ const ManageUsers = () => {
     } catch (error) {
       console.error("Error searching:", error);
     }
+  };
+
+  // delete user
+  const handleDeleteUser = (delUser) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform Axios delete operation
+        axios.delete(`http://localhost:5000/users/${delUser._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // Show success message
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User has been deleted!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting review:", error);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Failed to delete User.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      }
+    });
   };
 
   return (
@@ -116,7 +157,7 @@ const ManageUsers = () => {
                   </Table.Cell>
                   {/* delete button */}
                   <Table.Cell>
-                    <Button
+                    <Button  onClick={() => handleDeleteUser(usersInfo)}
                       color="gray"
                       style={{ backgroundColor: "red", color: "white" }}
                     >

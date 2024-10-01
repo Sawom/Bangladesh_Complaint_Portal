@@ -33,8 +33,7 @@ const ManageReview = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios
-          .delete(`http://localhost:5000/reviews/${review._id}`)
+        axios.delete(`http://localhost:5000/reviews/${review._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -61,6 +60,7 @@ const ManageReview = () => {
     });
   };
 
+  // style for review star
   const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: "#016A4E",
@@ -73,7 +73,7 @@ const ManageReview = () => {
         <br />
 
         <div
-          className="container mx-auto p-3"
+          className=" container mx-auto p-3"
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
