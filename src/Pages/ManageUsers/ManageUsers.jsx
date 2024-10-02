@@ -19,6 +19,7 @@ const ManageUsers = () => {
     }
   };
 
+  // for refetch data load
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -63,6 +64,7 @@ const ManageUsers = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              // refetch user
               fetchUsers();
             }
           })
