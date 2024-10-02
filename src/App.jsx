@@ -16,6 +16,7 @@ import Reviews from "./Pages/Reviews/Reviews";
 import ManageReview from "./Pages/ManageReview/ManageReview";
 import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
 import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
+import UpdateReview from "./Pages/UpdateReview/UpdateReview";
 
 function App() {
   return (
@@ -31,12 +32,15 @@ function App() {
 
                 {/* user home. nested route */}
                 <Route path="/userhome"  element={ <UserHome></UserHome> } >
-                  <Route path="myreview" element={ <MyReviews></MyReviews> } ></Route>
+                  <Route path="" element={ <MyReviews></MyReviews> } ></Route>
                   <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
                 </Route>
 
                 {/* update user */}
                 <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
+                {/* update review */}
+                <Route path='/userhome/review/:id'  element={ <UpdateReview></UpdateReview> } ></Route>
+
                 {/* manage user */}
                 <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
                 {/* add review */}

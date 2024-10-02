@@ -2,19 +2,18 @@ import { Rating, ThinStar } from "@smastrom/react-rating";
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const MyReviews = () => {
   const { user } = useFirebase();
   const [reviewInfo, setReviewInfo] = useState([]);
-
-
-  // for refetch data load
+  
+  //  for refetch data load
   useEffect(() => {
     if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/reviews?email=${user.email}`)
+      axios.get(`http://localhost:5000/reviews?email=${user.email}`)
         .then((response) => {
           setReviewInfo(response.data);
         })
@@ -23,7 +22,7 @@ const MyReviews = () => {
         });
     }
   }, [user]);
-
+ 
   // style for review star
   const myStyles = {
     itemShapes: ThinStar,
@@ -50,14 +49,29 @@ const MyReviews = () => {
               readOnly
             />
 
-            {/* delete btn */}
-            <Button
-              className="w-16 mt-2"
-              color="gray"
-              style={{ backgroundColor: "red", color: "white" }}
-            >
-              <FaTrashAlt></FaTrashAlt>
-            </Button>
+            <div className="flex gap-5" >
+                {/* delete btn */}
+                <Button
+                className="w-16 mt-2"
+                color="gray"
+                style={{ backgroundColor: "red", color: "white" }}
+                >
+                <FaTrashAlt></FaTrashAlt>
+                </Button>
+
+                {/* edit */}
+                <Link to={`/userhome/review/${refs._id}`} >
+                    <Button
+                    className="w-16 mt-2"
+                    color="gray"
+                    style={{ backgroundColor: "#016A4E", color: "white" }}
+                    >
+                    <FaEdit />
+                    </Button>
+                </Link>
+                
+            </div>
+
           </div>
         </div>
       ))}

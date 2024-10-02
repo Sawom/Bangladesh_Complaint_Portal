@@ -87,7 +87,7 @@ const UserHome = () => {
           </h1>
           {/* nested routes tabs */}
           <div role="tablist" className="tabs tabs-bordered ">
-            <Link to="/userhome/myreview" role="tab" className="tab ">My Reviews</Link>
+            <Link to="/userhome" role="tab" className="tab ">My Reviews</Link>
             <Link to="/userhome/mycomplain" role="tab" className="tab ">My Complain</Link>
           </div>
         </div>
