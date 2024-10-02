@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { Rating, ThinStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -77,7 +77,7 @@ const ManageReview = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-            Total review: {review.length}{" "}
+            Total review: {review.length}
           </h3>
           {/* show reviews */}
           {review.map((refs) => (
