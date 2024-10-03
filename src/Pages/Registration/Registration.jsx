@@ -116,11 +116,11 @@ const Registration = () => {
               {/* name */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">আপনার নাম </span>
                 </label>
                 <input
                   type="text"
-                  placeholder="name"
+                  placeholder="আপনার নাম"
                   className="input input-bordered"
                   name="name"
                   {...register("name", { required: true })}
@@ -131,11 +131,11 @@ const Registration = () => {
               {/* address */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text"> Address </span>
+                  <span className="label-text"> আপনার ঠিকানা </span>
                 </label>
                 <input
                   type="text"
-                  placeholder="address"
+                  placeholder="আপনার ঠিকানা"
                   className="input input-bordered"
                   name="address"
                   {...register("address", { required: true })}
@@ -146,7 +146,7 @@ const Registration = () => {
               {/* img */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text"> Upload your picture </span>
+                  <span className="label-text"> আপনার ছবি আপলোড করুন </span>
                 </label>
                 <input
                   type="file"
@@ -161,11 +161,11 @@ const Registration = () => {
               {/* nid */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text"> NID no </span>
+                  <span className="label-text"> আপনার দশ ডিজিটের জাতীয় পরিচয়পত্রের নাম্বার </span>
                 </label>
                 <input
                   type="number"
-                  placeholder="nid"
+                  placeholder="জাতীয় পরিচয়পত্রের নাম্বার"
                   className="input input-bordered"
                   name="nid"
                   {...register("nid", { required: true })}
@@ -176,11 +176,11 @@ const Registration = () => {
               {/* email */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">আপনার ইমেইল</span>
                 </label>
                 <input
                   type="email"
-                  placeholder="email"
+                  placeholder="আপনার ইমেইল"
                   className="input input-bordered"
                   name="email"
                   {...register("email", { required: true })}
@@ -191,7 +191,7 @@ const Registration = () => {
               {/* password */}
               <div>
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text"> নতুন পাসওয়ার্ড দিন </span>
                 </label>
 
                 <label
@@ -207,7 +207,7 @@ const Registration = () => {
                   </button>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
-                    placeholder="password"
+                    placeholder="নতুন পাসওয়ার্ড দিন"
                     className="border-none focus:outline-none focus:ring-0"
                     name="password"
                     {...register("password", { required: true })}
@@ -219,7 +219,7 @@ const Registration = () => {
               {/* retype password */}
               <div>
                 <label className="label">
-                  <span className="label-text">Retype Password</span>
+                  <span className="label-text">পুনরায় টাইপ করুন </span>
                 </label>
 
                 <label
@@ -235,7 +235,7 @@ const Registration = () => {
                   </button>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
-                    placeholder="retype password"
+                    placeholder="পুনরায় টাইপ করুন"
                     className="border-none focus:outline-none focus:ring-0"
                     name="confirmpass"
                     {...register("confirmpass", { required: true })}
@@ -253,12 +253,13 @@ const Registration = () => {
                     fontStyle: "bold",
                   }}
                 >
-                  Signup
+                  সাইনআপ করুন
                 </button>
               </div>
               {/* error */}
               <p className="text-red-600"> {error} </p>
-              <p>Already registered? <Link to='/login'> <span className='font-bold ' style={{ color: "#016A4E" }} >Go to LogIn</span>  </Link> </p>
+              <p>আগেই রেজিষ্ট্রেশন করেছেন? <Link to='/login'> <span className='font-bold '
+               style={{ color: "#016A4E" }} >লগইন করুন</span>  </Link> </p>
             </form>
           </div>
           

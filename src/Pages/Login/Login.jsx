@@ -92,11 +92,11 @@ const Login = () => {
               {/* email */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">ইমেইল</span>
                 </label>
                 <input
                   type="email"
-                  placeholder="email"
+                  placeholder="আপনার ইমেইল"
                   className="input input-bordered"
                   onBlur={handleEmail}
                   required
@@ -106,7 +106,7 @@ const Login = () => {
               {/* password */}
               <div>
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text"> পাসওয়ার্ড </span>
                 </label>
 
                 <label
@@ -122,7 +122,7 @@ const Login = () => {
                   </button>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
-                    placeholder="password"
+                    placeholder="আপনার পাসওয়ার্ড"
                     className="border-none focus:outline-none focus:ring-0"
                     onBlur={handlePassword}
                     required
@@ -130,7 +130,7 @@ const Login = () => {
                 </label>
 
                 <label className="label">
-                  <p className="label-text-alt ">Forgot password?</p>
+                  <p className="label-text-alt ">পাসওয়ার্ড ভুলে গিয়েছেন? </p>
                 </label>
               </div>
 
@@ -144,26 +144,26 @@ const Login = () => {
                     fontStyle: "bold",
                   }}
                 >
-                  Login
+                  লগইন 
                 </button>
                 {/* error */}
                 <p className="text-red-600"> {error} </p>
                 <br />
-                <p> New here?
+                <p> নতুন ইউজার ?
                   <Link to="/register">
                     <span className="font-bold px-3" style={{ color: "#016A4E" }}>
-                      Create a New Account
+                      একাউন্ট করুন
                     </span>
                   </Link>
                 </p>
                 {/* reset password */}
                 <p>
-                  Forgot password?
+                  পাসওয়ার্ড ভুলে গিয়েছেন?
                   <button
                     onClick={resetPassword}
                     className="btn btn-link font-bold "
                     style={{ textDecoration: "none", color: "#016A4E" }} >
-                    Reset Password
+                    পুনরায় পাসওয়ার্ড সেট করুন
                   </button>
                 </p>
               </div>
