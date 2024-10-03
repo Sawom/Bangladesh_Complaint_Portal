@@ -9,14 +9,25 @@ const ManageUsers = () => {
   // State to store search input and result
   const [searchQuery, setSearchQuery] = useState("");
 
+  // pagination
+  const [totalResults, setTotalResults] = useState(0); // Total number of results
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [totalPages, setTotalPages] = useState(1); 
+  const limit = 10; 
+
   //step 1: Fetch users initially to search
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/users"); // Fetch all users initially
-      setUsers(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const fetchUsers = async (page = 1) => {
+      try {
+          // Include page and limit parameters and limit per page data in the request
+          const response = await axios.get(`http://localhost:5000/users?page=${page}&limit=${limit}`);
+          setUsers(response.data.users); // collect user data
+          // handle pagination data as well
+          setTotalResults(response.data.totalResults);
+          setCurrentPage(response.data.currentPage);
+          setTotalPages(response.data.totalPages);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+      }
   };
 
   // for refetch data load
@@ -31,13 +42,16 @@ const ManageUsers = () => {
     } // Prevent empty search
 
     try {
-      const response = await axios.get(
-        `http://localhost:5000/search/${searchQuery}`
-      );
+      const response = await axios.get(`http://localhost:5000/search/${searchQuery}`);
       setUsers(response.data); // Update the users state with search results
     } catch (error) {
       console.error("Error searching:", error);
     }
+  };
+
+  // Function to handle page change
+  const handlePageChange = (page) => {
+        fetchUsers(page); // Fetch users for the selected page
   };
 
   // delete user
@@ -65,7 +79,7 @@ const ManageUsers = () => {
                 timer: 1500,
               });
               // refetch user
-              fetchUsers();
+              fetchUsers(currentPage);
             }
           })
           .catch((error) => {
@@ -90,13 +104,11 @@ const ManageUsers = () => {
       <br />
       <div
         className="container mx-auto mt-4 mb-4 p-3"
-        style={{ backgroundColor: "#FFFFFF" }}
-      >
+        style={{ backgroundColor: "#FFFFFF" }} >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-          Total users: {users.length}
+          Total users: {totalResults}
         </h3>
 
-        {/* Search box */}
         {/* Search Box */}
         <div className="flex justify-center mb-4">
           <input
@@ -136,7 +148,8 @@ const ManageUsers = () => {
             {users.map((usersInfo, index) => (
               <Table.Body key={usersInfo._id}>
                 <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800">
-                  <Table.Cell> {index + 1} </Table.Cell>
+                  {/* continuous indexing */}
+                  <Table.Cell>  {(currentPage - 1) * limit + index + 1} </Table.Cell> 
                   <Table.Cell> {usersInfo._id} </Table.Cell>
                   <Table.Cell>
                     <div className="avatar">
@@ -173,6 +186,19 @@ const ManageUsers = () => {
             ))}
           </Table>
         </div>
+
+        {/* pagination control button */}
+        <div className="flex justify-center mt-4">
+              {Array.from({ length: totalPages }, (_, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
+                    {index + 1}
+                  </Button>
+              ))}
+          </div>
+
       </div>
       <br />
     </div>
