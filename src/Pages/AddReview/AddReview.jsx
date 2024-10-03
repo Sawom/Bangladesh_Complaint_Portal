@@ -10,7 +10,6 @@ const AddReview = () => {
   const { user } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
-  const [review, setReview] = useState({});
 
   // load single user by email
   useEffect(() => {
@@ -54,15 +53,14 @@ const AddReview = () => {
   return (
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
-      className="p-3">
+      className="p-3" >
       <br />
 
-      <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
+      <div className="container mx-auto mt-4 mb-4 flex justify-center items-center" >
         {/* update form */}
         <div
           className="card w-full max-w-lg shrink-0 p-5 "
-          style={{ backgroundColor: "#FFFFFF" }}
-        >
+          style={{ backgroundColor: "#FFFFFF" }} >
           <h2 className="text-lg"> Add your review to update our service </h2>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}

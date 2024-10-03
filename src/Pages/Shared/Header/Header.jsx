@@ -1,13 +1,7 @@
 import axios from "axios";
 import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import {
-  HiArrowSmRight,
-  HiChartPie,
-  HiShoppingBag,
-  HiTable,
-  HiUser,
-} from "react-icons/hi";
+import { HiChartPie, HiTable, HiUser } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
@@ -109,11 +103,26 @@ const Header = () => {
               tabIndex={0}
               className=" menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
+              <li className="mb-2" >
+                <Link to="/complains">
+                  <span style={{ color: "#016A4E" }} className="font-bold">
+                    Complains
+                  </span>
+                </Link>
               </li>
-              <li>
-                <a>Item 3</a>
+              <li className="mb-2">
+                <Link to="/hotlines">
+                  <span style={{ color: "#016A4E" }} className="font-bold">
+                    Hotlines
+                  </span>
+                </Link>
+              </li>
+              <li >
+                <Link to="/reviews">
+                  <span style={{ color: "#016A4E" }} className="font-bold">
+                    Reviews
+                  </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -124,12 +133,20 @@ const Header = () => {
 
         {/* nav center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className=" menu-horizontal gap-4">
+          <ul className=" menu-horizontal gap-12">
             <li>
-              <a>Item 1</a>
+              <Link to="/complains">
+                <span style={{ color: "#016A4E" }} className="font-bold">
+                  Complains
+                </span>
+              </Link>
             </li>
             <li>
-              <Link to="/hotlines"> <span style={{ color: "#016A4E" }} className="font-bold" >Hotlines</span>  </Link>
+              <Link to="/hotlines">
+                <span style={{ color: "#016A4E" }} className="font-bold">
+                  Hotlines
+                </span>
+              </Link>
             </li>
             <li>
               <Link to="/reviews">
@@ -167,7 +184,7 @@ const Header = () => {
                         htmlFor="my-drawer-4"
                         className="drawer-button btn btn-ghost"
                       >
-                        {/*test*/}
+                        {/* header user pic */}
                         <img
                           className=" w-[40px] h-[40px] rounded-full object-cover"
                           alt="Tailwind CSS Navbar component"

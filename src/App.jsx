@@ -17,6 +17,8 @@ import ManageReview from "./Pages/ManageReview/ManageReview";
 import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
 import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
 import UpdateReview from "./Pages/UpdateReview/UpdateReview";
+import PostComplain from "./Pages/PostComplain/PostComplain";
+
 
 function App() {
   return (
@@ -35,6 +37,9 @@ function App() {
                   <Route path="" element={ <MyReviews></MyReviews> } ></Route>
                   <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
                 </Route>
+
+                {/* post complain here */}
+                <Route path="/complains" element={ <PostComplain></PostComplain> } ></Route>
 
                 {/* update user */}
                 <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
