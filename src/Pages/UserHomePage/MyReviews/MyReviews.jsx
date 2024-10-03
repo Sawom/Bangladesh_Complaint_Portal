@@ -2,14 +2,15 @@ import { Rating, ThinStar } from "@smastrom/react-rating";
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const MyReviews = () => {
   const { user } = useFirebase();
   const [reviewInfo, setReviewInfo] = useState([]);
-  
+
   //  for refetch data load
   useEffect(() => {
     if (user && user.email) {
@@ -21,8 +22,48 @@ const MyReviews = () => {
           console.error("Error fetching data:", error);
         });
     }
-  }, [user]);
- 
+  }, [user, reviewInfo]);
+
+  // delete review
+  const handleDeleteReview = (review) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform Axios delete operation
+        axios.delete(`http://localhost:5000/reviews/${review._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // Show success message
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Review has been deleted!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting review:", error);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Failed to delete review.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      }
+    });
+  };
+
   // style for review star
   const myStyles = {
     itemShapes: ThinStar,
@@ -49,29 +90,28 @@ const MyReviews = () => {
               readOnly
             />
 
-            <div className="flex gap-5" >
-                {/* delete btn */}
-                <Button
+            <div className="flex gap-5">
+              {/* delete btn */}
+              <Button
                 className="w-16 mt-2"
                 color="gray"
+                onClick={() => handleDeleteReview(refs)}
                 style={{ backgroundColor: "red", color: "white" }}
-                >
+              >
                 <FaTrashAlt></FaTrashAlt>
+              </Button>
+
+              {/* edit */}
+              <Link to={`/userhome/review/${refs._id}`}>
+                <Button
+                  className="w-16 mt-2"
+                  color="gray"
+                  style={{ backgroundColor: "#016A4E", color: "white" }}
+                >
+                  <FaEdit />
                 </Button>
-
-                {/* edit */}
-                <Link to={`/userhome/review/${refs._id}`} >
-                    <Button
-                    className="w-16 mt-2"
-                    color="gray"
-                    style={{ backgroundColor: "#016A4E", color: "white" }}
-                    >
-                    <FaEdit />
-                    </Button>
-                </Link>
-                
+              </Link>
             </div>
-
           </div>
         </div>
       ))}
