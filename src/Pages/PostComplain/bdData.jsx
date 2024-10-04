@@ -1,4 +1,4 @@
-export const bdData =  [
+export const divisionsData =  [
     {
         division: "ঢাকা",
         district:[
