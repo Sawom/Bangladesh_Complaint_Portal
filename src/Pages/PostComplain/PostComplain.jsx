@@ -1,13 +1,37 @@
 import { Dropdown } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {divisionsData} from './bdData'
 
 const PostComplain = () => {
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
-  const [subdistrict, subsetDistrict] = useState("");
+  const [subdistrict, setSubdistrict] = useState("");
+
+  // selected district, subDistrict
+  const [selectedDistrict, setSelectedDistrict] = useState([]);
+  const [selectedSubdistrict, setSelectedSubdistrict] = useState([]);
 
   // Effects for dynamic dropdowns
+  useEffect( ()=>{
+    const selectedDis = divisionsData?.find( 
+      (divisionName)=> divisionName.division === division)?.district;  
+
+      if(selectedDis){
+        setSelectedDistrict(selectedDis);
+        setDistrict(selectedDis[0]?.district );
+      }
+
+      const selectSubdistrict = selectedDis?.find(  
+        (districtName) => districtName.districtname === selectedDis[0]?.districtname
+      )?.subdistrict;
+
+      if(selectSubdistrict){
+        setSelectedSubdistrict(selectSubdistrict);
+        setSubdistrict(selectSubdistrict[0])
+      }
+  }, [division]);
+
+  
 
   return (
     <div
