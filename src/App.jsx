@@ -18,6 +18,7 @@ import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
 import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
 import UpdateReview from "./Pages/UpdateReview/UpdateReview";
 import PostComplain from "./Pages/PostComplain/PostComplain";
+import ManageComplain from "./Pages/ManageComplain/ManageComplain";
 
 
 function App() {
@@ -48,12 +49,15 @@ function App() {
 
                 {/* manage user */}
                 <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
+                {/* manage reviews */}
+                <Route path="/managereview" element={ <ManageReview></ManageReview> } ></Route>
+                <Route path="/managecomplain" element={ <ManageComplain></ManageComplain> } ></Route>
+
                 {/* add review */}
                 <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
                 {/* reviews */}
                 <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
-                {/* manage reviews */}
-                <Route path="/managereview" element={ <ManageReview></ManageReview> } ></Route>
+                
 
                 <Route path='*' element={ <NotFound></NotFound> } ></Route>
               </Routes>

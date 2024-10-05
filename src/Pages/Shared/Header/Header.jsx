@@ -207,9 +207,8 @@ const Header = () => {
                         <label
                           htmlFor="my-drawer-4"
                           className="cursor-pointer  p-3"
-                          aria-label="close"
-                        >
-                          {/* <span >User menu</span> */}
+                          aria-label="close" >
+                          {/* User menu */}
                           <span className=" flex justify-between px-5">
                             <p className="text-2xl ">Menus</p>{" "}
                             <p className="text-3xl">&times;</p>
@@ -220,8 +219,7 @@ const Header = () => {
                       {/* Sidebar content here */}
                       <Sidebar
                         className=" w-auto "
-                        aria-label="Default sidebar example"
-                      >
+                        aria-label="Default sidebar example" >
                         <Sidebar.Items>
                           <Sidebar.ItemGroup>
                             {/* 1 user home */}
@@ -240,8 +238,7 @@ const Header = () => {
                               <Link to="/manageuser">
                                 <span
                                   style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
+                                  className="font-bold">
                                   Manage User
                                 </span>
                               </Link>
@@ -257,6 +254,18 @@ const Header = () => {
                                 </span>
                               </Link>
                             </Sidebar.Item>
+                            {/* manage complain */}
+                            <Sidebar.Item icon={HiUser}>
+                              <Link to="/managecomplain">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Manage Complain
+                                </span>
+                              </Link>
+                            </Sidebar.Item>
+
                             {/* 3 add review */}
                             <Sidebar.Item icon={HiUser}>
                               <Link to="/addreview">

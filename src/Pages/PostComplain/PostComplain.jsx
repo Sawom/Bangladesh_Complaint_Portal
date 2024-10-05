@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { divisionsData } from "./bdData";
+import useFirebase from "../../Authentication/useFirebase/useFirebase";
+import axios from "axios";
 
 const PostComplain = () => {
-  const { handleSubmit, control, watch } = useForm();
+  const { handleSubmit, control, watch, register } = useForm();
 
   // Watch for the changes in division and district fields
   const watchDivision = watch("division");
   const watchDistrict = watch("district");
 
-  const onSubmit = (data) => {
-    console.log("Selected Location Data:", data);
-  };
+  const { user } = useFirebase();
+  const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  // load single user by email
+  useEffect(() => {
+    if (user && user.email) {
+      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+        .then((response) => {
+          if (response.data.length > 0) {
+            setUserInfo(response.data[0]); // user data is in the first index
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to fetch user data:", err);
+          setUserInfo({}); // If there's an error, keep userInfo as an empty object
+        })
+        .finally(() => {
+          setLoading(false); // Set loading to false after fetching
+        });
+    }
+  }, [user]);
 
   // Get the selected division and district data dynamically
   const selectedDivisionData = divisionsData.find(
@@ -20,6 +41,14 @@ const PostComplain = () => {
   const selectedDistrictData = selectedDivisionData?.district.find(
     (dist) => dist.districtname === watchDistrict
   );
+
+  // form submit
+  const onSubmit = (data) => {
+    console.log("Selected Location Data:", data);
+  };
+  
+
+
 
   return (
     <div
@@ -45,7 +74,9 @@ const PostComplain = () => {
                 placeholder="name"
                 className="input input-bordered"
                 name="name"
-                defaultValue=""
+                defaultValue={userInfo?.name}
+                readOnly
+                {...register("name", { required: true })}
               />
             </div>
 
@@ -59,7 +90,7 @@ const PostComplain = () => {
                 placeholder="email"
                 className="input input-bordered"
                 name="email"
-                defaultValue=""
+                defaultValue={userInfo?.email}
               />
             </div>
 

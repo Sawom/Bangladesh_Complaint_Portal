@@ -303,3 +303,63 @@ export const divisionsData =  [
         ]
     }
 ]
+
+export const problemCategory = [
+    {
+        category: "দুর্নীতি"
+    },
+    {
+        category: "বেকারত্ব"
+    },
+    {
+        category: "দারিদ্র্য"
+    },
+    {
+        category: "স্বাস্থ্যসেবা"
+    },
+    {
+        category: "পরিবেশ দূষণ"
+    },
+    {
+        category: "শিক্ষা ব্যবস্থা"
+    },
+    {
+        category: "সড়ক নিরাপত্তা ও যানজট"
+    },
+    {
+        category: "নারী নির্যাতন"
+    },
+    {
+        category: "বিদ্যুৎ"
+    },
+    {
+        category: "কৃষি"
+    },
+    {
+        category: "পানি সংকট"
+    },
+    {
+        category: "তথ্যপ্রযুক্তির সমস্যা"
+    },
+    {
+        category: "প্রযুক্তির মাধ্যমে প্রতারণা"
+    },
+    {
+        category: "শিশু শ্রম"
+    },
+    {
+        category: "প্রাকৃতিক দুর্যোগ"
+    },
+    {
+        category: "জঙ্গিবাদ ও নিরাপত্তা ঝুঁকি"
+    },
+    {
+        category: "মাদক"
+    },
+    {
+        category: "দ্রব্যমূল্য বৃদ্ধি"
+    },
+    {
+        category: "অন্যান্য"
+    }
+]
