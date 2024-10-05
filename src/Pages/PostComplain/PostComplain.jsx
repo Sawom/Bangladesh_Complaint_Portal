@@ -1,7 +1,6 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { divisionsData } from "./bdData";
-import "./postComplain.css";
 
 const PostComplain = () => {
   const { handleSubmit, control, watch } = useForm();
@@ -214,6 +213,20 @@ const PostComplain = () => {
               </label>
               <input
                 type="text"
+                placeholder="drive or cloud link"
+                className="input input-bordered"
+                name="name"
+                defaultValue=""
+              />
+            </div>
+
+            {/* date */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text"> Date </span>
+              </label>
+              <input
+                type="date"
                 placeholder="name"
                 className="input input-bordered"
                 name="name"
