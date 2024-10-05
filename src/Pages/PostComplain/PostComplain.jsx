@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { divisionsData } from "./bdData";
+import { divisionsData, problemCategory } from "./bdData";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import axios from "axios";
 
@@ -10,6 +10,9 @@ const PostComplain = () => {
   // Watch for the changes in division and district fields
   const watchDivision = watch("division");
   const watchDistrict = watch("district");
+
+  // watch problem category
+  const watchProblem = watch("category");
 
   const { user } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
@@ -42,19 +45,20 @@ const PostComplain = () => {
     (dist) => dist.districtname === watchDistrict
   );
 
+  // get problem category
+  const probCategory = problemCategory.find(
+    (problems) => problems.category === watchProblem 
+  );
+
   // form submit
   const onSubmit = (data) => {
-    console.log("Selected Location Data:", data);
+    console.log("Selected Data:", data);
   };
-  
-
-
 
   return (
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
-      className="p-3"
-    >
+      className="p-3" >
       <br />
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
         {/* update form */}
@@ -91,7 +95,50 @@ const PostComplain = () => {
                 className="input input-bordered"
                 name="email"
                 defaultValue={userInfo?.email}
+                readOnly
+                {...register("email", { required: true })}
               />
+            </div>
+
+            {/* problem category input */}
+            <div>
+              <label>Problem Category</label>
+              <div>
+                <Controller
+                  name="problem"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      style={{
+                        outline: "none",
+                        border: "2px solid #7E7E7E",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        width: "100%",
+                        backgroundColor: "white",
+                        color: "black",
+                        transition: "border-color 0.5s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}  >
+                      <option value="">Select problem category</option>
+                      {problemCategory.map((problems, idx) => (
+                        <option key={idx} value={problems.category}>
+                          {problems.category}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+              </div>
             </div>
 
             {/* Division Input */}
@@ -254,14 +301,21 @@ const PostComplain = () => {
             {/* date */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text"> Date </span>
+                <span className="label-text">Date</span>
               </label>
-              <input
-                type="date"
-                placeholder="name"
-                className="input input-bordered"
-                name="name"
-                defaultValue=""
+              {/* Controller for Date Input */}
+              <Controller
+                name="date"  // The name of the form field 
+                control={control}  // React Hook Form's control 
+                defaultValue=""  // Default value for the date 
+                render={({ field }) => (
+                  <input
+                    type="date"
+                    className="input input-bordered"
+                    {...field}  // This links the input with the form control
+                    placeholder="Select a date"
+                  />
+                )}
               />
             </div>
 
