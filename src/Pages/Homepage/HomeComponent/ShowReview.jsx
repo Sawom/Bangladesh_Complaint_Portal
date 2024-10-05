@@ -4,10 +4,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 // import required modules for swiper js for carousel to see reviews
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Link } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./styles.css";
@@ -53,7 +53,8 @@ const ShowReview = () => {
             <SwiperSlide>
               <div
                 key={review._id}
-                className="card w-full bg-base-100 my-4 flex items-center " >
+                className="card w-full bg-base-100 my-4 flex items-center "
+              >
                 <div className="card-body text-black">
                   <h2 className="card-title "> Name: {refs.name} </h2>
                   <h2 className="card-title"> Email: {refs.email} </h2>

@@ -1,37 +1,26 @@
-import { Dropdown } from "flowbite-react";
-import React, { useEffect, useState } from "react";
-import {divisionsData} from './bdData'
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { divisionsData } from "./bdData";
+import "./postComplain.css";
 
 const PostComplain = () => {
-  const [division, setDivision] = useState("");
-  const [district, setDistrict] = useState("");
-  const [subdistrict, setSubdistrict] = useState("");
+  const { handleSubmit, control, watch } = useForm();
 
-  // selected district, subDistrict
-  const [selectedDistrict, setSelectedDistrict] = useState([]);
-  const [selectedSubdistrict, setSelectedSubdistrict] = useState([]);
+  // Watch for the changes in division and district fields
+  const watchDivision = watch("division");
+  const watchDistrict = watch("district");
 
-  // Effects for dynamic dropdowns
-  useEffect( ()=>{
-    const selectedDis = divisionsData?.find( 
-      (divisionName)=> divisionName.division === division)?.district;  
+  const onSubmit = (data) => {
+    console.log("Selected Location Data:", data);
+  };
 
-      if(selectedDis){
-        setSelectedDistrict(selectedDis);
-        setDistrict(selectedDis[0]?.district );
-      }
-
-      const selectSubdistrict = selectedDis?.find(  
-        (districtName) => districtName.districtname === selectedDis[0]?.districtname
-      )?.subdistrict;
-
-      if(selectSubdistrict){
-        setSelectedSubdistrict(selectSubdistrict);
-        setSubdistrict(selectSubdistrict[0])
-      }
-  }, [division]);
-
-  
+  // Get the selected division and district data dynamically
+  const selectedDivisionData = divisionsData.find(
+    (div) => div.division === watchDivision
+  );
+  const selectedDistrictData = selectedDivisionData?.district.find(
+    (dist) => dist.districtname === watchDistrict
+  );
 
   return (
     <div
@@ -46,7 +35,7 @@ const PostComplain = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h2 className="text-lg"> what is your complain? tell us </h2>
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
             <div className="form-control">
               <label className="label">
@@ -75,64 +64,131 @@ const PostComplain = () => {
               />
             </div>
 
-            {/* division */}
-            <div className="flex items-center gap-5">
-              <Dropdown
-                style={{
-                  backgroundColor: "#71797E",
-                  color: "white",
-                  fontStyle: "bold",
-                  style: "none",
-                  width: "100%"
-                }}
-                label="division"
-                size="lg"
-              >
-                <Dropdown.Item >Dashboard</Dropdown.Item>
-                <Dropdown.Item>Settings</Dropdown.Item>
-                <Dropdown.Item>Earnings</Dropdown.Item>
-                <Dropdown.Item>Sign out</Dropdown.Item>
-              </Dropdown>
+            {/* Division Input */}
+            <div>
+              <label>Division</label>
+              <div>
+                <Controller
+                  name="division"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      style={{
+                        outline: "none",
+                        border: "2px solid #7E7E7E",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        width: "100%",
+                        backgroundColor: "white",
+                        color: "black",
+                        transition: "border-color 0.5s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}  >
+                      <option value="">Select Division</option>
+                      {divisionsData.map((division, idx) => (
+                        <option key={idx} value={division.division}>
+                          {division.division}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+              </div>
             </div>
 
-            {/* district */}
-            <div className="flex items-center gap-5">
-              <Dropdown
-                style={{
-                  backgroundColor: "#71797E",
-                  color: "white",
-                  fontStyle: "bold",
-                  style: "none",
-                  width: "100%"
-                }}
-                label="district"
-                size="lg"
-              >
-                <Dropdown.Item >Dashboard</Dropdown.Item>
-                <Dropdown.Item>Settings</Dropdown.Item>
-                <Dropdown.Item>Earnings</Dropdown.Item>
-                <Dropdown.Item>Sign out</Dropdown.Item>
-              </Dropdown>
+            {/* District Input */}
+            <div>
+              <label>District (select division first) </label>
+              {watchDivision && (
+                <div>
+                  <Controller
+                    name="district"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                      <select
+                        {...field}
+                        style={{
+                          outline: "none",
+                          border: "2px solid #7E7E7E",
+                          padding: "10px",
+                          borderRadius: "4px",
+                          width: "100%",
+                          backgroundColor: "white",
+                          color: "black",
+                          transition: "border-color 0.5s ease",
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.borderColor = "grey";
+                          e.target.style.boxShadow = "none";
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.borderColor = "grey";
+                          e.target.style.boxShadow = "none";
+                        }}  >
+                        <option value="">Select District</option>
+                        {selectedDivisionData?.district.map((district, idx) => (
+                          <option key={idx} value={district.districtname}>
+                            {district.districtname}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  />
+                </div>
+              )}
             </div>
 
-            {/* sub */}
-            <div className="flex items-center gap-5">
-              <Dropdown
-                style={{
-                  backgroundColor: "#71797E",
-                  color: "white",
-                  fontStyle: "bold",
-                  style: "none",
-                  width: "100%"
-                }}
-                label="sub district"
-                size="lg"
-              >
-                <Dropdown.Item >Dashboard</Dropdown.Item>
-                <Dropdown.Item>Settings</Dropdown.Item>
-                <Dropdown.Item>Earnings</Dropdown.Item>
-                <Dropdown.Item>Sign out</Dropdown.Item>
-              </Dropdown>
+            {/* sub district */}
+            <div>
+              <label>Sub District  (select district first) </label>
+              {watchDistrict && (
+                <div>
+                  <Controller
+                    name="subDistrict"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                      <select {...field} 
+                      style={{
+                        outline: "none",
+                        border: "2px solid #7E7E7E",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        width: "100%",
+                        backgroundColor: "white",
+                        color: "black",
+                        transition: "border-color 0.5s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }} >
+                        {selectedDistrictData?.subdistrict.map(
+                          (subDistrict, idx) => (
+                            <option key={idx} value={subDistrict}>
+                              {subDistrict}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    )}
+                  />
+                </div>
+              )}
             </div>
 
             {/* complain */}
@@ -141,8 +197,8 @@ const PostComplain = () => {
                 <span className="label-text">Your complain</span>
               </label>
               <textarea
-                className="textarea textarea-bordered h-32"
-                placeholder="Review"
+                className="textarea textarea-bordered h-36"
+                placeholder="Write your complain here. Either bangla or english. no banglish acceptable"
                 required
               ></textarea>
             </div>
