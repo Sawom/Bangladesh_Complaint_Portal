@@ -2,6 +2,7 @@ import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { FaTrashAlt } from "react-icons/fa";
 
 const ManageComplain = () => {
   const [complains, setComplains] = useState([]);
@@ -71,8 +72,7 @@ const ManageComplain = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios
-          .delete(`http://localhost:5000/complains/${delcomplains._id}`)
+        axios.delete(`http://localhost:5000/complains/${delcomplains._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -92,7 +92,7 @@ const ManageComplain = () => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Failed to delete User.",
+              title: "Failed to delete Complain.",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -146,11 +146,32 @@ const ManageComplain = () => {
                     <p> <span className="font-bold">Division:</span> {coms.division} </p>
                     <p> <span className="font-bold">District:</span> {coms.district} </p>
                     <p> <span className="font-bold">Sub District:</span> {coms.subDistrict} </p>
+                    {/* delete btn */}
+                    <Button
+                    className="w-16 mt-2"
+                    onClick={() => handleDeleteComplain(coms)}
+                    color="gray"
+                    style={{ backgroundColor: "red", color: "white" }}
+                    >
+                    <FaTrashAlt></FaTrashAlt>
+                    </Button>
                 </div>
             </div>
             ))
 
         }
+
+        {/* pagination control button */}
+        <div className="flex justify-center mt-4">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
+                    {index + 1}
+                  </Button>
+              ))}
+        </div>
 
 
       </div>
