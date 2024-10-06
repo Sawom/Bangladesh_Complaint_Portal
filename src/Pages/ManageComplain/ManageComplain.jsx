@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -111,6 +112,46 @@ const ManageComplain = () => {
             <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
                 Total Complains: {totalComplains}
             </h3>
+
+        {/* Search Box */}
+        <div className="flex justify-center mb-4">
+          <input
+            style={{width:"70%"}}
+            type="text"
+            placeholder="Search by NID or Email"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input input-bordered border-gray-300 rounded p-2"
+          />
+          <Button
+            onClick={handleSearch}
+            className="ml-2"
+            style={{ backgroundColor: "#01864C", color: "white" }}
+          >
+            Search
+          </Button>
+        </div>
+
+        {/* show complains */}
+        { complains.map( (coms)=>(
+            <div   key={coms._id}
+              className="card w-full bg-base-100 shadow-lg my-4"  >
+                <div className="card-body text-left text-black">
+                    <h2 className="card-title "> Name: {coms.name} </h2>
+                    <h2 className="card-title"> Email: {coms.email} </h2>
+                    <p> <span className="font-bold" >Complain:</span>  {coms.complain} </p>
+                    <p> <span className="font-bold" >Provelink:</span>  <span> <a href={coms.provelink}  target="_blank"> {coms.provelink} </a>  </span>  </p>
+                    <p> <span className="font-bold">Problem:</span> {coms.problem} </p>
+                    <p> <span className="font-bold">Submission Date:</span> {coms.date} </p>
+                    <p> <span className="font-bold">Division:</span> {coms.division} </p>
+                    <p> <span className="font-bold">District:</span> {coms.district} </p>
+                    <p> <span className="font-bold">Sub District:</span> {coms.subDistrict} </p>
+                </div>
+            </div>
+            ))
+
+        }
+
 
       </div>
       <br />

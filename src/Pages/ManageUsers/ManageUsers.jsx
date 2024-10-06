@@ -112,6 +112,7 @@ const ManageUsers = () => {
         {/* Search Box */}
         <div className="flex justify-center mb-4">
           <input
+            style={{width:"70%"}}
             type="text"
             placeholder="Search by NID or Email"
             value={searchQuery}
