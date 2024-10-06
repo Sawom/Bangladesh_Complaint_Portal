@@ -51,7 +51,7 @@ const ManageUsers = () => {
 
   // Function to handle page change
   const handlePageChange = (page) => {
-        fetchUsers(page); // Fetch users for the selected page
+      fetchUsers(page); // Fetch users for the selected page
   };
 
   // delete user

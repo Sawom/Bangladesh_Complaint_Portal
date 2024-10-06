@@ -22,8 +22,7 @@ const PostComplain = () => {
   // load single user by email
   useEffect(() => {
     if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/users?email=${user?.email}`)
+      axios.get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
