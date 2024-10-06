@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { Rating, ThinStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import axios from "axios";
 import { Button } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -12,28 +12,30 @@ const ManageReview = () => {
   // pagination
   const [totalReview, setTotalReview] = useState(0); // Total number of results
   const [currentPage, setCurrentPage] = useState(1); // Current page number
-  const [totalPages, setTotalPages] = useState(1); 
-  const limit = 10; 
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
 
   //  load all review initially for pagination
   const fetchReviews = async (page = 1) => {
-      try {
-          // Include page and limit parameters and limit per page data in the request
-          const response = await axios.get(`http://localhost:5000/reviews?page=${page}&limit=${limit}`);
-          setReview(response.data.reviews); // collect user data
-          // handle pagination data as well
-          setTotalReview(response.data.totalReview);
-          setCurrentPage(response.data.currentPage);
-          setTotalPages(response.data.totalPages);
-      } catch (error) {
-          console.error("Error fetching data:", error);
-      }
+    try {
+      // Include page and limit parameters and limit per page data in the request
+      const response = await axios.get(
+        `http://localhost:5000/reviews?page=${page}&limit=${limit}`
+      );
+      setReview(response.data.reviews); // collect user data
+      // handle pagination data as well
+      setTotalReview(response.data.totalReview);
+      setCurrentPage(response.data.currentPage);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   // for refetch data load
   useEffect(() => {
     fetchReviews();
-  }, [reviews]);
+  }, []); // do not use dependent. if use pagination does not work.
 
   // Function to handle page change
   const handlePageChange = (page) => {
@@ -53,9 +55,12 @@ const ManageReview = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios.delete(`http://localhost:5000/reviews/${review._id}`)
+        axios
+          .delete(`http://localhost:5000/reviews/${review._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
+              // refetch data load
+              fetchReviews();
               // Show success message
               Swal.fire({
                 position: "top-end",
@@ -130,16 +135,20 @@ const ManageReview = () => {
 
           {/* pagination control button */}
           <div className="flex justify-center mt-4">
-              {Array.from({ length: totalPages }, (_, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
-                    {index + 1}
+            {Array.from({ length: totalPages }, (_, index) => (
+              <Button
+                key={index}
+                onClick={() => handlePageChange(index + 1)}
+                className={`mx-1 ${
+                  currentPage === index + 1
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-500"
+                }`}
+              >
+                {index + 1}
               </Button>
-              ))}
+            ))}
           </div>
-
         </div>
 
         <br />

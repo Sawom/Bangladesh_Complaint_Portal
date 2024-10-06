@@ -73,13 +73,13 @@ const MyReviews = () => {
   return (
     <div className="p-3 " style={{ backgroundColor: "#FFFFFF" }}>
       <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-        Total review: {reviewInfo?.length}
+        Total Review: {reviewInfo?.length}
       </h3>
 
       {/* show reviews */}
       {reviewInfo.map((refs) => (
-        <div key={refs._id} className="card w-full bg-base-100 shadow-xl my-4">
-          <div className="card-body text-left text-black">
+        <div key={refs._id} className="card w-full bg-base-100 shadow-lg my-4" >
+          <div className="card-body text-left text-black" >
             <h2 className="card-title "> Name: {refs.name} </h2>
             <h2 className="card-title"> Email: {refs.email} </h2>
             <p> {refs.comments} </p>

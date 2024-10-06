@@ -35,7 +35,7 @@ const ManageComplain = () => {
   // for refetch data load
   useEffect(() => {
     fetchComplains();
-  }, [complains]);
+  }, []);
 
   // step 2: search function
   const handleSearch = async () => {
@@ -75,6 +75,8 @@ const ManageComplain = () => {
           .delete(`http://localhost:5000/complains/${delcomplains._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
+              // refetch data load
+              fetchComplains();
               // Show success message
               Swal.fire({
                 position: "top-end",
@@ -143,42 +145,15 @@ const ManageComplain = () => {
             <div className="card-body text-left text-black">
               <h2 className="card-title "> Name: {coms.name} </h2>
               <h2 className="card-title"> Email: {coms.email} </h2>
-              <p>
-                {" "}
-                <span className="font-bold">Complain:</span> {coms.complain}{" "}
+              <p><span className="font-bold">Complain:</span> {coms.complain}</p>
+              <p><span className="font-bold">Provelink:</span>
+                <span> <a href={coms.provelink} target="_blank">{coms.provelink}</a> </span>
               </p>
-              <p>
-                {" "}
-                <span className="font-bold">Provelink:</span>{" "}
-                <span>
-                  {" "}
-                  <a href={coms.provelink} target="_blank">
-                    {" "}
-                    {coms.provelink}{" "}
-                  </a>{" "}
-                </span>{" "}
-              </p>
-              <p>
-                {" "}
-                <span className="font-bold">Problem:</span> {coms.problem}{" "}
-              </p>
-              <p>
-                {" "}
-                <span className="font-bold">Submission Date:</span> {coms.date}{" "}
-              </p>
-              <p>
-                {" "}
-                <span className="font-bold">Division:</span> {coms.division}{" "}
-              </p>
-              <p>
-                {" "}
-                <span className="font-bold">District:</span> {coms.district}{" "}
-              </p>
-              <p>
-                {" "}
-                <span className="font-bold">Sub District:</span>{" "}
-                {coms.subDistrict}{" "}
-              </p>
+              <p><span className="font-bold">Problem:</span> {coms.problem}</p>
+              <p><span className="font-bold">Submission Date:</span> {coms.date}</p>
+              <p><span className="font-bold">Division:</span> {coms.division}</p>
+              <p><span className="font-bold">District:</span> {coms.district}</p>
+              <p><span className="font-bold">Sub District:</span>{coms.subDistrict} </p>
               {/* delete btn */}
               <Button
                 className="w-16 mt-2"

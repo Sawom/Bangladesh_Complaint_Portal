@@ -17,7 +17,8 @@ const Reviews = () => {
   const fetchReviews = async (page = 1) => {
       try {
           // Include page and limit parameters and limit per page data in the request
-          const response = await axios.get(`http://localhost:5000/reviews?page=${page}&limit=${limit}`);
+          const response = await axios.get(
+            `http://localhost:5000/reviews?page=${page}&limit=${limit}`);
           setReview(response.data.reviews); // collect user data
           // handle pagination data as well
           setTotalReview(response.data.totalReview);
@@ -31,7 +32,7 @@ const Reviews = () => {
   // for refetch data load
   useEffect(() => {
     fetchReviews();
-  }, [reviews]);
+  }, []);
 
   // Function to handle page change
   const handlePageChange = (page) => {
