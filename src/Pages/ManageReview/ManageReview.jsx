@@ -33,7 +33,7 @@ const ManageReview = () => {
   // for refetch data load
   useEffect(() => {
     fetchReviews();
-  }, []);
+  }, [reviews]);
 
   // Function to handle page change
   const handlePageChange = (page) => {

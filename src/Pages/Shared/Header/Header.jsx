@@ -233,7 +233,33 @@ const Header = () => {
                                 </span>
                               </Link>
                             </Sidebar.Item>
-                            {/* 2 manage user */}
+
+                            {/*  add review */}
+                            <Sidebar.Item icon={HiUser}>
+                              <Link to="/addreview">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Add Review
+                                </span>
+                              </Link>
+                            </Sidebar.Item>
+
+                            {/* post complains */}
+                            {/*  add review */}
+                            <Sidebar.Item icon={HiUser}>
+                              <Link to="/postcomplains">
+                                <span
+                                  style={{ color: "#016A4E" }}
+                                  className="font-bold"
+                                >
+                                  Post Complain
+                                </span>
+                              </Link>
+                            </Sidebar.Item>
+
+                            {/* manage user */}
                             <Sidebar.Item icon={HiUser}>
                               <Link to="/manageuser">
                                 <span
@@ -266,17 +292,7 @@ const Header = () => {
                               </Link>
                             </Sidebar.Item>
 
-                            {/* 3 add review */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/addreview">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Add Review
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
+                            
                             {/* 5 */}
                             <Sidebar.Item icon={HiTable}>
                               <button onClick={logoutFunction}>

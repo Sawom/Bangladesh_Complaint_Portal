@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ManageComplain = () => {
   const [complains, setComplains] = useState([]);
@@ -35,7 +35,7 @@ const ManageComplain = () => {
   // for refetch data load
   useEffect(() => {
     fetchComplains();
-  }, []);
+  }, [complains]);
 
   // step 2: search function
   const handleSearch = async () => {
@@ -71,7 +71,8 @@ const ManageComplain = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios.delete(`http://localhost:5000/complains/${delcomplains._id}`)
+        axios
+          .delete(`http://localhost:5000/complains/${delcomplains._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -103,19 +104,21 @@ const ManageComplain = () => {
   return (
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
-      className="p-3">
+      className="p-3"
+    >
       <br />
       <div
         className="container mx-auto mt-4 mb-4 p-3"
-        style={{ backgroundColor: "#FFFFFF" }} >
-            <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-                Total Complains: {totalComplains}
-            </h3>
+        style={{ backgroundColor: "#FFFFFF" }}
+      >
+        <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
+          Total Complains: {totalComplains}
+        </h3>
 
         {/* Search Box */}
         <div className="flex justify-center mb-4">
           <input
-            style={{width:"70%"}}
+            style={{ width: "70%" }}
             type="text"
             placeholder="Search by NID or Email"
             value={searchQuery}
@@ -132,47 +135,79 @@ const ManageComplain = () => {
         </div>
 
         {/* show complains */}
-        { complains.map( (coms)=>(
-            <div  key={coms._id}
-              className="card w-full bg-base-100 shadow-lg my-4"  >
-                <div className="card-body text-left text-black">
-                    <h2 className="card-title "> Name: {coms.name} </h2>
-                    <h2 className="card-title"> Email: {coms.email} </h2>
-                    <p> <span className="font-bold" >Complain:</span>  {coms.complain} </p>
-                    <p> <span className="font-bold" >Provelink:</span>  <span> <a href={coms.provelink}  target="_blank"> {coms.provelink} </a>  </span>  </p>
-                    <p> <span className="font-bold">Problem:</span> {coms.problem} </p>
-                    <p> <span className="font-bold">Submission Date:</span> {coms.date} </p>
-                    <p> <span className="font-bold">Division:</span> {coms.division} </p>
-                    <p> <span className="font-bold">District:</span> {coms.district} </p>
-                    <p> <span className="font-bold">Sub District:</span> {coms.subDistrict} </p>
-                    {/* delete btn */}
-                    <Button
-                    className="w-16 mt-2"
-                    onClick={() => handleDeleteComplain(coms)}
-                    color="gray"
-                    style={{ backgroundColor: "red", color: "white" }}
-                    >
-                    <FaTrashAlt></FaTrashAlt>
-                    </Button>
-                </div>
+        {complains.map((coms) => (
+          <div
+            key={coms._id}
+            className="card w-full bg-base-100 shadow-lg my-4"
+          >
+            <div className="card-body text-left text-black">
+              <h2 className="card-title "> Name: {coms.name} </h2>
+              <h2 className="card-title"> Email: {coms.email} </h2>
+              <p>
+                {" "}
+                <span className="font-bold">Complain:</span> {coms.complain}{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">Provelink:</span>{" "}
+                <span>
+                  {" "}
+                  <a href={coms.provelink} target="_blank">
+                    {" "}
+                    {coms.provelink}{" "}
+                  </a>{" "}
+                </span>{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">Problem:</span> {coms.problem}{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">Submission Date:</span> {coms.date}{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">Division:</span> {coms.division}{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">District:</span> {coms.district}{" "}
+              </p>
+              <p>
+                {" "}
+                <span className="font-bold">Sub District:</span>{" "}
+                {coms.subDistrict}{" "}
+              </p>
+              {/* delete btn */}
+              <Button
+                className="w-16 mt-2"
+                onClick={() => handleDeleteComplain(coms)}
+                color="gray"
+                style={{ backgroundColor: "red", color: "white" }}
+              >
+                <FaTrashAlt></FaTrashAlt>
+              </Button>
             </div>
-            ))
-
-        }
+          </div>
+        ))}
 
         {/* pagination control button */}
         <div className="flex justify-center mt-4">
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
-                    {index + 1}
-                  </Button>
-              ))}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`mx-1 ${
+                currentPage === index + 1
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-500"
+              }`}
+            >
+              {index + 1}
+            </Button>
+          ))}
         </div>
-
-
       </div>
       <br />
     </div>

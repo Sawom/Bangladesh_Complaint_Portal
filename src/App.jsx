@@ -40,7 +40,7 @@ function App() {
                 </Route>
 
                 {/* post complain here */}
-                <Route path="/complains" element={ <PostComplain></PostComplain> } ></Route>
+                <Route path="/postcomplains" element={ <PostComplain></PostComplain> } ></Route>
 
                 {/* update user */}
                 <Route path='/userhome/update/:id' element={ <UpdateUser></UpdateUser> }  ></Route>
@@ -51,6 +51,7 @@ function App() {
                 <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
                 {/* manage reviews */}
                 <Route path="/managereview" element={ <ManageReview></ManageReview> } ></Route>
+                {/* manage complain */}
                 <Route path="/managecomplain" element={ <ManageComplain></ManageComplain> } ></Route>
 
                 {/* add review */}
