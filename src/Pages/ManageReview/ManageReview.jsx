@@ -7,18 +7,38 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const ManageReview = () => {
-  const [review, setReview] = useState([]);
+  const [reviews, setReview] = useState([]);
 
-  //  load all review
+  // pagination
+  const [totalReview, setTotalReview] = useState(0); // Total number of results
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [totalPages, setTotalPages] = useState(1); 
+  const limit = 10; 
+
+  //  load all review initially for pagination
+  const fetchReviews = async (page = 1) => {
+      try {
+          // Include page and limit parameters and limit per page data in the request
+          const response = await axios.get(`http://localhost:5000/reviews?page=${page}&limit=${limit}`);
+          setReview(response.data.reviews); // collect user data
+          // handle pagination data as well
+          setTotalReview(response.data.totalReview);
+          setCurrentPage(response.data.currentPage);
+          setTotalPages(response.data.totalPages);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+      }
+  };
+
+  // for refetch data load
   useEffect(() => {
-    axios.get("http://localhost:5000/reviews")
-      .then((response) => {
-        setReview(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [review]);
+    fetchReviews();
+  }, []);
+
+  // Function to handle page change
+  const handlePageChange = (page) => {
+    fetchReviews(page); // Fetch users for the selected page
+  };
 
   // delete review
   const handleDeleteReview = (review) => {
@@ -77,10 +97,10 @@ const ManageReview = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-            Total review: {review.length}
+            Total review: {totalReview}
           </h3>
           {/* show reviews */}
-          {review.map((refs) => (
+          {reviews.map((refs) => (
             <div
               key={refs._id}
               className="card w-full bg-base-100 shadow-xl my-4"
@@ -107,8 +127,21 @@ const ManageReview = () => {
               </div>
             </div>
           ))}
+
+          {/* pagination control button */}
+          <div className="flex justify-center mt-4">
+              {Array.from({ length: totalPages }, (_, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
+                    {index + 1}
+              </Button>
+              ))}
+          </div>
+
         </div>
-        
+
         <br />
       </div>
 

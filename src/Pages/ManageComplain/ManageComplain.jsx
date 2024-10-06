@@ -6,7 +6,6 @@ import { FaTrashAlt } from "react-icons/fa";
 
 const ManageComplain = () => {
   const [complains, setComplains] = useState([]);
-  const [users, setUsers] = useState([]);
   //  search
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -16,14 +15,14 @@ const ManageComplain = () => {
   const [totalPages, setTotalPages] = useState(1);
   const limit = 10;
 
-  //step 1: Fetch users initially to search
+  //step 1: Fetch users initially to search and pagination
   const fetchComplains = async (page = 1) => {
     try {
       // Include page and limit parameters and limit per page data in the request
       const response = await axios.get(
         `http://localhost:5000/complains?page=${page}&limit=${limit}`
       );
-      setComplains(response.data.complains); // collect user data
+      setComplains(response.data.complains); // collect complains data
       // handle pagination data as well
       setTotalComplains(response.data.totalComplains);
       setCurrentPage(response.data.currentPage);
@@ -48,7 +47,7 @@ const ManageComplain = () => {
       const response = await axios.get(
         `http://localhost:5000/search/${searchQuery}`
       );
-      setUsers(response.data); // Update the users state with search results
+      setComplains(response.data); // Update the users state with search results
     } catch (error) {
       console.error("Error searching:", error);
     }
@@ -134,7 +133,7 @@ const ManageComplain = () => {
 
         {/* show complains */}
         { complains.map( (coms)=>(
-            <div   key={coms._id}
+            <div  key={coms._id}
               className="card w-full bg-base-100 shadow-lg my-4"  >
                 <div className="card-body text-left text-black">
                     <h2 className="card-title "> Name: {coms.name} </h2>
