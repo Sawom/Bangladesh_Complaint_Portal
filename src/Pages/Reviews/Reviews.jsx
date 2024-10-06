@@ -11,7 +11,7 @@ const Reviews = () => {
   const [totalReview, setTotalReview] = useState(0); // Total number of results
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const [totalPages, setTotalPages] = useState(1); 
-  const limit = 10; 
+  const limit = 20; 
 
   //  load all review initially for pagination
   const fetchReviews = async (page = 1) => {
