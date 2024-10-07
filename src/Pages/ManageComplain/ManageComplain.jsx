@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Helmet } from 'react-helmet-async';
 
 const ManageComplain = () => {
   const [complains, setComplains] = useState([]);
@@ -41,6 +41,7 @@ const ManageComplain = () => {
   // step 2: search function
   const handleSearch = async () => {
     if (searchQuery.trim() === "") {
+      fetchComplains();
       return;
     } // Prevent empty search
 
@@ -110,7 +111,7 @@ const ManageComplain = () => {
       className="p-3"
     >
       <Helmet>
-            <title> Manage Complain </title>
+        <title> Manage Complain </title>
       </Helmet>
       <br />
       <div
@@ -149,15 +150,47 @@ const ManageComplain = () => {
             <div className="card-body text-left text-black">
               <h2 className="card-title "> Name: {coms.name} </h2>
               <h2 className="card-title"> Email: {coms.email} </h2>
-              <p><span className="font-bold">Complain: </span> {coms.complain} </p>
-              <p><span className="font-bold">Provelink:</span>
-                <span> <a href={coms.provelink} target="_blank">{coms.provelink}</a> </span>
+              <p>
+                <span className="font-bold">Complain: </span> {coms.complain}{" "}
               </p>
-              <p><span className="font-bold">Problem Category:</span> {coms.problem}</p>
-              <p><span className="font-bold">Submission Date:</span> {coms.date}</p>
-              <p><span className="font-bold">Division:</span> {coms.division}</p>
-              <p><span className="font-bold">District:</span> {coms.district}</p>
-              <p><span className="font-bold">Sub District:</span>{coms.subDistrict} </p>
+
+              <p>
+                <span className="font-bold">Provelink:</span>
+                <span>
+                  <a
+                    style={{
+                      wordBreak: "break-word",
+                      overflowWrap: "break-word",
+                      display: "block", // Use block for the link inside flex container
+                      maxWidth: "60%",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                    href={coms.provelink}
+                    target="_blank"
+                  >
+                    {coms.provelink}
+                  </a>
+                </span>
+              </p>
+              <p>
+                <span className="font-bold">Problem Category: </span>{" "}
+                {coms.problem}
+              </p>
+              <p>
+                <span className="font-bold">Submission Date:</span> {coms.date}
+              </p>
+              <p>
+                <span className="font-bold">Division:</span> {coms.division}
+              </p>
+              <p>
+                <span className="font-bold">District:</span> {coms.district}
+              </p>
+              <p>
+                <span className="font-bold">Sub District: </span>
+                {coms.subDistrict}{" "}
+              </p>
               {/* delete btn */}
               <Button
                 className="w-16 mt-2"
