@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from 'react-helmet-async';
 
 const UpdateReview = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -67,6 +68,9 @@ const UpdateReview = () => {
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3">
+        <Helmet>
+            <title> Update Review </title>
+        </Helmet>
     <br />
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
         {/* update form */}

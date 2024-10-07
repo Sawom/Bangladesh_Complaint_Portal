@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
+import { Helmet } from 'react-helmet-async';
 
 const UserHome = () => {
   const { user } = useFirebase();
@@ -33,6 +34,9 @@ const UserHome = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
+      <Helmet>
+            <title> UserHome </title>
+      </Helmet>
       <br />
       {/* profile */}
       <div

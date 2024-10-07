@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import { divisionsData, problemCategory } from "./bdData";
+import { Helmet } from 'react-helmet-async';
 
 const PostComplain = () => {
   const { handleSubmit, control, watch, register, reset } = useForm();
@@ -99,6 +100,9 @@ const PostComplain = () => {
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3"
     >
+      <Helmet>
+            <title> Your Complain? </title>
+      </Helmet>
       <br />
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
         {/* update form */}

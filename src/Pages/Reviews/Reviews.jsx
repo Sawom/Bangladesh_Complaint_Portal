@@ -3,6 +3,7 @@ import "@smastrom/react-rating/style.css";
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 
 const Reviews = () => {
   const [reviews, setReview] = useState([]);
@@ -47,6 +48,9 @@ const Reviews = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
+      <Helmet>
+            <title> Reviews </title>
+      </Helmet>
       <br />
 
       <div

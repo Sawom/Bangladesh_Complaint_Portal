@@ -3,10 +3,14 @@ import Slides from './HomeComponent/Slides';
 import Faqs from './HomeComponent/Faqs';
 import Problems from './HomeComponent/Problems';
 import ShowReview from './HomeComponent/ShowReview';
+import { Helmet } from 'react-helmet-async';
 
 const Homepage = () => {
     return (
         <div>
+           <Helmet>
+            <title> BD Complain Portal </title>
+           </Helmet>
            <Slides></Slides>
            <Problems></Problems>
            <Faqs></Faqs> 

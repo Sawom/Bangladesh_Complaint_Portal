@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 
 const Hotlines = () => {
   const [numbers, setNumbers] = useState([]);
@@ -17,6 +18,9 @@ const Hotlines = () => {
 
   return (
     <div className="px-3" style={{ backgroundColor: "#E5E5E5" }}>
+      <Helmet>
+            <title> Hotlines </title>
+      </Helmet>
       <br />
       {/* load hotlines in table */}
       <div

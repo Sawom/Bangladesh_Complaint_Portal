@@ -20,7 +20,6 @@ import UpdateReview from "./Pages/UpdateReview/UpdateReview";
 import PostComplain from "./Pages/PostComplain/PostComplain";
 import ManageComplain from "./Pages/ManageComplain/ManageComplain";
 
-
 function App() {
   return (
     <div>

@@ -5,6 +5,7 @@ import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from 'react-helmet-async';
 
 const ManageReview = () => {
   const [reviews, setReview] = useState([]);
@@ -93,6 +94,9 @@ const ManageReview = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
+      <Helmet>
+            <title> Manage Review </title>
+      </Helmet>
       <br />
       <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
         <br />

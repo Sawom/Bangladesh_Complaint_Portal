@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from 'react-helmet-async';
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
@@ -86,6 +87,9 @@ const UpdateUser = () => {
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3"
     >
+      <Helmet>
+            <title> Update Profile </title>
+      </Helmet>
       <br />
 
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">

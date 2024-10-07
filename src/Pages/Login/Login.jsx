@@ -6,6 +6,7 @@ import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import login from "../../assets/others/login.png";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -74,6 +75,9 @@ const Login = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
+      <Helmet>
+            <title> Login </title>
+      </Helmet>
       {/* login form */}
       <div className="hero min-h-screen px-3">
         <div

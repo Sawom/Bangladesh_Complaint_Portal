@@ -7,6 +7,7 @@ import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
+import { Helmet } from 'react-helmet-async';
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
@@ -99,6 +100,10 @@ const Registration = () => {
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
+      <Helmet>
+            <title> Registration </title>
+      </Helmet>
+
       <div className="hero min-h-screen px-3">
         <div
           className="hero-content flex-col mt-8 mb-8 rounded-box lg:flex-row md:flex-row "

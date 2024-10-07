@@ -3,6 +3,7 @@ import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from 'react-helmet-async';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -101,6 +102,9 @@ const ManageUsers = () => {
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3"
     >
+      <Helmet>
+            <title> Manage User </title>
+      </Helmet>
       <br />
       <div
         className="container mx-auto mt-4 mb-4 p-3"
