@@ -104,7 +104,7 @@ const Header = () => {
               className=" menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
             >
               <li className="mb-2" >
-                <Link to="/complains">
+                <Link to="/postcomplains">
                   <span style={{ color: "#016A4E" }} className="font-bold">
                     Complains
                   </span>
@@ -135,7 +135,7 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className=" menu-horizontal gap-12">
             <li>
-              <Link to="/complains">
+              <Link to="/postcomplains">
                 <span style={{ color: "#016A4E" }} className="font-bold">
                   Complains
                 </span>
