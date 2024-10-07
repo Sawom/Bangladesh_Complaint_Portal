@@ -1,9 +1,9 @@
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Helmet } from 'react-helmet-async';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -54,6 +54,38 @@ const ManageUsers = () => {
   const handlePageChange = (page) => {
       fetchUsers(page); // Fetch users for the selected page
   };
+
+  // make admin
+  const handleMakeAdmin = (user)=>{
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Make Admin!'
+        })
+        .then( (result)=>{
+            if(result.isConfirmed){
+              axios.patch(`http://localhost:5000/users/admin/${user._id}`)
+              .then( (response)=>{
+                const data = response.data;
+                if (data.modifiedCount){
+                  fetchUsers();
+                  Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+              } )
+
+            }
+      } )
+  }
 
   // delete user
   const handleDeleteUser = (delUser) => {
@@ -169,12 +201,14 @@ const ManageUsers = () => {
                   <Table.Cell> {usersInfo.email} </Table.Cell>
                   {/* role */}
                   <Table.Cell>
-                    <Button
-                      color="gray"
-                      style={{ backgroundColor: "#01864C", color: "white" }}
-                    >
+                    {
+                      usersInfo.role === 'admin' ? 'admin' : <Button color="gray"
+                      onClick={() => handleMakeAdmin(usersInfo)}
+                      style={{ backgroundColor: "#01864C", color: "white" }}>
                       <FaUserShield></FaUserShield>
                     </Button>
+                    }
+                    
                   </Table.Cell>
                   {/* delete button */}
                   <Table.Cell>
