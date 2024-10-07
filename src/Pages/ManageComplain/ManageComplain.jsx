@@ -14,7 +14,7 @@ const ManageComplain = () => {
   const [totalComplains, setTotalComplains] = useState(0); // Total number of results
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const limit = 20;
 
   //step 1: Fetch users initially to search and pagination
   const fetchComplains = async (page = 1) => {
@@ -126,7 +126,7 @@ const ManageComplain = () => {
           <input
             style={{ width: "70%" }}
             type="text"
-            placeholder="Search by NID or Email"
+            placeholder="Search by Email"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="input input-bordered border-gray-300 rounded p-2"
@@ -149,11 +149,11 @@ const ManageComplain = () => {
             <div className="card-body text-left text-black">
               <h2 className="card-title "> Name: {coms.name} </h2>
               <h2 className="card-title"> Email: {coms.email} </h2>
-              <p><span className="font-bold">Complain:</span> {coms.complain}</p>
+              <p><span className="font-bold">Complain: </span> {coms.complain} </p>
               <p><span className="font-bold">Provelink:</span>
                 <span> <a href={coms.provelink} target="_blank">{coms.provelink}</a> </span>
               </p>
-              <p><span className="font-bold">Problem:</span> {coms.problem}</p>
+              <p><span className="font-bold">Problem Category:</span> {coms.problem}</p>
               <p><span className="font-bold">Submission Date:</span> {coms.date}</p>
               <p><span className="font-bold">Division:</span> {coms.division}</p>
               <p><span className="font-bold">District:</span> {coms.district}</p>

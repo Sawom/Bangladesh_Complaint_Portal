@@ -36,7 +36,7 @@ const MyComplain = () => {
                 <p><span className="font-bold">Provelink:</span>
                     <span> <a href={complains.provelink} target="_blank">{complains.provelink}</a> </span>
                 </p>
-                <p><span className="font-bold">Problem:</span> {complains.problem}</p>
+                <p><span className="font-bold">Problem Category:</span> {complains.problem}</p>
                 <p><span className="font-bold">Submission Date:</span> {complains.date}</p>
                 <p><span className="font-bold">Division:</span> {complains.division}</p>
                 <p><span className="font-bold">District:</span> {complains.district}</p>
