@@ -2,10 +2,24 @@ import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { divisionsData,problemCategory } from "../PostComplain/bdData";
 
 const ManageComplain = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  // Watch for the changes in division and district fields
+  const watchDivision = watch("division");
+  const watchDistrict = watch("district");
+  const watchProblem = watch("category");
+
   const [complains, setComplains] = useState([]);
   //  search
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,12 +31,27 @@ const ManageComplain = () => {
   const limit = 20;
 
   //step 1: Fetch users initially to search and pagination
-  const fetchComplains = async (page = 1) => {
+  const fetchComplains = async (page = 1, filters = {}) => {
     try {
-      // Include page and limit parameters and limit per page data in the request
-      const response = await axios.get(
-        `http://localhost:5000/complains?page=${page}&limit=${limit}`
-      );
+      let apiUrl = `http://localhost:5000/complains?page=${page}&limit=${limit}`;
+
+      const queryParams = new URLSearchParams();
+      queryParams.append("page", page);
+      queryParams.append("limit", limit);
+
+      // adding filters
+      if (filters.division) queryParams.append("division", filters.division);
+      if (filters.district) queryParams.append("district", filters.district);
+      if (filters.subDistrict) queryParams.append("subdistrict", filters.subDistrict);
+      if (filters.problem) queryParams.append("problem", filters.problem);
+
+      // If there are filters, append them to the base API URL
+      if (queryParams.toString()) {
+        apiUrl += `&${queryParams.toString()}`;
+      }
+
+      const response = await axios.get(apiUrl);
+
       setComplains(response.data.complains); // collect complains data
       // handle pagination data as well
       setTotalComplains(response.data.totalComplains);
@@ -33,26 +62,30 @@ const ManageComplain = () => {
     }
   };
 
+  // Get the selected division and district data dynamically
+  const selectedDivisionData = divisionsData.find(
+    (div) => div.division === watchDivision
+  );
+  const selectedDistrictData = selectedDivisionData?.district.find(
+    (dist) => dist.districtname === watchDistrict
+  );
+
   // for refetch data load
   useEffect(() => {
-    fetchComplains();
-  }, []);
+    fetchComplains(currentPage);
+  }, [currentPage]);
 
-  // step 2: search function
-  const handleSearch = async () => {
-    if (searchQuery.trim() === "") {
-      fetchComplains();
-      return;
-    } // Prevent empty search
+  // Fetch filtered data on form submit
+  const onSubmitFilter = (data) => {
+    const filters = {
+      division: data.division,
+      district: data.district,
+      subDistrict: data.subDistrict,
+      problem: data.problem,
+    };
 
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/search/${searchQuery}`
-      );
-      setComplains(response.data); // Update the users state with search results
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
+    // Fetch complains with filters (reset to page 1)
+    fetchComplains(1, filters);
   };
 
   // Function to handle page change
@@ -122,8 +155,86 @@ const ManageComplain = () => {
           Total Complains: {totalComplains}
         </h3>
 
+        <div>
+          <form onSubmit={handleSubmit(onSubmitFilter)}>
+            
+            <div>
+              <label>problem category</label>
+              <select {...register("problem")}  >
+                <option value="">Select category</option>
+                {
+                  problemCategory.map((problems, idx)=>(
+                    <option key={idx} value={problems.category} >
+                      {problems.category}
+                    </option>)
+                  )
+                }
+              </select>
+            </div>
+
+            {/* Division Filter */}
+            <div>
+              <label>Division</label>
+              <select {...register("division")}>
+                <option value="">Select Division</option>
+                {divisionsData.map((division, idx) => (
+                  <option key={idx} value={division.division}>
+                    {division.division}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* District Filter */}
+            <div>
+              <label>District</label>
+              {watchDivision && (
+                <div>
+                  <select {...register("district")}>
+                    <option value="">Select District</option>
+                    {selectedDivisionData?.district.map((district, idx) => (
+                      <option key={idx} value={district.districtname}>
+                        {district.districtname}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+
+            {/* Subdistrict Filter */}
+            <div>
+              <label>Subdistrict</label>
+              {watchDistrict && (
+                <div>
+                  <select {...register("subDistrict")}>
+                    <option value="">Select Subdistrict</option>
+                    {selectedDistrictData?.subdistrict.map(
+                      (subDistrict, idx) => (
+                        <option key={idx} value={subDistrict}>
+                          {subDistrict}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              )}
+            </div>
+            
+            <br />
+            {/* Submit button to apply filter */}
+            <Button
+              type="submit"
+              className="ml-2"
+              style={{ backgroundColor: "#01864C", color: "white" }}
+            >
+              Filter
+            </Button>
+          </form>
+        </div>
+
         {/* Search Box */}
-        <div className="flex justify-center mb-4">
+        {/* <div className="flex justify-center mb-4">
           <input
             style={{ width: "70%" }}
             type="text"
@@ -139,7 +250,7 @@ const ManageComplain = () => {
           >
             Search
           </Button>
-        </div>
+        </div> */}
 
         {/* show complains */}
         {complains.map((coms) => (

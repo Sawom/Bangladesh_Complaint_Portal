@@ -103,7 +103,7 @@ const Header = () => {
               tabIndex={0}
               className=" menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-36 p-2 shadow"
             >
-              <li className="mb-2" >
+              <li className="mb-2">
                 <Link to="/postcomplains">
                   <span style={{ color: "#016A4E" }} className="font-bold">
                     Complains
@@ -117,7 +117,7 @@ const Header = () => {
                   </span>
                 </Link>
               </li>
-              <li >
+              <li>
                 <Link to="/reviews">
                   <span style={{ color: "#016A4E" }} className="font-bold">
                     Reviews
@@ -207,7 +207,8 @@ const Header = () => {
                         <label
                           htmlFor="my-drawer-4"
                           className="cursor-pointer  p-3"
-                          aria-label="close" >
+                          aria-label="close"
+                        >
                           {/* User menu */}
                           <span className=" flex justify-between px-5">
                             <p className="text-2xl ">Menus</p>{" "}
@@ -219,7 +220,8 @@ const Header = () => {
                       {/* Sidebar content here */}
                       <Sidebar
                         className=" w-auto "
-                        aria-label="Default sidebar example" >
+                        aria-label="Default sidebar example"
+                      >
                         <Sidebar.Items>
                           <Sidebar.ItemGroup>
                             {/* 1 user home */}
@@ -264,7 +266,8 @@ const Header = () => {
                               <Link to="/manageuser">
                                 <span
                                   style={{ color: "#016A4E" }}
-                                  className="font-bold">
+                                  className="font-bold"
+                                >
                                   Manage User
                                 </span>
                               </Link>
@@ -292,7 +295,6 @@ const Header = () => {
                               </Link>
                             </Sidebar.Item>
 
-                            
                             {/* 5 */}
                             <Sidebar.Item icon={HiTable}>
                               <button onClick={logoutFunction}>
