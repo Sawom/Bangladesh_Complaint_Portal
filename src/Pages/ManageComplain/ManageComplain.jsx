@@ -107,8 +107,7 @@ const ManageComplain = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios
-          .delete(`http://localhost:5000/complains/${delcomplains._id}`)
+        axios.delete(`http://localhost:5000/complains/${delcomplains._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // refetch data load

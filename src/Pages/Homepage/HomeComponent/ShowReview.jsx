@@ -16,7 +16,8 @@ const ShowReview = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/homereview")
+    axios
+      .get("http://localhost:5000/homereview")
       .then((response) => {
         setReview(response.data);
       })
@@ -40,7 +41,7 @@ const ShowReview = () => {
         <Swiper
           centeredSlides={true}
           autoplay={{
-            delay: 3000,
+            delay: 4000,
             disableOnInteraction: false,
           }}
           pagination={{

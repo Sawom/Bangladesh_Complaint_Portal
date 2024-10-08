@@ -10,6 +10,7 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 const Header = () => {
   const { user, setUser, logoutUser } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   // load
   useEffect(() => {

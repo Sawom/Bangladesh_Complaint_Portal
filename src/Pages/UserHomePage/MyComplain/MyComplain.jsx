@@ -8,7 +8,7 @@ const MyComplain = () => {
 
   // complain data load
   useEffect(() => {
-    if (user && user.email) {
+    if (user && user?.email) {
       axios
         .get(`http://localhost:5000/complains?email=${user.email}`)
         .then((response) => {
@@ -18,7 +18,7 @@ const MyComplain = () => {
           console.error("Error fetching data:", error);
         });
     }
-  }, [user, complainInfo]);
+  }, [user?.email, complainInfo]);
 
   return (
     <div className="p-3" style={{ backgroundColor: "#FFFFFF" }}>
