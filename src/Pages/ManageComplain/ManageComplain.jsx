@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { divisionsData,problemCategory } from "../PostComplain/bdData";
+import { divisionsData, problemCategory } from "../PostComplain/bdData";
 
 const ManageComplain = () => {
   const {
@@ -42,7 +42,8 @@ const ManageComplain = () => {
       // adding filters
       if (filters.division) queryParams.append("division", filters.division);
       if (filters.district) queryParams.append("district", filters.district);
-      if (filters.subDistrict) queryParams.append("subdistrict", filters.subDistrict);
+      if (filters.subDistrict)
+        queryParams.append("subdistrict", filters.subDistrict);
       if (filters.problem) queryParams.append("problem", filters.problem);
 
       // If there are filters, append them to the base API URL
@@ -154,73 +155,156 @@ const ManageComplain = () => {
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
           Total Complains: {totalComplains}
         </h3>
-
+        <p className="text-xl font-bold px-5">Filter</p>
         <div>
           <form onSubmit={handleSubmit(onSubmitFilter)}>
-            
-            <div>
-              <label>problem category</label>
-              <select {...register("problem")}  >
-                <option value="">Select category</option>
-                {
-                  problemCategory.map((problems, idx)=>(
-                    <option key={idx} value={problems.category} >
+            {/* grid */}
+            <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-5 gap-5">
+              {/* category filter */}
+              <div>
+                <label>problem category</label>
+                <br />
+                <select
+                  {...register("problem")}
+                  style={{
+                    outline: "none",
+                    border: "2px solid #7E7E7E",
+                    padding: "10px",
+                    borderRadius: "4px",
+                    width: "100%",
+                    backgroundColor: "white",
+                    color: "black",
+                    transition: "border-color 0.5s ease",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "grey";
+                    e.target.style.boxShadow = "none";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "grey";
+                    e.target.style.boxShadow = "none";
+                  }}
+                >
+                  <option value="">Select category</option>
+                  {problemCategory.map((problems, idx) => (
+                    <option key={idx} value={problems.category}>
                       {problems.category}
-                    </option>)
-                  )
-                }
-              </select>
-            </div>
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Division Filter */}
-            <div>
-              <label>Division</label>
-              <select {...register("division")}>
-                <option value="">Select Division</option>
-                {divisionsData.map((division, idx) => (
-                  <option key={idx} value={division.division}>
-                    {division.division}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Division Filter */}
+              <div>
+                <label>Division</label>
+                <br />
+                <select
+                  {...register("division")}
+                  style={{
+                    outline: "none",
+                    border: "2px solid #7E7E7E",
+                    padding: "10px",
+                    borderRadius: "4px",
+                    width: "100%",
+                    backgroundColor: "white",
+                    color: "black",
+                    transition: "border-color 0.5s ease",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "grey";
+                    e.target.style.boxShadow = "none";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "grey";
+                    e.target.style.boxShadow = "none";
+                  }}
+                >
+                  <option value="">Select Division</option>
+                  {divisionsData.map((division, idx) => (
+                    <option key={idx} value={division.division}>
+                      {division.division}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* District Filter */}
-            <div>
-              <label>District</label>
-              {watchDivision && (
-                <div>
-                  <select {...register("district")}>
-                    <option value="">Select District</option>
-                    {selectedDivisionData?.district.map((district, idx) => (
-                      <option key={idx} value={district.districtname}>
-                        {district.districtname}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-            </div>
-
-            {/* Subdistrict Filter */}
-            <div>
-              <label>Subdistrict</label>
-              {watchDistrict && (
-                <div>
-                  <select {...register("subDistrict")}>
-                    <option value="">Select Subdistrict</option>
-                    {selectedDistrictData?.subdistrict.map(
-                      (subDistrict, idx) => (
-                        <option key={idx} value={subDistrict}>
-                          {subDistrict}
+              {/* District Filter */}
+              <div>
+                <label>District</label>
+                {watchDivision && (
+                  <div>
+                    <select
+                      {...register("district")}
+                      style={{
+                        outline: "none",
+                        border: "2px solid #7E7E7E",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        width: "100%",
+                        backgroundColor: "white",
+                        color: "black",
+                        transition: "border-color 0.5s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                    >
+                      <option value="">Select District</option>
+                      {selectedDivisionData?.district.map((district, idx) => (
+                        <option key={idx} value={district.districtname}>
+                          {district.districtname}
                         </option>
-                      )
-                    )}
-                  </select>
-                </div>
-              )}
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+
+              {/* Subdistrict Filter */}
+              <div>
+                <label>Subdistrict</label>
+                {watchDistrict && (
+                  <div>
+                    <select
+                      {...register("subDistrict")}
+                      style={{
+                        outline: "none",
+                        border: "2px solid #7E7E7E",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        width: "100%",
+                        backgroundColor: "white",
+                        color: "black",
+                        transition: "border-color 0.5s ease",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "grey";
+                        e.target.style.boxShadow = "none";
+                      }}
+                    >
+                      <option value="">Select Subdistrict</option>
+                      {selectedDistrictData?.subdistrict.map(
+                        (subDistrict, idx) => (
+                          <option key={idx} value={subDistrict}>
+                            {subDistrict}
+                          </option>
+                        )
+                      )}
+                    </select>
+                  </div>
+                )}
+              </div>
             </div>
-            
+
             <br />
             {/* Submit button to apply filter */}
             <Button
@@ -232,25 +316,6 @@ const ManageComplain = () => {
             </Button>
           </form>
         </div>
-
-        {/* Search Box */}
-        {/* <div className="flex justify-center mb-4">
-          <input
-            style={{ width: "70%" }}
-            type="text"
-            placeholder="Search by Email"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="input input-bordered border-gray-300 rounded p-2"
-          />
-          <Button
-            onClick={handleSearch}
-            className="ml-2"
-            style={{ backgroundColor: "#01864C", color: "white" }}
-          >
-            Search
-          </Button>
-        </div> */}
 
         {/* show complains */}
         {complains.map((coms) => (
