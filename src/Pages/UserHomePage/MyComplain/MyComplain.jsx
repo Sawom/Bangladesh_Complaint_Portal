@@ -9,8 +9,7 @@ const MyComplain = () => {
   // complain data load
   useEffect(() => {
     if (user && user?.email) {
-      axios
-        .get(`http://localhost:5000/complains?email=${user.email}`)
+      axios.get(`http://localhost:5000/complains?email=${user.email}`)
         .then((response) => {
           setComplainInfo(response.data);
         })
@@ -59,11 +58,11 @@ const MyComplain = () => {
               </span>
             </p>
             <p>
-              <span className="font-bold">Problem Category:</span>{" "}
+              <span className="font-bold">Problem Category:</span>
               {complains.problem}
             </p>
             <p>
-              <span className="font-bold">Submission Date:</span>{" "}
+              <span className="font-bold">Submission Date:</span>
               {complains.date}
             </p>
             <p>
@@ -74,11 +73,14 @@ const MyComplain = () => {
             </p>
             <p>
               <span className="font-bold">Sub District:</span>
-              {complains.subDistrict}{" "}
+              {complains.subDistrict}
             </p>
             {/* complain status */}
             <p>
-              <span className="font-bold">Status:</span> pending{" "}
+              <span className="font-bold">Status:</span>  <span className="font-bold"
+                style={{ color: complains?.status ? 'green' : 'black' }}>
+                {complains?.status || 'Pending'}
+              </span>   
             </p>
           </div>
         </div>

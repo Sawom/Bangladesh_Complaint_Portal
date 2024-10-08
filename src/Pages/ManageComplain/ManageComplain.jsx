@@ -94,6 +94,37 @@ const ManageComplain = () => {
     fetchComplains(page); // Fetch users for the selected page
   };
 
+  // handle received
+  const handleReceived = (comp) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Confirm received!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:5000/complains/received/${comp._id}`)
+          .then((response) => {
+            const data = response.data;
+            if (data.modifiedCount) {
+              fetchComplains();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Confirmed for processing!`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
+      }
+    });
+  };
+
   // delete user
   const handleDeleteComplain = (delcomplains) => {
     Swal.fire({
@@ -107,7 +138,8 @@ const ManageComplain = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios.delete(`http://localhost:5000/complains/${delcomplains._id}`)
+        axios
+          .delete(`http://localhost:5000/complains/${delcomplains._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // refetch data load
@@ -368,13 +400,23 @@ const ManageComplain = () => {
               </p>
               {/* delete btn */}
               <Button
-                className="w-16 mt-2"
+                className="w-20 mt-2"
                 onClick={() => handleDeleteComplain(coms)}
                 color="gray"
                 style={{ backgroundColor: "red", color: "white" }}
               >
                 <FaTrashAlt></FaTrashAlt>
               </Button>
+
+              {coms.status === "received" ? <p className="font-bold " style={{color: "green"}} >Status : Received</p>
+               : 
+                <Button
+                  className="w-20 mt-2"
+                  style={{ backgroundColor: "#01864C", color: "white" }}
+                  onClick={() => handleReceived(coms)}>
+                  Received
+                </Button>
+              }
             </div>
           </div>
         ))}
