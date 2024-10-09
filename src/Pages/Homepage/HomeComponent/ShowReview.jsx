@@ -53,7 +53,7 @@ const ShowReview = () => {
           {review.map((refs) => (
             <SwiperSlide>
               <div
-                key={review._id}
+                key={refs._id}
                 className="card w-full bg-base-100 my-4 flex items-center "
               >
                 <div className="card-body text-black">

@@ -355,8 +355,8 @@ const ManageComplain = () => {
             className="card w-full bg-base-100 shadow-lg my-4"
           >
             <div className="card-body text-left text-black">
-              <h2 className="card-title "> Name: {coms.name} </h2>
-              <h2 className="card-title"> Email: {coms.email} </h2>
+              <p className="card-title "> Name: {coms.name} </p>
+              <p > <span className="font-bold">Email:</span>  {coms.email} </p>
               <p>
                 <span className="font-bold">Complain: </span> {coms.complain}{" "}
               </p>

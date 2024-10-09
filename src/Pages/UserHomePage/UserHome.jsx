@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
-import { Helmet } from 'react-helmet-async';
 
 const UserHome = () => {
   const { user } = useFirebase();
@@ -16,7 +16,7 @@ const UserHome = () => {
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
-          } 
+          }
         })
         .catch((err) => {
           console.error("Failed to fetch user data:", err);
@@ -28,33 +28,40 @@ const UserHome = () => {
     } else {
       // If no user or email, reset the profile data
       setUserInfo({});
-      setLoading(false);
     }
   }, [user]);
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
       <Helmet>
-            <title> UserHome </title>
+        <title> UserHome </title>
       </Helmet>
       <br />
       {/* profile */}
       <div
         className="container mx-auto mt-10 mb-10"
-        style={{ backgroundColor: "#FFFFFF", minHeight: "50vh" }} >
+        style={{ backgroundColor: "#FFFFFF", minHeight: "50vh" }}
+      >
         <div
           className="p-4 flex justify-between"
-          style={{ backgroundColor: "#016A4E" }} >
-          <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">Profile details</h1>
+          style={{ backgroundColor: "#016A4E" }}
+        >
+          <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">
+            Profile details
+          </h1>
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">
           {/* Profile Image */}
           <div className="mb-6">
-            <img className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
+            <img
+              className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
               src={userInfo?.img || "https://via.placeholder.com/200"}
-              alt="Avatar" />
-            <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`} >
-              <span style={{color:'#016A4E', fontWeight: 'bold'}} >Edit profile</span>  
+              alt="Avatar"
+            />
+            <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>
+              <span style={{ color: "#016A4E", fontWeight: "bold" }}>
+                Edit profile
+              </span>
             </Link>
           </div>
 
@@ -73,7 +80,8 @@ const UserHome = () => {
               {userInfo?.address || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Nid:</span> {userInfo?.nid || "N/A"}
+              <span className="font-bold pr-3">Nid:</span>{" "}
+              {userInfo?.nid || "N/A"}
             </p>
             <p className="mb-4">
               <span className="font-bold pr-3">Email:</span>
@@ -82,17 +90,21 @@ const UserHome = () => {
           </div>
         </div>
       </div>
-      
+
       {/* nested route component */}
-      <div className="container mx-auto mt-10" >
-        <div style={{backgroundColor: "#FFFFFF"}} className="p-3" >
+      <div className="container mx-auto mt-10">
+        <div style={{ backgroundColor: "#FFFFFF" }} className="p-3">
           <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
             timeline
           </h1>
           {/* nested routes tabs */}
           <div role="tablist" className="tabs tabs-bordered ">
-            <Link to="/userhome" role="tab" className="tab ">My Reviews</Link>
-            <Link to="/userhome/mycomplain" role="tab" className="tab ">My Complain</Link>
+            <Link to="/userhome" role="tab" className="tab ">
+              My Reviews
+            </Link>
+            <Link to="/userhome/mycomplain" role="tab" className="tab ">
+              My Complain
+            </Link>
           </div>
         </div>
         <Outlet></Outlet>
