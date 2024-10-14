@@ -10,8 +10,9 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 const MyReviews = () => {
   const { user } = useFirebase();
   const [reviewInfo, setReviewInfo] = useState([]);
+  const [refresh, setRefresh] = useState(false); // Add a state to trigger data reload
 
-  //  for refetch data load
+  //  for fetch data load
   useEffect(() => {
     if (user && user.email) {
       axios.get(`http://localhost:5000/reviews?email=${user.email}`)
@@ -22,7 +23,7 @@ const MyReviews = () => {
           console.error("Error fetching data:", error);
         });
     }
-  }, [user, reviewInfo]);
+  }, [user, refresh]);
 
   // delete review
   const handleDeleteReview = (review) => {
@@ -48,6 +49,8 @@ const MyReviews = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              // Trigger a refresh by toggling the 'refresh' state
+              setRefresh((prev) => !prev);
             }
           })
           .catch((error) => {

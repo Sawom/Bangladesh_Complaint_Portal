@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../useAuth/useAuth';
-import useAxiosSecure from '../useAxiosSecure/useAxiosSecure';
+import axios from 'axios';
 
 const useAdmin = () => {
-    const { user, loading } = useAuth(); 
-    const [axiosSecure] = useAxiosSecure();
-    const [isAdmin, setIsAdmin] = useState(null);
-    const [isAdminLoading, setIsAdminLoading] = useState(true); 
+  const { user, loading } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(null);
+  const [isAdminLoading, setIsAdminLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchAdminStatus = async () => {
-            if (!loading && user?.email && !!localStorage.getItem('access-token')) {
-                try {
-                    const res = await axiosSecure.get(`/users/admin/${user?.email}`);
-                    setIsAdmin(res?.data?.admin); // Set admin status
-                } catch (error) {
-                    console.error('Failed to fetch admin status:', error);
-                    setIsAdmin(false); // If error, treat as non-admin
-                } finally {
-                    setIsAdminLoading(false); // Loading done
-                }
-            }
-        };
+  useEffect(() => {
+    const fetchAdminStatus = async () => {
+      if (!loading && user?.email) {
+        try {
+          const res = await axios.get(`http://localhost:5000/users/admin/${user.email}`, {
+            withCredentials: true,  // Ensures cookies are sent with the request
+          });
+          setIsAdmin(res.data.admin);
+        } catch (error) {
+          console.error('Failed to fetch admin status:', error);
+          setIsAdmin(false);
+        } finally {
+          setIsAdminLoading(false);
+        }
+      }
+    };
 
-        fetchAdminStatus(); // Call the function when component mounts
-    }, [user?.email, loading, axiosSecure]);
+    fetchAdminStatus();  // Call when component mounts
+  }, [user?.email, loading]);
 
-    return [isAdmin, isAdminLoading]; // Return admin status and loading state
+  return [isAdmin, isAdminLoading];
 };
 
 export default useAdmin;

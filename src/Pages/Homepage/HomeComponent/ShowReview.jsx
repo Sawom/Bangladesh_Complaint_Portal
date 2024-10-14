@@ -16,8 +16,7 @@ const ShowReview = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/homereview")
+    axios.get("http://localhost:5000/homereview")
       .then((response) => {
         setReview(response.data);
       })
@@ -51,24 +50,24 @@ const ShowReview = () => {
           className="mySwiper"
         >
           {review.map((refs) => (
-            <SwiperSlide>
-              <div
-                key={refs._id}
-                className="card w-full bg-base-100 my-4 flex items-center "
-              >
-                <div className="card-body text-black">
-                  <h2 className="card-title "> Name: {refs.name} </h2>
-                  <h2 className="card-title"> Email: {refs.email} </h2>
-                  <p> {refs.comments} </p>
-                  <Rating
-                    style={{ maxWidth: 150 }}
-                    itemStyles={myStyles}
-                    value={refs.rating}
-                    readOnly
-                  />
+            <div key={refs._id} >
+              <SwiperSlide >
+                <div className="card w-full bg-base-100 my-4 flex items-center ">
+                  <div className="card-body text-black">
+                    <h2 className="card-title "> Name: {refs.name} </h2>
+                    <h2 className="card-title"> Email: {refs.email} </h2>
+                    <p> {refs.comments} </p>
+                    <Rating
+                      style={{ maxWidth: 150 }}
+                      itemStyles={myStyles}
+                      value={refs.rating}
+                      readOnly
+                    />
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            </div>
+            
           ))}
         </Swiper>
       </div>

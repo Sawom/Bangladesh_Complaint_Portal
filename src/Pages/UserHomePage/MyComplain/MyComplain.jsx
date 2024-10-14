@@ -17,7 +17,7 @@ const MyComplain = () => {
           console.error("Error fetching data:", error);
         });
     }
-  }, [user?.email, complainInfo]);
+  }, []);
 
   return (
     <div className="p-3" style={{ backgroundColor: "#FFFFFF" }}>

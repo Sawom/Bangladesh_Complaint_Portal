@@ -8,10 +8,10 @@ const UserHome = () => {
   const { user } = useFirebase();
   const [userInfo, setUserInfo] = useState({}); // To store fetched user info
   const [loading, setLoading] = useState(true); // Loading state
-
+  
   // Fetch user data by email when component mounts
   useEffect(() => {
-    if (user && user.email) {
+    if (user && user?.email) {
       axios.get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {

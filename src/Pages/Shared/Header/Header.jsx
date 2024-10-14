@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Sidebar } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { HiChartPie, HiTable, HiUser } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -12,13 +12,15 @@ const Header = () => {
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // const [isAdmin] = useAdmin();
+
   // load
   useEffect(() => {
     const fetchUserData = async () => {
       if (user && user?.email) {
         try {
           const response = await axios.get(
-            `http://localhost:5000/users?email=${user?.email}`
+           ` http://localhost:5000/users?email=${user?.email}`
           );
           if (response.data.length > 0) {
             const updatedUserInfo = response.data[0];
@@ -34,7 +36,8 @@ const Header = () => {
     };
 
     fetchUserData();
-  }, [user]);
+  }, []);
+
 
   // flag get from local storage so that swal can be showed
   useEffect(() => {
