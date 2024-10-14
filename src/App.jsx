@@ -21,14 +21,13 @@ import PostComplain from "./Pages/PostComplain/PostComplain";
 import ManageComplain from "./Pages/ManageComplain/ManageComplain";
 import useFirebase from './Authentication/useFirebase/useFirebase';
 import axios from 'axios';
-// import { UserProvider } from "./Authentication/UserProvider/UserProvider";
 
 function App() {
   const { user, loading, setLoading } = useFirebase();
   const [userInfo, setUserInfo] = useState({});
 
   // to solve header img, userhome's user data update automatically.
-  // it changes in header, userhome, UpdateUser 
+  // it changes in Header, UserHome, UpdateUser 
   useEffect(() => {
     const fetchUserData = async () => {
       if (user && user.email) {
@@ -65,7 +64,7 @@ function App() {
 
                   {/* user home. nested route */}
                   <Route path="/userhome"  element={ <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> } >
-                    <Route path="" element={ <MyReviews></MyReviews> } ></Route>
+                    <Route path="" element={ <MyReviews  userInfo={userInfo} setUserInfo={setUserInfo} ></MyReviews> } ></Route>
                     <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
                   </Route>
 

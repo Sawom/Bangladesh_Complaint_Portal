@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
 const MyReviews = () => {
-  const { user } = useFirebase();
+  const { user, setUser } = useFirebase();
   const [reviewInfo, setReviewInfo] = useState([]);
   const [refresh, setRefresh] = useState(false); // Add a state to trigger data reload
 
@@ -23,6 +23,7 @@ const MyReviews = () => {
           console.error("Error fetching data:", error);
         });
     }
+    
   }, [user, refresh]);
 
   // delete review

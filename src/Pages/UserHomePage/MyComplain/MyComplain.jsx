@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
 const MyComplain = () => {
-  const { user } = useFirebase();
+  const { user, setUser } = useFirebase();
   const [complainInfo, setComplainInfo] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
