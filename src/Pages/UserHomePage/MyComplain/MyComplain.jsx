@@ -5,6 +5,7 @@ import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 const MyComplain = () => {
   const { user } = useFirebase();
   const [complainInfo, setComplainInfo] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   // complain data load
   useEffect(() => {
@@ -17,7 +18,7 @@ const MyComplain = () => {
           console.error("Error fetching data:", error);
         });
     }
-  }, []);
+  }, [user, refresh]);
 
   return (
     <div className="p-3" style={{ backgroundColor: "#FFFFFF" }}>
