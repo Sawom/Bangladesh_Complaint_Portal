@@ -7,37 +7,8 @@ import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
-const Header = () => {
-  const { user, setUser, logoutUser } = useFirebase();
-  const [userInfo, setUserInfo] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  // const [isAdmin] = useAdmin();
-
-  // load
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (user && user?.email) {
-        try {
-          const response = await axios.get(
-           ` http://localhost:5000/users?email=${user?.email}`
-          );
-          if (response.data.length > 0) {
-            const updatedUserInfo = response.data[0];
-            setUserInfo(updatedUserInfo); // Update local state with fetched user info
-            setUser((prev) => ({ ...prev, img: updatedUserInfo.img })); // Update global context, only update img
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      } else {
-        setUserInfo({});
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
+const Header = ({ userInfo, setUserInfo }) => {
+  const { user, logoutUser } = useFirebase();
 
   // flag get from local storage so that swal can be showed
   useEffect(() => {

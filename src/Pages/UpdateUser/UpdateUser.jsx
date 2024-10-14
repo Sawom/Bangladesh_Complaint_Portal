@@ -1,20 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Helmet } from 'react-helmet-async';
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
-const UpdateUser = () => {
+const UpdateUser = ({ setUserInfo }) => {
   const [update, setUpdate] = useState({});
   const { id } = useParams();
   const { register, handleSubmit, reset } = useForm();
-  
+
   // single user data load
   useEffect(() => {
-    axios.get(`http://localhost:5000/users/${id}`)
+    axios
+      .get(`http://localhost:5000/users/${id}`)
       .then((response) => setUpdate(response.data))
       .catch((err) => console.error("Error loading user data:", err));
   }, [id]);
@@ -52,10 +53,15 @@ const UpdateUser = () => {
       };
 
       // Perform the PUT operation
-      const response = await axios.put(`http://localhost:5000/users/${id}`, updatedUser);
+      const response = await axios.put(
+        `http://localhost:5000/users/${id}`,
+        updatedUser
+      );
 
       if (response.data.modifiedCount > 0) {
-        
+        // Update the user info in the parent component
+        setUserInfo(updatedUser);
+        // confirmation msg
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -63,7 +69,7 @@ const UpdateUser = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // Reset the form after update 
+        // Reset the form after update
         useEffect(() => {
           if (update) {
             reset({
@@ -71,10 +77,10 @@ const UpdateUser = () => {
               address: update.address || "",
               img: update.img || "", // Set the existing image URL or empty string
               nid: update.nid || "",
-              email: update.email || ""
+              email: update.email || "",
             });
           }
-        }, [update, reset]); 
+        }, [update, reset]);
         // update user info in reset function
       }
     } catch (error) {
@@ -83,12 +89,12 @@ const UpdateUser = () => {
   };
 
   return (
-     <div
+    <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
       className="p-3"
     >
       <Helmet>
-            <title> Update Profile </title>
+        <title> Update Profile </title>
       </Helmet>
       <br />
 
@@ -157,7 +163,6 @@ const UpdateUser = () => {
                 placeholder="upload your picture"
                 name="propic"
                 {...register("img")}
-                
               />
             </div>
 

@@ -28,7 +28,7 @@ const useFirebase = () => {
   };
 
 
-    // observer if login or not
+    // observer if login or not******* todo
      useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);

@@ -4,11 +4,9 @@ import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
 
-const UserHome = () => {
-  const { user } = useFirebase();
-  const [userInfo, setUserInfo] = useState({}); // To store fetched user info
-  const [loading, setLoading] = useState(true); // Loading state
-  
+const UserHome = ({ userInfo, setUserInfo }) => {
+  const { user,loading, setLoading } = useFirebase();
+
   // Fetch user data by email when component mounts
   useEffect(() => {
     if (user && user?.email) {
@@ -29,7 +27,7 @@ const UserHome = () => {
       // If no user or email, reset the profile data
       setUserInfo({});
     }
-  }, [user]);
+  }, [user, setUserInfo]);
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
@@ -55,7 +53,7 @@ const UserHome = () => {
           <div className="mb-6">
             <img
               className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
-              src={userInfo?.img || "https://via.placeholder.com/200"}
+              src={userInfo?.img || "https://via.placeholder.com/200" }
               alt="Avatar"
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>
