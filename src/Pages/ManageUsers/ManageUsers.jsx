@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet-async';
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
+  const axiosSecure = useAxiosSecure();
   // State to store search input and result
   const [searchQuery, setSearchQuery] = useState("");
 

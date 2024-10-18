@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   getAuth,
   onAuthStateChanged,
@@ -8,7 +9,6 @@ import {
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import initializeFirebase from "../Firebase/firebase.init";
-import axios from "axios";
 
 initializeFirebase();
 
@@ -27,32 +27,36 @@ const useFirebase = () => {
       });
   };
 
-
-    // observer if login or not******* todo
-     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
-            if (currentUser) {
-                // get token and store client
-                const userInfo = { email: currentUser.email };
-                axios.post('http://localhost:5000/jwt', userInfo)
-                    .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token);
-                        }
-                    })
+  // observer if login or not**
+  // if user enter our site by anyway. either registration, login then it will post a token and,,
+  //  when user not found if user logged out then token will remove
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        // get token and store client
+        const userInfo = { email: currentUser.email };
+        axios
+          .post("http://localhost:5000/jwt", userInfo)
+          .then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("access-token", res.data.token);
             }
-            else {
-                // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
-                localStorage.removeItem('access-token');
-            }
-            setLoading(false);
-        });
-        return () => {
-            return unsubscribe();
-        }
-    }, [])
-
+          })
+          .catch((error) => {
+            console.log({ error: error.message });
+          });
+        setLoading(false);
+      } else {
+        // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+        localStorage.removeItem("access-token");
+      }
+      setLoading(false);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
 
   // handle login with email
   const handleLogin = (email, password) => {
