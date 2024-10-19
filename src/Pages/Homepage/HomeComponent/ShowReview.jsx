@@ -33,7 +33,7 @@ const ShowReview = () => {
   return (
     <div className="container mx-auto mt-10 mb-8">
       <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-1 ">
-        amader reviews
+        আমাদের রিভিউ
       </h1>
 
       <div className=" px-2 ">
@@ -74,7 +74,7 @@ const ShowReview = () => {
 
       <div className="text-center text-xl font-bold mt-5">
         <Link to="/reviews">
-          <span style={{ color: "#016A4E" }}>see all </span>
+          <span style={{ color: "#016A4E" }}>সবগুলো দেখুন </span>
         </Link>
       </div>
     </div>
