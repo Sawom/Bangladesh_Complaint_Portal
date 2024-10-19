@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import useAuth from "../useAuth/useAuth";
 import useAxiosSecure from "../useAxiosSecure/useAxiosSecure";
 import useFirebase from "../useFirebase/useFirebase";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const useAdmin = () => {
   const { user, loading } = useFirebase();
   const axiosSecure = useAxiosSecure();
+
+  // ****** useQuery or axios both can be used for useAdmin******
 
   // const { data: isAdmin, isPending: isAdminLoading } = useQuery({
   //       queryKey: [user?.email, 'isAdmin'],

@@ -199,7 +199,6 @@ const Header = ({ userInfo, setUserInfo }) => {
                         aria-label="Default sidebar example"
                       >
                         <Sidebar.Items>
-                          
                           <Sidebar.ItemGroup>
                             {isAdmin ? (
                               <>

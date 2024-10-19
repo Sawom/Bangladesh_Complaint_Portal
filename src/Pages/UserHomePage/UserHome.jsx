@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
 import useFirebase from "../../Authentication/useFirebase/useFirebase";
+import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
 
 const UserHome = ({ userInfo, setUserInfo }) => {
   const { user,loading, setLoading } = useFirebase();
+  const axiosSecure = useAxiosSecure();
 
   // Fetch user data by email when component mounts
   useEffect(() => {
