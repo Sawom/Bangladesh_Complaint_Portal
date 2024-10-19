@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react';
-import AuthProvider from "./Authentication/AuthProvider/AuthProvider";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Homepage from "./Pages/Homepage/Homepage";
-import Header from "./Pages/Shared/Header/Header";
-import Footer from "./Pages/Shared/Footer/Footer";
-import Login from "./Pages/Login/Login";
-import Registration from "./Pages/Registration/Registration";
-import Hotlines from "./Pages/Hotlines/Hotlines";
-import UserHome from "./Pages/UserHomePage/UserHome";
-import ManageUsers from "./Pages/ManageUsers/ManageUsers";
-import UpdateUser from "./Pages/UpdateUser/UpdateUser";
-import NotFound from "./Pages/NotFound/NotFound";
-import AddReview from "./Pages/AddReview/AddReview";
-import Reviews from "./Pages/Reviews/Reviews";
-import ManageReview from "./Pages/ManageReview/ManageReview";
-import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
-import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
-import UpdateReview from "./Pages/UpdateReview/UpdateReview";
-import PostComplain from "./Pages/PostComplain/PostComplain";
-import ManageComplain from "./Pages/ManageComplain/ManageComplain";
-import useFirebase from './Authentication/useFirebase/useFirebase';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AuthProvider from "./Authentication/AuthProvider/AuthProvider";
+import useFirebase from './Authentication/useFirebase/useFirebase';
+import AddReview from "./Pages/AddReview/AddReview";
 import AdminHome from './Pages/AdminHome/AdminHome';
+import Homepage from "./Pages/Homepage/Homepage";
+import Hotlines from "./Pages/Hotlines/Hotlines";
+import Login from "./Pages/Login/Login";
+import ManageComplain from "./Pages/ManageComplain/ManageComplain";
+import ManageReview from "./Pages/ManageReview/ManageReview";
+import ManageUsers from "./Pages/ManageUsers/ManageUsers";
+import NotFound from "./Pages/NotFound/NotFound";
+import PostComplain from "./Pages/PostComplain/PostComplain";
+import Registration from "./Pages/Registration/Registration";
+import Reviews from "./Pages/Reviews/Reviews";
+import Footer from "./Pages/Shared/Footer/Footer";
+import Header from "./Pages/Shared/Header/Header";
+import UpdateReview from "./Pages/UpdateReview/UpdateReview";
+import UpdateUser from "./Pages/UpdateUser/UpdateUser";
+import MyComplain from "./Pages/UserHomePage/MyComplain/MyComplain";
+import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
+import UserHome from "./Pages/UserHomePage/UserHome";
+import PrivateRoute from './Authentication/PrivateRoute/PrivateRoute';
+import AdminRoute from './Authentication/AdminRoute/AdminRoute';
 
 function App() {
   const { user, loading, setLoading } = useFirebase();
@@ -69,32 +71,68 @@ function App() {
                   {/* reviews */}
                   <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
 
-                  {/* user home. nested route */}
-                  <Route path="/userhome"  element={ <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> } >
+                  {/* user home. nested route. private route */}
+                  <Route path="/userhome"  element={ 
+                      <PrivateRoute>
+                        <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> 
+                      </PrivateRoute>
+                    } >
                     <Route path="" element={ <MyReviews  userInfo={userInfo} setUserInfo={setUserInfo} ></MyReviews> } ></Route>
                     <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
                   </Route>
-                  {/* update user */}
-                  <Route path='/userhome/update/:id' element={ <UpdateUser setUserInfo={setUserInfo} ></UpdateUser> }  ></Route>
+
+                  {/* update user. private route */}
+                  <Route path='/userhome/update/:id' element={ 
+                    <PrivateRoute>
+                      <UpdateUser setUserInfo={setUserInfo} ></UpdateUser> 
+                    </PrivateRoute>
+                    }  ></Route>
+
                   {/* post complain here */}
-                  <Route path="/postcomplains" element={ <PostComplain></PostComplain> } ></Route>
-                  {/* add review */}
-                  <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
-                  {/* update review */}
-                  <Route path='/userhome/review/:id'  element={ <UpdateReview></UpdateReview> } ></Route>
+                  <Route path="/postcomplains" element={ 
+                    <PrivateRoute>
+                      <PostComplain></PostComplain>
+                    </PrivateRoute>
+                    } 
+                    ></Route>
+                  {/* add review. private route */}
+                  <Route path="/addreview"  element={ 
+                    <PrivateRoute>
+                      <AddReview></AddReview>
+                    </PrivateRoute>
+                    } ></Route>
+                  {/* update review. private route */}
+                  <Route path='/userhome/review/:id'  element={ 
+                    <PrivateRoute>
+                      <UpdateReview></UpdateReview>
+                    </PrivateRoute>
+                    } ></Route>
 
+                  {/* ***admin routes*** */}
                   {/* admin home */}
-                  <Route path="/adminhome" element={ <AdminHome></AdminHome> } ></Route>
+                  <Route path="/adminhome" element={ 
+                    <AdminRoute>
+                      <AdminHome userInfo={userInfo} setUserInfo={setUserInfo} ></AdminHome>
+                    </AdminRoute>
+                    } ></Route>
                   {/* manage user */}
-                  <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
+                  <Route path="/manageuser" element={ 
+                    <AdminRoute>
+                      <ManageUsers></ManageUsers>
+                    </AdminRoute>
+                    } > </Route>
                   {/* manage reviews */}
-                  <Route path="/managereview" element={ <ManageReview></ManageReview> } ></Route>
+                  <Route path="/managereview" element={ 
+                    <AdminRoute>
+                      <ManageReview></ManageReview>
+                    </AdminRoute>
+                    } ></Route>
                   {/* manage complain */}
-                  <Route path="/managecomplain" element={ <ManageComplain></ManageComplain> } ></Route>
-
-                  
-                  
-                  
+                  <Route path="/managecomplain" element={ 
+                    <AdminRoute>
+                      <ManageComplain></ManageComplain> 
+                    </AdminRoute>
+                    } ></Route>
 
                   <Route path='*' element={ <NotFound></NotFound> } ></Route>
                 </Routes>

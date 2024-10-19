@@ -1,7 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import useAdmin from '../useAdmin/useAdmin';
-import useAuth from '../useAuth/useAuth';
 import useFirebase from '../useFirebase/useFirebase';
 
 const AdminRoute = ({children}) => {

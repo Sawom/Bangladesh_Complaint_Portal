@@ -1,12 +1,11 @@
-import axios from "axios";
 import { Sidebar } from "flowbite-react";
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect } from "react";
 import { HiChartPie, HiTable, HiUser } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
-import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 import useAdmin from "../../../Authentication/useAdmin/useAdmin";
+import useFirebase from "../../../Authentication/useFirebase/useFirebase";
 
 const Header = ({ userInfo, setUserInfo }) => {
   const { user, logoutUser } = useFirebase();
@@ -199,89 +198,98 @@ const Header = ({ userInfo, setUserInfo }) => {
                         className=" w-auto "
                         aria-label="Default sidebar example"
                       >
-                        {
-                          isAdmin ? <>
-
-                          </>
-
-                          :
-                          <>
-
-                          </>
-                        }
-
-
                         <Sidebar.Items>
+                          
                           <Sidebar.ItemGroup>
-                            {/* 1 user home */}
-                            <Sidebar.Item icon={HiChartPie}>
-                              <Link to="/userhome">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  User Home
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
+                            {isAdmin ? (
+                              <>
+                                {/* admin home */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/adminhome">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Admin Home
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
 
-                            {/*  add review */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/addreview">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Add Review
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
+                                {/* manage user */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/manageuser">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Manage User
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
 
-                            {/* post complains */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/postcomplains">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Post Complain
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
+                                {/* manage review */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/managereview">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Manage Review
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
 
-                            {/* manage user */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/manageuser">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Manage User
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
-                            {/* manage review */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/managereview">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Manage Review
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
-                            {/* manage complain */}
-                            <Sidebar.Item icon={HiUser}>
-                              <Link to="/managecomplain">
-                                <span
-                                  style={{ color: "#016A4E" }}
-                                  className="font-bold"
-                                >
-                                  Manage Complain
-                                </span>
-                              </Link>
-                            </Sidebar.Item>
+                                {/* manage complain */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/managecomplain">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Manage Complain
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
+                              </>
+                            ) : (
+                              <>
+                                {/* 1 user home */}
+                                <Sidebar.Item icon={HiChartPie}>
+                                  <Link to="/userhome">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      User Home
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
+
+                                {/*  add review */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/addreview">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Add Review
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
+
+                                {/* post complains */}
+                                <Sidebar.Item icon={HiUser}>
+                                  <Link to="/postcomplains">
+                                    <span
+                                      style={{ color: "#016A4E" }}
+                                      className="font-bold"
+                                    >
+                                      Post Complain
+                                    </span>
+                                  </Link>
+                                </Sidebar.Item>
+                              </>
+                            )}
 
                             {/* 5 */}
                             <Sidebar.Item icon={HiTable}>
