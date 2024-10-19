@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
 import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import useAdmin from "../../../Authentication/useAdmin/useAdmin";
 
 const Header = ({ userInfo, setUserInfo }) => {
   const { user, logoutUser } = useFirebase();
+  const [isAdmin] = useAdmin();
 
   // flag get from local storage so that swal can be showed
   useEffect(() => {
@@ -197,6 +199,18 @@ const Header = ({ userInfo, setUserInfo }) => {
                         className=" w-auto "
                         aria-label="Default sidebar example"
                       >
+                        {
+                          isAdmin ? <>
+
+                          </>
+
+                          :
+                          <>
+
+                          </>
+                        }
+
+
                         <Sidebar.Items>
                           <Sidebar.ItemGroup>
                             {/* 1 user home */}
@@ -224,7 +238,6 @@ const Header = ({ userInfo, setUserInfo }) => {
                             </Sidebar.Item>
 
                             {/* post complains */}
-                            {/*  add review */}
                             <Sidebar.Item icon={HiUser}>
                               <Link to="/postcomplains">
                                 <span

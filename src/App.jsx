@@ -21,6 +21,7 @@ import PostComplain from "./Pages/PostComplain/PostComplain";
 import ManageComplain from "./Pages/ManageComplain/ManageComplain";
 import useFirebase from './Authentication/useFirebase/useFirebase';
 import axios from 'axios';
+import AdminHome from './Pages/AdminHome/AdminHome';
 
 function App() {
   const { user, loading, setLoading } = useFirebase();
@@ -57,25 +58,33 @@ function App() {
             <BrowserRouter>
             <Header userInfo={userInfo} setUserInfo={setUserInfo}  ></Header>
                 <Routes>
+                  {/* homepage */}
                   <Route path="/" element={ <Homepage></Homepage> } ></Route>
+                  {/* login page */}
                   <Route path="/login" element={ <Login></Login> } ></Route>
+                  {/* registration page */}
                   <Route path="/register" element={ <Registration></Registration> } ></Route>
+                  {/* hotlines */}
                   <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
+                  {/* reviews */}
+                  <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
 
                   {/* user home. nested route */}
                   <Route path="/userhome"  element={ <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> } >
                     <Route path="" element={ <MyReviews  userInfo={userInfo} setUserInfo={setUserInfo} ></MyReviews> } ></Route>
                     <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
                   </Route>
-
-                  {/* post complain here */}
-                  <Route path="/postcomplains" element={ <PostComplain></PostComplain> } ></Route>
-
                   {/* update user */}
                   <Route path='/userhome/update/:id' element={ <UpdateUser setUserInfo={setUserInfo} ></UpdateUser> }  ></Route>
+                  {/* post complain here */}
+                  <Route path="/postcomplains" element={ <PostComplain></PostComplain> } ></Route>
+                  {/* add review */}
+                  <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
                   {/* update review */}
                   <Route path='/userhome/review/:id'  element={ <UpdateReview></UpdateReview> } ></Route>
 
+                  {/* admin home */}
+                  <Route path="/adminhome" element={ <AdminHome></AdminHome> } ></Route>
                   {/* manage user */}
                   <Route path="/manageuser" element={ <ManageUsers></ManageUsers> } > </Route>
                   {/* manage reviews */}
@@ -83,10 +92,8 @@ function App() {
                   {/* manage complain */}
                   <Route path="/managecomplain" element={ <ManageComplain></ManageComplain> } ></Route>
 
-                  {/* add review */}
-                  <Route path="/addreview"  element={ <AddReview></AddReview> } ></Route>
-                  {/* reviews */}
-                  <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
+                  
+                  
                   
 
                   <Route path='*' element={ <NotFound></NotFound> } ></Route>

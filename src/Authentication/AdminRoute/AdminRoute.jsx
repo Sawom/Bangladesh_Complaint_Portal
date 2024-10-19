@@ -2,9 +2,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import useAdmin from '../useAdmin/useAdmin';
 import useAuth from '../useAuth/useAuth';
+import useFirebase from '../useFirebase/useFirebase';
 
 const AdminRoute = ({children}) => {
-    const { user, loading } = useAuth();
+    const { user, loading } = useFirebase();
     const [isAdmin, isAdminLoading]  = useAdmin();
     const location = useLocation();
 
