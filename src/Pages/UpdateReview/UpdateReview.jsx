@@ -56,8 +56,7 @@ const UpdateReview = () => {
                 }, [updateReview, reset]); 
                 // update user info in reset function
             }
-        }
-        catch (error) {
+        }catch (error) {
             console.error('Error updating review:', error);
         }
     }

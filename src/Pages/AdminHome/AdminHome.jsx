@@ -1,20 +1,21 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import useAdmin from "../../Authentication/useAdmin/useAdmin";
 import useAuth from "../../Authentication/useAuth/useAuth";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
-import useAdmin from "../../Authentication/useAdmin/useAdmin";
 
 const AdminHome = ({ userInfo, setUserInfo }) => {
   const { user, loading, setLoading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const [isAdmin] = useAdmin();
+  const [stats, setStats] = useState({});
 
   // Fetch user data by email when component mounts
   useEffect(() => {
-    if (user && user?.email && isAdmin ) {
-      axiosSecure.get(`/users?email=${user?.email}`)
+    if (user && user?.email && isAdmin) {
+      axiosSecure
+        .get(`/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -32,6 +33,18 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
       setUserInfo({});
     }
   }, [user, setUserInfo]);
+
+  // stats data load
+  useEffect(() => {
+    axiosSecure
+      .get(`/admin-stats`)
+      .then((response) => {
+        setStats(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
@@ -99,6 +112,14 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
           <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
             Statistic
           </h1>
+          <div>
+            <p> <span className="font-bold">Number of total hotline: </span> {stats.hotline}</p>
+            <p> <span className="font-bold">Number of total users: </span> {stats.users} </p>
+            <p> <span className="font-bold">Number of total reviews: </span> {stats.reviews} </p>
+            <p> <span className="font-bold">Number of total homereview: </span> {stats.homereview} </p>
+            <p> <span className="font-bold">Number of total complains: </span> {stats.complains} </p> 
+          </div>
+          
         </div>
       </div>
       <br />
