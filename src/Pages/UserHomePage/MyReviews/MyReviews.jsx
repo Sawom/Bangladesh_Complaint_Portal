@@ -5,17 +5,18 @@ import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import useAuth from "../../../Authentication/useAuth/useAuth";
 
 const MyReviews = () => {
-  const { user, setUser } = useFirebase();
+  const { user, setUser } = useAuth();
   const [reviewInfo, setReviewInfo] = useState([]);
   const [refresh, setRefresh] = useState(false); // Add a state to trigger data reload
 
   //  for fetch data load
   useEffect(() => {
     if (user && user.email) {
-      axios.get(`http://localhost:5000/reviews?email=${user.email}`)
+      axios
+        .get(`http://localhost:5000/reviews?email=${user.email}`)
         .then((response) => {
           setReviewInfo(response.data);
         })
@@ -23,7 +24,6 @@ const MyReviews = () => {
           console.error("Error fetching data:", error);
         });
     }
-    
   }, [user, refresh]);
 
   // delete review
@@ -39,7 +39,8 @@ const MyReviews = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios.delete(`http://localhost:5000/reviews/${review._id}`)
+        axios
+          .delete(`http://localhost:5000/reviews/${review._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -82,8 +83,8 @@ const MyReviews = () => {
 
       {/* show reviews */}
       {reviewInfo.map((refs) => (
-        <div key={refs._id} className="card w-full bg-base-100 shadow-lg my-4" >
-          <div className="card-body text-left text-black" >
+        <div key={refs._id} className="card w-full bg-base-100 shadow-lg my-4">
+          <div className="card-body text-left text-black">
             <h2 className="card-title "> Name: {refs.name} </h2>
             <h2 className="card-title"> Email: {refs.email} </h2>
             <p> {refs.comments} </p>

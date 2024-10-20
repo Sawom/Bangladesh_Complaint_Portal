@@ -1,16 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import useAuth from "../../../Authentication/useAuth/useAuth";
 
 const MyComplain = () => {
-  const { user, setUser } = useFirebase();
+  const { user, setUser } = useAuth();
   const [complainInfo, setComplainInfo] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
   // complain data load
   useEffect(() => {
     if (user && user?.email) {
-      axios.get(`http://localhost:5000/complains?email=${user.email}`)
+      axios
+        .get(`http://localhost:5000/complains?email=${user.email}`)
         .then((response) => {
           setComplainInfo(response.data);
         })
@@ -78,10 +79,13 @@ const MyComplain = () => {
             </p>
             {/* complain status */}
             <p>
-              <span className="font-bold">Status:</span>  <span className="font-bold"
-                style={{ color: complains?.status ? 'green' : 'black' }}>
-                {complains?.status || 'Pending'}
-              </span>   
+              <span className="font-bold">Status:</span>{" "}
+              <span
+                className="font-bold"
+                style={{ color: complains?.status ? "green" : "black" }}
+              >
+                {complains?.status || "Pending"}
+              </span>
             </p>
           </div>
         </div>

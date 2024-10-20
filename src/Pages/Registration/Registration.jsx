@@ -1,20 +1,20 @@
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
-import { Helmet } from 'react-helmet-async';
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
 const Registration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { register, handleSubmit, reset } = useForm();
-  const { user, setUser, auth, error, setError, verifyEmail } = useFirebase();
+  const { user, setUser, auth, error, setError, verifyEmail } = useAuth();
 
   const navigate = useNavigate();
   // navigate
@@ -28,7 +28,7 @@ const Registration = () => {
   };
 
   // create a new register user. with *react hook form*
-  // user data with profile picture, without password 
+  // user data with profile picture, without password
   const onSubmit = (data) => {
     // destructure here
     const { password, confirmpass, email } = data;
@@ -63,18 +63,20 @@ const Registration = () => {
               const imgUrl = imgResponse.data.display_url;
               console.log(imgUrl);
               const { name, address, nid, email, password, confirmpass } = data;
-              const newUser = {  //test data
+              const newUser = {
+                //test data
                 name: name,
                 address: address,
                 img: imgUrl,
                 nid: nid,
                 email: email,
               };
-              axios.post("http://localhost:5000/users", newUser)
+              axios
+                .post("http://localhost:5000/users", newUser)
                 .then((data) => {
                   if (data.data.insertedId) {
                     setUser(data);
-                    reset(); 
+                    reset();
 
                     // **Store the registration success flag in localStorage**
                     localStorage.setItem("showSwal", "true");
@@ -83,7 +85,6 @@ const Registration = () => {
                     window.location.reload();
                     console.log(data);
                   }
-
                 });
             }
           });
@@ -101,7 +102,7 @@ const Registration = () => {
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <Helmet>
-            <title> Registration </title>
+        <title> Registration </title>
       </Helmet>
 
       <div className="hero min-h-screen px-3">
@@ -166,7 +167,10 @@ const Registration = () => {
               {/* nid */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text"> আপনার দশ ডিজিটের জাতীয় পরিচয়পত্রের নাম্বার </span>
+                  <span className="label-text">
+                    {" "}
+                    আপনার দশ ডিজিটের জাতীয় পরিচয়পত্রের নাম্বার{" "}
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -263,11 +267,17 @@ const Registration = () => {
               </div>
               {/* error */}
               <p className="text-red-600"> {error} </p>
-              <p>আগেই রেজিষ্ট্রেশন করেছেন? <Link to='/login'> <span className='font-bold '
-               style={{ color: "#016A4E" }} >লগইন করুন</span>  </Link> </p>
+              <p>
+                আগেই রেজিষ্ট্রেশন করেছেন?{" "}
+                <Link to="/login">
+                  {" "}
+                  <span className="font-bold " style={{ color: "#016A4E" }}>
+                    লগইন করুন
+                  </span>{" "}
+                </Link>{" "}
+              </p>
             </form>
           </div>
-          
         </div>
       </div>
     </div>

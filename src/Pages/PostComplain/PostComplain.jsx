@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import { divisionsData, problemCategory } from "./bdData";
-import { Helmet } from 'react-helmet-async';
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const PostComplain = () => {
   const { handleSubmit, control, watch, register, reset } = useForm();
@@ -16,14 +16,15 @@ const PostComplain = () => {
   // watch problem category
   const watchProblem = watch("category");
 
-  const { user } = useFirebase();
+  const { user } = useAuth();
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
   // load single user by email
   useEffect(() => {
     if (user && user.email) {
-      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+      axios
+        .get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -101,7 +102,7 @@ const PostComplain = () => {
       className="p-3"
     >
       <Helmet>
-            <title> Your Complain? </title>
+        <title> Your Complain? </title>
       </Helmet>
       <br />
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">

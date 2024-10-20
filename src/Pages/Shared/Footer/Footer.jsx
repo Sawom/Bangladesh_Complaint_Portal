@@ -1,42 +1,51 @@
 import React from "react";
 import pics1 from "../../../assets/logo/cabinet.png";
-import pics2 from "../../../assets/logo/ict.png";
 import pics3 from "../../../assets/logo/gov.png";
+import pics2 from "../../../assets/logo/ict.png";
 import "./Footer.css";
-import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import useAuth from "../../../Authentication/useAuth/useAuth";
 
 const Footer = () => {
-  const {user} = useFirebase();
+  const { user } = useAuth();
 
   return (
-    <div style={{backgroundColor: "#FFFFFF"}} >
-      <hr  style={{ borderWidth: '5px' }} />
+    <div style={{ backgroundColor: "#FFFFFF" }}>
+      <hr style={{ borderWidth: "5px" }} />
       <div className="footer-center">
         {/* 1st part */}
         <footer className="footer p-8 text-left">
           <aside>
-            <p style={{fontSize: "16px"}} > Onnanno website</p>
+            <p style={{ fontSize: "16px" }}> Onnanno website</p>
             <div className="grid grid-flow-col gap-4">
               {/* 1 ict */}
-              <a href="https://ictd.gov.bd/" target="_blank" >
+              <a href="https://ictd.gov.bd/" target="_blank">
                 <img src={pics2} className="imgSize" alt="" />
               </a>
               {/* 2 cabinet */}
-              <a href="https://cabinet.gov.bd/" target="_blank" >
+              <a href="https://cabinet.gov.bd/" target="_blank">
                 <img src={pics1} className="imgSize" alt="" />
               </a>
               {/* 3 mygov */}
-              <a href="https://www.mygov.bd/" target="_blank" >
+              <a href="https://www.mygov.bd/" target="_blank">
                 <img src={pics3} className="imgSize" alt="" />
               </a>
             </div>
-            <p style={{color: '#05694E', fontWeight:'bold' }}> User: {user?.email && user.email} </p>
+            <p style={{ color: "#05694E", fontWeight: "bold" }}>
+              {" "}
+              User: {user?.email && user.email}{" "}
+            </p>
           </aside>
           {/* logos */}
-          <nav  >
-            <h6 style={{fontWeight:'bold'}}> যোগাযোগ <br /> support@demo.com </h6>
-            <h6 className="footer-title " style={{fontWeight:'bold'}} > সাথে থাকুন </h6>
-            <div className="grid grid-flow-col gap-4" >
+          <nav>
+            <h6 style={{ fontWeight: "bold" }}>
+              {" "}
+              যোগাযোগ <br /> support@demo.com{" "}
+            </h6>
+            <h6 className="footer-title " style={{ fontWeight: "bold" }}>
+              {" "}
+              সাথে থাকুন{" "}
+            </h6>
+            <div className="grid grid-flow-col gap-4">
               {/* twitter */}
               <a>
                 <svg
@@ -79,7 +88,10 @@ const Footer = () => {
 
         {/* 2nd part */}
         <aside className="mb-2 px-4">
-          <p  >Copyright © {new Date().getFullYear()} - All right reserved by আব্দুর রশীদ সাওম </p>
+          <p>
+            Copyright © {new Date().getFullYear()} - All right reserved by
+            আব্দুর রশীদ সাওম{" "}
+          </p>
         </aside>
       </div>
     </div>

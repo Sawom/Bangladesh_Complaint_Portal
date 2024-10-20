@@ -1,18 +1,18 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import login from "../../assets/others/login.png";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
-import { Helmet } from 'react-helmet-async';
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, handleLogin, error, auth, setError } = useFirebase();
+  const { user, handleLogin, error, auth, setError } = useAuth();
 
   // after login load previous page
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ const Login = () => {
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <Helmet>
-            <title> Login </title>
+        <title> Login </title>
       </Helmet>
       {/* login form */}
       <div className="hero min-h-screen px-3">
@@ -148,14 +148,19 @@ const Login = () => {
                     fontStyle: "bold",
                   }}
                 >
-                  লগইন 
+                  লগইন
                 </button>
                 {/* error */}
                 <p className="text-red-600"> {error} </p>
                 <br />
-                <p> নতুন ইউজার ?
+                <p>
+                  {" "}
+                  নতুন ইউজার ?
                   <Link to="/register">
-                    <span className="font-bold px-3" style={{ color: "#016A4E" }}>
+                    <span
+                      className="font-bold px-3"
+                      style={{ color: "#016A4E" }}
+                    >
                       একাউন্ট করুন
                     </span>
                   </Link>
@@ -166,7 +171,8 @@ const Login = () => {
                   <button
                     onClick={resetPassword}
                     className="btn btn-link font-bold "
-                    style={{ textDecoration: "none", color: "#016A4E" }} >
+                    style={{ textDecoration: "none", color: "#016A4E" }}
+                  >
                     পুনরায় পাসওয়ার্ড সেট করুন
                   </button>
                 </p>

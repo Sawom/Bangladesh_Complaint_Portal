@@ -25,9 +25,10 @@ import UserHome from "./Pages/UserHomePage/UserHome";
 import PrivateRoute from './Authentication/PrivateRoute/PrivateRoute';
 import AdminRoute from './Authentication/AdminRoute/AdminRoute';
 import { HelmetProvider } from 'react-helmet-async';
+import useAuth from './Authentication/useAuth/useAuth';
 
 function App() {
-  const { user, loading, setLoading } = useFirebase();
+  const { user, loading, setLoading } = useAuth();
   const [userInfo, setUserInfo] = useState({});
 
   // to solve header img, userhome's user data update automatically.

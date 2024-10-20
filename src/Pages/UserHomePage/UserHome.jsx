@@ -1,18 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const UserHome = ({ userInfo, setUserInfo }) => {
-  const { user,loading, setLoading } = useFirebase();
+  const { user, loading, setLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   // Fetch user data by email when component mounts
   useEffect(() => {
     if (user && user?.email) {
-      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+      axios
+        .get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -55,7 +56,7 @@ const UserHome = ({ userInfo, setUserInfo }) => {
           <div className="mb-6">
             <img
               className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
-              src={userInfo?.img || "https://via.placeholder.com/200" }
+              src={userInfo?.img || "https://via.placeholder.com/200"}
               alt="Avatar"
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>

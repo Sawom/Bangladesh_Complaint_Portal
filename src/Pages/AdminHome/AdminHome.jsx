@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
-import useFirebase from '../../Authentication/useFirebase/useFirebase';
-import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const AdminHome = ({ userInfo, setUserInfo }) => {
-    const { user,loading, setLoading } = useFirebase();
+  const { user, loading, setLoading } = useAuth();
 
   // Fetch user data by email when component mounts
   useEffect(() => {
     if (user && user?.email) {
-      axios.get(`http://localhost:5000/users?email=${user?.email}`)
+      axios
+        .get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -53,7 +54,7 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
           <div className="mb-6">
             <img
               className="mb-2 w-[200px] h-[200px] rounded-full object-cover"
-              src={userInfo?.img || "https://via.placeholder.com/200" }
+              src={userInfo?.img || "https://via.placeholder.com/200"}
               alt="Avatar"
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>
@@ -93,17 +94,13 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
       <div className="container mx-auto mt-10">
         <div style={{ backgroundColor: "#FFFFFF" }} className="p-3">
           <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
-            Statistic 
+            Statistic
           </h1>
-          
-          
         </div>
-        
       </div>
       <br />
     </div>
-  )
-    
+  );
 };
 
 export default AdminHome;

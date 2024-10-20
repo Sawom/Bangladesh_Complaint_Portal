@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
 import useAdmin from "../../../Authentication/useAdmin/useAdmin";
-import useFirebase from "../../../Authentication/useFirebase/useFirebase";
+import useAuth from "../../../Authentication/useAuth/useAuth";
 
 const Header = ({ userInfo, setUserInfo }) => {
-  const { user, logoutUser } = useFirebase();
+  const { user, logoutUser } = useAuth();
   const [isAdmin] = useAdmin();
 
   // flag get from local storage so that swal can be showed

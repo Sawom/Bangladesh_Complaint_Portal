@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
-import { Helmet } from 'react-helmet-async';
+import useAuth from "../../Authentication/useAuth/useAuth";
 
 const AddReview = () => {
   const { register, handleSubmit, reset } = useForm();
   const [rating, setRating] = useState(null);
-  const { user } = useFirebase();
+  const { user } = useAuth();
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -35,36 +35,37 @@ const AddReview = () => {
   // add review
   const onSubmit = (data) => {
     const formData = new FormData();
-    const {name, email,comments,rating} = data;
-    axios.post("http://localhost:5000/reviews", data)
-      .then((data) => {
-        if (data.data.insertedId) {
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Thanks for your review",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+    const { name, email, comments, rating } = data;
+    axios.post("http://localhost:5000/reviews", data).then((data) => {
+      if (data.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Thanks for your review",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
-      className="p-3" >
+      className="p-3"
+    >
       <Helmet>
-            <title> Post Review </title>
-      </Helmet> 
+        <title> Post Review </title>
+      </Helmet>
       <br />
 
-      <div className="container mx-auto mt-4 mb-4 flex justify-center items-center" >
+      <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
         {/* update form */}
         <div
           className="card w-full max-w-lg shrink-0 p-5 "
-          style={{ backgroundColor: "#FFFFFF" }} >
+          style={{ backgroundColor: "#FFFFFF" }}
+        >
           <h2 className="text-lg"> Add your review to update our service </h2>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
