@@ -5,9 +5,11 @@ import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { divisionsData, problemCategory } from "./bdData";
 import useAuth from "../../Authentication/useAuth/useAuth";
+import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
 
-const PostComplain = () => {
+const PostComplain = ({ userInfo, setUserInfo }) => {
   const { handleSubmit, control, watch, register, reset } = useForm();
+  const [axiosSecure] = useAxiosSecure();
 
   // Watch for the changes in division and district fields
   const watchDivision = watch("division");
@@ -17,14 +19,13 @@ const PostComplain = () => {
   const watchProblem = watch("category");
 
   const { user } = useAuth();
-  const [userInfo, setUserInfo] = useState({});
+  // const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
   // load single user by email
   useEffect(() => {
-    if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/users?email=${user?.email}`)
+    if (user && user?.email) {
+      axiosSecure.get(`/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -38,7 +39,7 @@ const PostComplain = () => {
           setLoading(false); // Set loading to false after fetching
         });
     }
-  }, [user]);
+  }, [user,setUserInfo]);
 
   // Get the selected division and district data dynamically
   const selectedDivisionData = divisionsData.find(

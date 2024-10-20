@@ -47,7 +47,7 @@ function App() {
     const fetchUserData = async () => {
       if (user && user.email) {
         try {
-          const response = await axiosSecure.get(`http://localhost:5000/users?email=${user?.email}`);
+          const response = await axiosSecure.get(`/users?email=${user?.email}`);
           if (response.data.length > 0) {
             setUserInfo(response.data[0]);
           }
@@ -105,14 +105,14 @@ function App() {
                     {/* post complain here */}
                     <Route path="/postcomplains" element={ 
                       <PrivateRoute>
-                        <PostComplain></PostComplain>
+                        <PostComplain userInfo={userInfo} setUserInfo={setUserInfo}  ></PostComplain>
                       </PrivateRoute>
                       } 
                       ></Route>
                     {/* add review. private route */}
                     <Route path="/addreview"  element={ 
                       <PrivateRoute>
-                        <AddReview></AddReview>
+                        <AddReview userInfo={userInfo} setUserInfo={setUserInfo}  ></AddReview>
                       </PrivateRoute>
                       } ></Route>
                     {/* update review. private route */}
