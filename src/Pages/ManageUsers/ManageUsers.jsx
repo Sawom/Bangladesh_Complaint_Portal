@@ -8,7 +8,7 @@ import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
-  const axiosSecure = useAxiosSecure();
+  const [axiosSecure] = useAxiosSecure();
   // State to store search input and result
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -22,7 +22,7 @@ const ManageUsers = () => {
   const fetchUsers = async (page = 1) => {
       try {
           // Include page and limit parameters and limit per page data in the request
-          const response = await axios.get(`http://localhost:5000/users?page=${page}&limit=${limit}`);
+          const response = await axiosSecure.get(`/users?page=${page}&limit=${limit}`);
           setUsers(response.data.users); // collect user data
           // handle pagination data as well
           setTotalResults(response.data.totalResults);
