@@ -24,6 +24,7 @@ import MyReviews from "./Pages/UserHomePage/MyReviews/MyReviews";
 import UserHome from "./Pages/UserHomePage/UserHome";
 import PrivateRoute from './Authentication/PrivateRoute/PrivateRoute';
 import AdminRoute from './Authentication/AdminRoute/AdminRoute';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const { user, loading, setLoading } = useFirebase();
@@ -57,8 +58,9 @@ function App() {
   return (
     <div>
         <AuthProvider>
+          <HelmetProvider>
             <BrowserRouter>
-            <Header userInfo={userInfo} setUserInfo={setUserInfo}  ></Header>
+                <Header userInfo={userInfo} setUserInfo={setUserInfo}  ></Header>
                 <Routes>
                   {/* homepage */}
                   <Route path="/" element={ <Homepage></Homepage> } ></Route>
@@ -136,9 +138,10 @@ function App() {
 
                   <Route path='*' element={ <NotFound></NotFound> } ></Route>
                 </Routes>
-            <Footer></Footer>
-              
+                <Footer></Footer>
             </BrowserRouter>
+          </HelmetProvider>
+            
         </AuthProvider>
     </div>
   )
