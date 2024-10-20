@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
@@ -15,22 +15,24 @@ const ManageUsers = () => {
   // pagination
   const [totalResults, setTotalResults] = useState(0); // Total number of results
   const [currentPage, setCurrentPage] = useState(1); // Current page number
-  const [totalPages, setTotalPages] = useState(1); 
-  const limit = 10; 
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
 
   //step 1: Fetch users initially to search
   const fetchUsers = async (page = 1) => {
-      try {
-          // Include page and limit parameters and limit per page data in the request
-          const response = await axiosSecure.get(`/users?page=${page}&limit=${limit}`);
-          setUsers(response.data.users); // collect user data
-          // handle pagination data as well
-          setTotalResults(response.data.totalResults);
-          setCurrentPage(response.data.currentPage);
-          setTotalPages(response.data.totalPages);
-      } catch (error) {
-          console.error("Error fetching data:", error);
-      }
+    try {
+      // Include page and limit parameters and limit per page data in the request
+      const response = await axiosSecure.get(
+        `/users?page=${page}&limit=${limit}`
+      );
+      setUsers(response.data.users); // collect user data
+      // handle pagination data as well
+      setTotalResults(response.data.totalResults);
+      setCurrentPage(response.data.currentPage);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   // for refetch data load
@@ -45,7 +47,9 @@ const ManageUsers = () => {
     } // Prevent empty search
 
     try {
-      const response = await axios.get(`http://localhost:5000/search/${searchQuery}`);
+      const response = await axios.get(
+        `http://localhost:5000/search/${searchQuery}`
+      );
       setUsers(response.data); // Update the users state with search results
     } catch (error) {
       console.error("Error searching:", error);
@@ -54,43 +58,53 @@ const ManageUsers = () => {
 
   // Function to handle page change
   const handlePageChange = (page) => {
-      fetchUsers(page); // Fetch users for the selected page
+    fetchUsers(page); // Fetch users for the selected page
   };
 
   // make admin
-  const handleMakeAdmin = (user)=>{
+  const handleMakeAdmin = (user) => {
     Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, Make Admin!'
-        })
-        .then( (result)=>{
-            if(result.isConfirmed){
-              axios.patch(`http://localhost:5000/users/admin/${user._id}`)
-              .then( (response)=>{
-                const data = response.data;
-                if (data.modifiedCount){
-                  fetchUsers();
-                  Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: `${user.name} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-              } )
-
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Admin!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:5000/users/admin/${user._id}`)
+          .then((response) => {
+            const data = response.data;
+            if (data.modifiedCount) {
+              fetchUsers();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${user.name} is an Admin Now!`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
             }
-      } )
-  }
+          });
+      }
+    });
+  };
 
   // delete user
   const handleDeleteUser = (delUser) => {
+    if (delUser.email === "asawom250@gmail.com") {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Super Admin cannot be deleted!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -102,7 +116,8 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
-        axios.delete(`http://localhost:5000/users/${delUser._id}`)
+        axios
+          .delete(`http://localhost:5000/users/${delUser._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -111,7 +126,7 @@ const ManageUsers = () => {
                 icon: "success",
                 title: "User has been deleted!",
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 2000,
               });
               // refetch user
               fetchUsers(currentPage);
@@ -137,12 +152,13 @@ const ManageUsers = () => {
       className="p-3"
     >
       <Helmet>
-            <title> Manage User </title>
+        <title> Manage User </title>
       </Helmet>
       <br />
       <div
         className="container mx-auto mt-4 mb-4 p-3"
-        style={{ backgroundColor: "#FFFFFF" }} >
+        style={{ backgroundColor: "#FFFFFF" }}
+      >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
           Total users: {totalResults}
         </h3>
@@ -150,7 +166,7 @@ const ManageUsers = () => {
         {/* Search Box */}
         <div className="flex justify-center mb-4">
           <input
-            style={{width:"70%"}}
+            style={{ width: "70%" }}
             type="text"
             placeholder="Search by NID or Email"
             value={searchQuery}
@@ -188,7 +204,10 @@ const ManageUsers = () => {
               <Table.Body key={usersInfo._id}>
                 <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800">
                   {/* continuous indexing */}
-                  <Table.Cell>  {(currentPage - 1) * limit + index + 1} </Table.Cell> 
+                  <Table.Cell>
+                    {" "}
+                    {(currentPage - 1) * limit + index + 1}{" "}
+                  </Table.Cell>
                   <Table.Cell> {usersInfo._id} </Table.Cell>
                   <Table.Cell>
                     <div className="avatar">
@@ -203,14 +222,17 @@ const ManageUsers = () => {
                   <Table.Cell> {usersInfo.email} </Table.Cell>
                   {/* role */}
                   <Table.Cell>
-                    {
-                      usersInfo.role === 'admin' ? 'admin' : <Button color="gray"
-                      onClick={() => handleMakeAdmin(usersInfo)}
-                      style={{ backgroundColor: "#01864C", color: "white" }}>
-                      <FaUserShield></FaUserShield>
-                    </Button>
-                    }
-                    
+                    {usersInfo.role === "admin" ? (
+                      "admin"
+                    ) : (
+                      <Button
+                        color="gray"
+                        onClick={() => handleMakeAdmin(usersInfo)}
+                        style={{ backgroundColor: "#01864C", color: "white" }}
+                      >
+                        <FaUserShield></FaUserShield>
+                      </Button>
+                    )}
                   </Table.Cell>
                   {/* delete button */}
                   <Table.Cell>
@@ -230,16 +252,20 @@ const ManageUsers = () => {
 
         {/* pagination control button */}
         <div className="flex justify-center mt-4">
-              {Array.from({ length: totalPages }, (_, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={`mx-1 ${currentPage === index + 1 ? 'bg-green-600 text-white' : 'bg-gray-500'}`} >
-                    {index + 1}
-                  </Button>
-              ))}
-          </div>
-
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`mx-1 ${
+                currentPage === index + 1
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-500"
+              }`}
+            >
+              {index + 1}
+            </Button>
+          ))}
+        </div>
       </div>
       <br />
     </div>

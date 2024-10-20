@@ -115,9 +115,9 @@ const ManageReview = () => {
               className="card w-full bg-base-100 shadow-xl my-4"
             >
               <div className="card-body text-left text-black">
-                <h2 className="card-title "> Name: {refs.name} </h2>
-                <h2 className="card-title"> Email: {refs.email} </h2>
-                <p> {refs.comments} </p>
+                <p className="card-title "> Name: {refs.name} </p>
+                <p > <span className="font-bold">Email:</span> {refs.email} </p>
+                <p> <span className="font-bold">Review:</span> {refs.comments} </p>
                 <Rating
                   style={{ maxWidth: 150 }}
                   itemStyles={myStyles}

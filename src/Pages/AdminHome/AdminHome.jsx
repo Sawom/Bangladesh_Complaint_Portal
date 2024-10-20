@@ -119,7 +119,7 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
             <p> <span className="font-bold">Number of total homereview: </span> {stats.homereview} </p>
             <p> <span className="font-bold">Number of total complains: </span> {stats.complains} </p> 
           </div>
-          
+
         </div>
       </div>
       <br />
