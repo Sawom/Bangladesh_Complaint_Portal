@@ -112,12 +112,12 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
           className="card w-full max-w-lg shrink-0 p-5 "
           style={{ backgroundColor: "#FFFFFF" }}
         >
-          <h2 className="text-lg"> what is your complain? tell us </h2>
+          <h2 className="text-lg"> আপনার অভিযোগ কি? আমাদের জানান </h2>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name*</span>
+                <span className="label-text">আপনার নাম*</span>
               </label>
               <input
                 type="text"
@@ -133,7 +133,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
             {/* email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email*</span>
+                <span className="label-text">আপনার ইমেইল*</span>
               </label>
               <input
                 type="email"
@@ -148,7 +148,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
 
             {/* problem category input */}
             <div>
-              <label>Problem Category* </label>
+              <label>সমস্যার ধরন* </label>
               <div>
                 <Controller
                   name="problem"
@@ -176,7 +176,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                         e.target.style.boxShadow = "none";
                       }}
                     >
-                      <option value="">Select problem category</option>
+                      <option value="">সমস্যার ধরন সিলেক্ট করুন</option>
                       {problemCategory.map((problems, idx) => (
                         <option key={idx} value={problems.category}>
                           {problems.category}
@@ -190,7 +190,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
 
             {/* Division Input */}
             <div>
-              <label>Division* </label>
+              <label>বিভাগ* </label>
               <div>
                 <Controller
                   name="division"
@@ -218,7 +218,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                         e.target.style.boxShadow = "none";
                       }}
                     >
-                      <option value="">Select Division</option>
+                      <option value="">বিভাগ নির্বাচন করুন</option>
                       {divisionsData.map((division, idx) => (
                         <option key={idx} value={division.division}>
                           {division.division}
@@ -232,7 +232,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
 
             {/* District Input */}
             <div>
-              <label>District* (select division first) </label>
+              <label>জেলা* (প্রথমে বিভাগ নির্বাচন করুন) </label>
               {watchDivision && (
                 <div>
                   <Controller
@@ -261,7 +261,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                           e.target.style.boxShadow = "none";
                         }}
                       >
-                        <option value="">Select District</option>
+                        <option value="">জেলা নির্বাচন করুন</option>
                         {selectedDivisionData?.district.map((district, idx) => (
                           <option key={idx} value={district.districtname}>
                             {district.districtname}
@@ -276,7 +276,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
 
             {/* sub district */}
             <div>
-              <label>Sub District* (select district first) </label>
+              <label>উপজেলা* (প্রথমে জেলা নির্বাচন করুন) </label>
               {watchDistrict && (
                 <div>
                   <Controller
@@ -305,7 +305,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                           e.target.style.boxShadow = "none";
                         }}
                       >
-                        <option value="">Select sub District</option>
+                        <option value="">উপজেলা নির্বাচন করুন</option>
                         {selectedDistrictData?.subdistrict.map(
                           (subDistrict, idx) => (
                             <option key={idx} value={subDistrict}>
@@ -323,12 +323,12 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
             {/* complain */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your complain* </span>
+                <span className="label-text">আপনার অভিযোগ জানান* </span>
               </label>
               <textarea
                 className="textarea textarea-bordered h-36"
                 name="complain"
-                placeholder="Write your complain here. Either bangla or english. no banglish acceptable"
+                placeholder="আপনার সমস্যা বাংলায় অথবা ইংরেজিতে লিখুন। বাংলিশ গ্রহনযোগ্য নয়। "
                 required
                 {...register("complain", { required: true })}
               ></textarea>
@@ -338,14 +338,13 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text">
-                  prove link* <br />
-                  prove can be img or video link. upload your prove if any in
-                  google drive and send the link. if no prove write none{" "}
+                  প্রমান (যদি থাকে) লিংক* <br />
+                  প্রমান হতে পারে কোন ছবি, ভিডিও। আপনার গুগল ড্রাইভে আপলোড করে সেই লিংক বক্সে শেয়ার করুন।
                 </span>
               </label>
               <input
                 type="text"
-                placeholder="drive or cloud link"
+                placeholder="গুগল ড্রাইভ লিংক"
                 className="input input-bordered"
                 name="provelink"
                 required
@@ -356,7 +355,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
             {/* date */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Date* </span>
+                <span className="label-text">তারিখ* </span>
               </label>
               {/* Controller for Date Input */}
               <Controller
@@ -382,9 +381,8 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}
-              >
-                Submit
+                }}>
+                সাবমিট করুন
               </button>
             </div>
           </form>
