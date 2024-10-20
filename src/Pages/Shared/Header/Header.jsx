@@ -82,21 +82,21 @@ const Header = ({ userInfo, setUserInfo }) => {
               <li className="mb-2">
                 <Link to="/postcomplains">
                   <span style={{ color: "#016A4E" }} className="font-bold">
-                    Complains
+                    অভিযোগ ?
                   </span>
                 </Link>
               </li>
               <li className="mb-2">
                 <Link to="/hotlines">
                   <span style={{ color: "#016A4E" }} className="font-bold">
-                    Hotlines
+                    হটলাইন
                   </span>
                 </Link>
               </li>
               <li>
                 <Link to="/reviews">
                   <span style={{ color: "#016A4E" }} className="font-bold">
-                    Reviews
+                    রিভিউ
                   </span>
                 </Link>
               </li>
@@ -113,21 +113,21 @@ const Header = ({ userInfo, setUserInfo }) => {
             <li>
               <Link to="/postcomplains">
                 <span style={{ color: "#016A4E" }} className="font-bold">
-                  Complains
+                  অভিযোগ ?
                 </span>
               </Link>
             </li>
             <li>
               <Link to="/hotlines">
                 <span style={{ color: "#016A4E" }} className="font-bold">
-                  Hotlines
+                  হটলাইন
                 </span>
               </Link>
             </li>
             <li>
               <Link to="/reviews">
                 <span style={{ color: "#016A4E" }} className="font-bold">
-                  Reviews
+                  রিভিউ
                 </span>
               </Link>
             </li>

@@ -15,7 +15,7 @@ const Footer = () => {
         {/* 1st part */}
         <footer className="footer p-8 text-left">
           <aside>
-            <p style={{ fontSize: "16px" }}> Onnanno website</p>
+            <p style={{ fontSize: "16px" }}> অন্যান্য সরকারি ওয়েবসাইট </p>
             <div className="grid grid-flow-col gap-4">
               {/* 1 ict */}
               <a href="https://ictd.gov.bd/" target="_blank">
@@ -31,19 +31,16 @@ const Footer = () => {
               </a>
             </div>
             <p style={{ color: "#05694E", fontWeight: "bold" }}>
-              {" "}
-              User: {user?.email && user.email}{" "}
+              ইমেইল: {user?.email && user.email}{" "}
             </p>
           </aside>
           {/* logos */}
           <nav>
             <h6 style={{ fontWeight: "bold" }}>
-              {" "}
               যোগাযোগ <br /> support@demo.com{" "}
             </h6>
             <h6 className="footer-title " style={{ fontWeight: "bold" }}>
-              {" "}
-              সাথে থাকুন{" "}
+              সাথে থাকুন
             </h6>
             <div className="grid grid-flow-col gap-4">
               {/* twitter */}
@@ -90,7 +87,7 @@ const Footer = () => {
         <aside className="mb-2 px-4">
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by
-            আব্দুর রশীদ সাওম{" "}
+            Abdur Rashid Sawom
           </p>
         </aside>
       </div>
