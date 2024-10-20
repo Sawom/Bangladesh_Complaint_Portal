@@ -15,8 +15,7 @@ const MyReviews = () => {
   //  for fetch data load
   useEffect(() => {
     if (user && user.email) {
-      axios
-        .get(`http://localhost:5000/reviews?email=${user.email}`)
+      axios.get(`http://localhost:5000/reviews?email=${user.email}`)
         .then((response) => {
           setReviewInfo(response.data);
         })

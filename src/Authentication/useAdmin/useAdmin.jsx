@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../useAxiosSecure/useAxiosSecure";
 import useAuth from "../useAuth/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const useAdmin = () => {
   const { user, loading } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const [axiosSecure] = useAxiosSecure();
 
   // ****** useQuery or axios both can be used for useAdmin******
 
@@ -16,32 +17,40 @@ const useAdmin = () => {
   //           return res.data?.admin;
   //       }
   //   })
-  // return [isAdmin, isAdminLoading]
-
-  const [isAdmin, setIsAdmin] = useState(null);
-  const [isAdminLoading, setIsAdminLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchAdminStatus = async () => {
-      if (user?.email) {
-        try {
-          setIsAdminLoading(true);
-          const response = await axiosSecure.get(`/users/admin/${user.email}`);
-          setIsAdmin(response.data?.admin);
-        } catch (error) {
-          console.error("Error fetching admin status:", error);
-          setIsAdmin(false);
-        } finally {
-          setIsAdminLoading(false);
+  const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
+        queryKey: ['isAdmin', user?.email],
+        enabled: !loading && !!user?.email && !!localStorage.getItem("access-token"),
+        queryFn: async ()=>{
+            const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+            return res?.data?.admin;
         }
-      } else {
-        setIsAdmin(false);
-        setIsAdminLoading(false);
-      }
-    };
+    })
+  return [isAdmin, isAdminLoading]
 
-    fetchAdminStatus();
-  }, [user?.email, axiosSecure]);
+  // const [isAdmin, setIsAdmin] = useState(null);
+  // const [isAdminLoading, setIsAdminLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchAdminStatus = async () => {
+  //     if (user?.email) {
+  //       try {
+  //         setIsAdminLoading(true);
+  //         const response = await axiosSecure.get(`/users/admin/${user.email}`);
+  //         setIsAdmin(response.data?.admin);
+  //       } catch (error) {
+  //         console.error("Error fetching admin status:", error);
+  //         setIsAdmin(false);
+  //       } finally {
+  //         setIsAdminLoading(false);
+  //       }
+  //     } else {
+  //       setIsAdmin(false);
+  //       setIsAdminLoading(false);
+  //     }
+  //   };
+
+  //   fetchAdminStatus();
+  // }, [user?.email, axiosSecure]);
 
   return [isAdmin, isAdminLoading];
 };

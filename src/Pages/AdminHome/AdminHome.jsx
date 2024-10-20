@@ -3,15 +3,16 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import useAuth from "../../Authentication/useAuth/useAuth";
+import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
 
 const AdminHome = ({ userInfo, setUserInfo }) => {
   const { user, loading, setLoading } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
   // Fetch user data by email when component mounts
   useEffect(() => {
     if (user && user?.email) {
-      axios
-        .get(`http://localhost:5000/users?email=${user?.email}`)
+      axiosSecure.get(`http://localhost:5000/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index

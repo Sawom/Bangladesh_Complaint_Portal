@@ -26,10 +26,20 @@ import PrivateRoute from './Authentication/PrivateRoute/PrivateRoute';
 import AdminRoute from './Authentication/AdminRoute/AdminRoute';
 import { HelmetProvider } from 'react-helmet-async';
 import useAuth from './Authentication/useAuth/useAuth';
+import useAxiosSecure from './Authentication/useAxiosSecure/useAxiosSecure';
+
+// tanstack query
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+const queryClient = new QueryClient();
+
 
 function App() {
   const { user, loading, setLoading } = useAuth();
   const [userInfo, setUserInfo] = useState({});
+  const [axiosSecure] = useAxiosSecure();
 
   // to solve header img, userhome's user data update automatically.
   // it changes in Header, UserHome, UpdateUser 
@@ -37,7 +47,7 @@ function App() {
     const fetchUserData = async () => {
       if (user && user.email) {
         try {
-          const response = await axios.get(`http://localhost:5000/users?email=${user?.email}`);
+          const response = await axiosSecure.get(`http://localhost:5000/users?email=${user?.email}`);
           if (response.data.length > 0) {
             setUserInfo(response.data[0]);
           }
@@ -59,90 +69,91 @@ function App() {
   return (
     <div>
         <AuthProvider>
-          <HelmetProvider>
-            <BrowserRouter>
-                <Header userInfo={userInfo} setUserInfo={setUserInfo}  ></Header>
-                <Routes>
-                  {/* homepage */}
-                  <Route path="/" element={ <Homepage></Homepage> } ></Route>
-                  {/* login page */}
-                  <Route path="/login" element={ <Login></Login> } ></Route>
-                  {/* registration page */}
-                  <Route path="/register" element={ <Registration></Registration> } ></Route>
-                  {/* hotlines */}
-                  <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
-                  {/* reviews */}
-                  <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
+          <QueryClientProvider client={queryClient} >
+            <HelmetProvider>
+              <BrowserRouter>
+                  <Header userInfo={userInfo} setUserInfo={setUserInfo}  ></Header>
+                  <Routes>
+                    {/* homepage */}
+                    <Route path="/" element={ <Homepage></Homepage> } ></Route>
+                    {/* login page */}
+                    <Route path="/login" element={ <Login></Login> } ></Route>
+                    {/* registration page */}
+                    <Route path="/register" element={ <Registration></Registration> } ></Route>
+                    {/* hotlines */}
+                    <Route path="/hotlines" element={ <Hotlines></Hotlines> } ></Route>
+                    {/* reviews */}
+                    <Route path="/reviews"  element={ <Reviews></Reviews> } ></Route>
 
-                  {/* user home. nested route. private route */}
-                  <Route path="/userhome"  element={ 
+                    {/* user home. nested route. private route */}
+                    <Route path="/userhome"  element={ 
+                        <PrivateRoute>
+                          <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> 
+                        </PrivateRoute>
+                      } >
+                      <Route path="" element={ <MyReviews  userInfo={userInfo} setUserInfo={setUserInfo} ></MyReviews> } ></Route>
+                      <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
+                    </Route>
+
+                    {/* update user. private route */}
+                    <Route path='/userhome/update/:id' element={ 
                       <PrivateRoute>
-                        <UserHome userInfo={userInfo} setUserInfo={setUserInfo} ></UserHome> 
+                        <UpdateUser setUserInfo={setUserInfo} ></UpdateUser> 
                       </PrivateRoute>
-                    } >
-                    <Route path="" element={ <MyReviews  userInfo={userInfo} setUserInfo={setUserInfo} ></MyReviews> } ></Route>
-                    <Route path="mycomplain" element={ <MyComplain></MyComplain> } ></Route>
-                  </Route>
+                      }  ></Route>
 
-                  {/* update user. private route */}
-                  <Route path='/userhome/update/:id' element={ 
-                    <PrivateRoute>
-                      <UpdateUser setUserInfo={setUserInfo} ></UpdateUser> 
-                    </PrivateRoute>
-                    }  ></Route>
+                    {/* post complain here */}
+                    <Route path="/postcomplains" element={ 
+                      <PrivateRoute>
+                        <PostComplain></PostComplain>
+                      </PrivateRoute>
+                      } 
+                      ></Route>
+                    {/* add review. private route */}
+                    <Route path="/addreview"  element={ 
+                      <PrivateRoute>
+                        <AddReview></AddReview>
+                      </PrivateRoute>
+                      } ></Route>
+                    {/* update review. private route */}
+                    <Route path='/userhome/review/:id'  element={ 
+                      <PrivateRoute>
+                        <UpdateReview></UpdateReview>
+                      </PrivateRoute>
+                      } ></Route>
 
-                  {/* post complain here */}
-                  <Route path="/postcomplains" element={ 
-                    <PrivateRoute>
-                      <PostComplain></PostComplain>
-                    </PrivateRoute>
-                    } 
-                    ></Route>
-                  {/* add review. private route */}
-                  <Route path="/addreview"  element={ 
-                    <PrivateRoute>
-                      <AddReview></AddReview>
-                    </PrivateRoute>
-                    } ></Route>
-                  {/* update review. private route */}
-                  <Route path='/userhome/review/:id'  element={ 
-                    <PrivateRoute>
-                      <UpdateReview></UpdateReview>
-                    </PrivateRoute>
-                    } ></Route>
+                    {/* ***admin routes*** */}
+                    {/* admin home */}
+                    <Route path="/adminhome" element={ 
+                      <AdminRoute>
+                        <AdminHome userInfo={userInfo} setUserInfo={setUserInfo} ></AdminHome>
+                      </AdminRoute>
+                      } ></Route>
+                    {/* manage user */}
+                    <Route path="/manageuser" element={ 
+                      <AdminRoute>
+                        <ManageUsers></ManageUsers>
+                      </AdminRoute>
+                      } > </Route>
+                    {/* manage reviews */}
+                    <Route path="/managereview" element={ 
+                      <AdminRoute>
+                        <ManageReview></ManageReview>
+                      </AdminRoute>
+                      } ></Route>
+                    {/* manage complain */}
+                    <Route path="/managecomplain" element={ 
+                      <AdminRoute>
+                        <ManageComplain></ManageComplain> 
+                      </AdminRoute>
+                      } ></Route>
 
-                  {/* ***admin routes*** */}
-                  {/* admin home */}
-                  <Route path="/adminhome" element={ 
-                    <AdminRoute>
-                      <AdminHome userInfo={userInfo} setUserInfo={setUserInfo} ></AdminHome>
-                    </AdminRoute>
-                    } ></Route>
-                  {/* manage user */}
-                  <Route path="/manageuser" element={ 
-                    <AdminRoute>
-                      <ManageUsers></ManageUsers>
-                    </AdminRoute>
-                    } > </Route>
-                  {/* manage reviews */}
-                  <Route path="/managereview" element={ 
-                    <AdminRoute>
-                      <ManageReview></ManageReview>
-                    </AdminRoute>
-                    } ></Route>
-                  {/* manage complain */}
-                  <Route path="/managecomplain" element={ 
-                    <AdminRoute>
-                      <ManageComplain></ManageComplain> 
-                    </AdminRoute>
-                    } ></Route>
-
-                  <Route path='*' element={ <NotFound></NotFound> } ></Route>
-                </Routes>
-                <Footer></Footer>
-            </BrowserRouter>
+                    <Route path='*' element={ <NotFound></NotFound> } ></Route>
+                  </Routes>
+                  <Footer></Footer>
+              </BrowserRouter>
           </HelmetProvider>
-            
+          </QueryClientProvider>
         </AuthProvider>
     </div>
   )
