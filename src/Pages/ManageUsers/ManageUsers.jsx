@@ -82,7 +82,7 @@ const ManageUsers = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `${user.name} is an Admin Now!`,
+                title: `${user.name} এখন থেকে এডমিন!`,
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -98,7 +98,7 @@ const ManageUsers = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Super Admin cannot be deleted!",
+        title: "সুপার অ্যাডমিন রিমুভ করা যাবে না!",
         showConfirmButton: false,
         timer: 2000,
       });
@@ -106,13 +106,14 @@ const ManageUsers = () => {
     }
 
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, ডিলেট করুন!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
@@ -160,7 +161,7 @@ const ManageUsers = () => {
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-          Total users: {totalResults}
+          মোট ইউজার: {totalResults}
         </h3>
 
         {/* Search Box */}
@@ -168,7 +169,7 @@ const ManageUsers = () => {
           <input
             style={{ width: "70%" }}
             type="text"
-            placeholder="Search by NID or Email"
+            placeholder="এনআইডি অথবা ইমেইল দিয়ে খুঁজুন"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="input input-bordered border-gray-300 rounded p-2"
@@ -176,9 +177,8 @@ const ManageUsers = () => {
           <Button
             onClick={handleSearch}
             className="ml-2"
-            style={{ backgroundColor: "#01864C", color: "white" }}
-          >
-            Search
+            style={{ backgroundColor: "#01864C", color: "white" }} >
+            সার্চ করুন
           </Button>
         </div>
 
@@ -189,14 +189,14 @@ const ManageUsers = () => {
             {/* table head */}
             <Table.Head className="bg-base-content ">
               <Table.HeadCell> # </Table.HeadCell>
-              <Table.HeadCell> Web Id </Table.HeadCell>
-              <Table.HeadCell> Photo </Table.HeadCell>
-              <Table.HeadCell> Name </Table.HeadCell>
-              <Table.HeadCell> Address </Table.HeadCell>
-              <Table.HeadCell> NID </Table.HeadCell>
-              <Table.HeadCell> Email </Table.HeadCell>
-              <Table.HeadCell> Role </Table.HeadCell>
-              <Table.HeadCell> Action </Table.HeadCell>
+              <Table.HeadCell> ওয়েব আইডি </Table.HeadCell>
+              <Table.HeadCell> ছবি </Table.HeadCell>
+              <Table.HeadCell> নাম </Table.HeadCell>
+              <Table.HeadCell> এড্রেস </Table.HeadCell>
+              <Table.HeadCell> এনআইডি </Table.HeadCell>
+              <Table.HeadCell> ইমেইল </Table.HeadCell>
+              <Table.HeadCell> ইউজার রোল </Table.HeadCell>
+              <Table.HeadCell> ডিলেট </Table.HeadCell>
             </Table.Head>
 
             {/* table body. map operation */}
@@ -205,8 +205,7 @@ const ManageUsers = () => {
                 <Table.Row className="bg-white text-black divide-y-2 hover dark:border-gray-800 dark:bg-gray-800">
                   {/* continuous indexing */}
                   <Table.Cell>
-                    {" "}
-                    {(currentPage - 1) * limit + index + 1}{" "}
+                    {(currentPage - 1) * limit + index + 1}
                   </Table.Cell>
                   <Table.Cell> {usersInfo._id} </Table.Cell>
                   <Table.Cell>

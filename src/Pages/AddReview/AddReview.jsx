@@ -43,7 +43,7 @@ const AddReview = ({ userInfo, setUserInfo }) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Thanks for your review",
+          title: "রিভিউ দেওয়ার জন্য ধন্যবাদ",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -67,16 +67,16 @@ const AddReview = ({ userInfo, setUserInfo }) => {
           className="card w-full max-w-lg shrink-0 p-5 "
           style={{ backgroundColor: "#FFFFFF" }}
         >
-          <h2 className="text-lg"> Add your review to update our service </h2>
+          <h2 className="text-lg"> আপনার রিভিউ দিন যাতে আমরা আমাদের সেবার মান আরও উন্নত করতে পারি </h2>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">নাম</span>
               </label>
               <input
                 type="text"
-                placeholder="name"
+                placeholder="নাম"
                 className="input input-bordered"
                 name="name"
                 defaultValue={userInfo?.name}
@@ -88,11 +88,11 @@ const AddReview = ({ userInfo, setUserInfo }) => {
             {/* email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">ইমেইল</span>
               </label>
               <input
                 type="email"
-                placeholder="email"
+                placeholder="ইমেইল"
                 className="input input-bordered"
                 name="email"
                 defaultValue={userInfo?.email}
@@ -104,11 +104,12 @@ const AddReview = ({ userInfo, setUserInfo }) => {
             {/* review */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Review</span>
+                <span className="label-text">আপনার রিভিউ </span>
               </label>
               <textarea
                 className="textarea textarea-bordered h-32"
-                placeholder="Review"
+                placeholder="রিভিউ" 
+                name="comments"
                 {...register("comments", { required: true })}
                 required
               ></textarea>
@@ -117,7 +118,7 @@ const AddReview = ({ userInfo, setUserInfo }) => {
             {/* rating */}
             <div className="form-control rating ">
               <label className="label">
-                <span className="label-text">Your Review</span>
+                <span className="label-text">আপনার রেটিং</span>
               </label>
               {/* Radio buttons for 5-star rating */}
               <div className="flex">
@@ -167,9 +168,8 @@ const AddReview = ({ userInfo, setUserInfo }) => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}
-              >
-                Submit
+                }}>
+                সাবমিট করুন
               </button>
             </div>
           </form>

@@ -46,13 +46,14 @@ const ManageReview = () => {
   // delete review
   const handleDeleteReview = (review) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, ডিলেট করুন!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
@@ -66,7 +67,7 @@ const ManageReview = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Review has been deleted!",
+                title: "রিভিউ ডিলেট করা হয়েছে!",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -77,7 +78,7 @@ const ManageReview = () => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Failed to delete review.",
+              title: "রিভিউ ডিলেট করা সম্ভব হয় নি|",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -106,7 +107,7 @@ const ManageReview = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-            Total review: {totalReview}
+            মোট রিভিউ: {totalReview}
           </h3>
           {/* show reviews */}
           {reviews.map((refs) => (
@@ -115,9 +116,9 @@ const ManageReview = () => {
               className="card w-full bg-base-100 shadow-xl my-4"
             >
               <div className="card-body text-left text-black">
-                <p className="card-title "> Name: {refs.name} </p>
-                <p > <span className="font-bold">Email:</span> {refs.email} </p>
-                <p> <span className="font-bold">Review:</span> {refs.comments} </p>
+                <p className="card-title "> নাম: {refs.name} </p>
+                <p > <span className="font-bold">ইমেইল: </span> {refs.email} </p>
+                <p> <span className="font-bold">রিভিউ: </span> {refs.comments} </p>
                 <Rating
                   style={{ maxWidth: 150 }}
                   itemStyles={myStyles}
@@ -147,8 +148,7 @@ const ManageReview = () => {
                   currentPage === index + 1
                     ? "bg-green-600 text-white"
                     : "bg-gray-500"
-                }`}
-              >
+                }`} >
                 {index + 1}
               </Button>
             ))}
