@@ -316,8 +316,8 @@ const Header = ({ userInfo, setUserInfo }) => {
             </>
           ) : (
             <Link to="/login">
-              <span style={{ color: "#016A4E" }} className="font-bold">
-                লগইন
+              <span style={{ color: "#016A4E" }} className="font-bold flex gap-3">
+                <IoLogIn /> লগইন
               </span>
             </Link>
           )}

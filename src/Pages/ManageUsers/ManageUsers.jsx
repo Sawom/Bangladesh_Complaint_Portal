@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
+import { FaSearch } from "react-icons/fa";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -167,7 +168,7 @@ const ManageUsers = () => {
         {/* Search Box */}
         <div className="flex justify-center mb-4">
           <input
-            style={{ width: "70%" }}
+            style={{ width: "65%" }}
             type="text"
             placeholder="এনআইডি অথবা ইমেইল দিয়ে খুঁজুন"
             value={searchQuery}
@@ -178,7 +179,8 @@ const ManageUsers = () => {
             onClick={handleSearch}
             className="ml-2"
             style={{ backgroundColor: "#01864C", color: "white" }} >
-            সার্চ করুন
+            <span className="flex gap-4"> <FaSearch /> সার্চ </span>
+            
           </Button>
         </div>
 

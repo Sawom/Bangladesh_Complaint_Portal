@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../../Authentication/useAuth/useAuth";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
+import { IoCloudDone } from "react-icons/io5";
 
 const AddReview = ({ userInfo, setUserInfo }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -169,7 +170,7 @@ const AddReview = ({ userInfo, setUserInfo }) => {
                   color: "white",
                   fontStyle: "bold",
                 }}>
-                সাবমিট করুন
+                <span className="flex gap-4"> <IoCloudDone /> সাবমিট করুন </span>  
               </button>
             </div>
           </form>

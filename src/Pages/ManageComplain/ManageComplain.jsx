@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaFilter, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { divisionsData, problemCategory } from "../PostComplain/bdData";
 
@@ -342,13 +342,21 @@ const ManageComplain = () => {
             {/* Submit button to apply filter */}
             <Button
               type="submit"
-              className="ml-2"
+              className="ml-2 mb-4"
               style={{ backgroundColor: "#01864C", color: "white" }}>
-              ফিল্টার 
+              <span className="flex gap-4"> <FaFilter /> ফিল্টার </span>  
             </Button>
           </form>
+          {/* reset button */}
+          <Button
+            onClick={ ()=> fetchComplains(currentPage)}
+            type="submit"
+            className="ml-2"
+            style={{ backgroundColor: "#01864C", color: "white" }}>
+            <span className="flex gap-4"> <FaFilter /> রিসেট </span>  
+          </Button>
         </div>
-
+      
         {/* show complains */}
         {complains.map((coms) => (
           <div

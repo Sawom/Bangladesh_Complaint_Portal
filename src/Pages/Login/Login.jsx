@@ -7,6 +7,7 @@ import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import login from "../../assets/others/login.png";
 import useAuth from "../../Authentication/useAuth/useAuth";
+import { IoLogIn } from "react-icons/io5";
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -146,21 +147,18 @@ const Login = () => {
                     backgroundColor: "#016A4E",
                     color: "white",
                     fontStyle: "bold",
-                  }}
-                >
-                  লগইন
+                  }} >
+                  <span className="flex gap-4"> <IoLogIn /> লগইন </span> 
                 </button>
                 {/* error */}
                 <p className="text-red-600"> {error} </p>
                 <br />
                 <p>
-                  {" "}
                   নতুন ইউজার ?
                   <Link to="/register">
                     <span
                       className="font-bold px-3"
-                      style={{ color: "#016A4E" }}
-                    >
+                      style={{ color: "#016A4E" }} >
                       একাউন্ট করুন
                     </span>
                   </Link>
