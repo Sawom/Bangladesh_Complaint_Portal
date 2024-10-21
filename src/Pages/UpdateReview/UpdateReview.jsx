@@ -41,9 +41,9 @@ const UpdateReview = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Updated!",
+                    title: "রিভিউ আপডেট করা হয়েছে!",
                     showConfirmButton: false,
-                    timer: 2500,
+                    timer: 2000,
                 });
                 // Reset the form after update 
                 useEffect(() => {
@@ -77,16 +77,16 @@ const UpdateReview = () => {
           className="card w-full max-w-lg shrink-0 p-5 "
           style={{ backgroundColor: "#FFFFFF" }}
         >
-          <h2 className="text-lg"> Update your review </h2>
+          <h2 className="text-lg"> রিভিউ আপডেট করুন </h2>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)} >
             {/* name */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">আপনার নাম </span>
               </label>
               <input
                 type="text"
-                placeholder="name"
+                placeholder="নাম"
                 className="input input-bordered"
                 name="name"
                 defaultValue={updateReview.name}
@@ -98,11 +98,11 @@ const UpdateReview = () => {
             {/* email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">আপনার ইমেইল</span>
               </label>
               <input
                 type="email"
-                placeholder="email"
+                placeholder="ইমেইল"
                 className="input input-bordered"
                 name="email"
                 readOnly
@@ -113,11 +113,11 @@ const UpdateReview = () => {
             {/* review */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Review</span>
+                <span className="label-text">আপনার রিভিউ</span>
               </label>
               <textarea
                 className="textarea textarea-bordered h-32"
-                placeholder="Review"
+                placeholder="রিভিউ"
                 {...register("comments", { required: true })}
                 defaultValue={updateReview.comments}
               ></textarea>
@@ -126,7 +126,7 @@ const UpdateReview = () => {
             {/* rating */}
             <div className="form-control rating ">
               <label className="label">
-                <span className="label-text">Your Review</span>
+                <span className="label-text">রেটিং</span>
               </label>
               {/* Radio buttons for 5-star rating */}
                <div className="flex">
@@ -182,9 +182,8 @@ const UpdateReview = () => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}
-              >
-                Submit
+                }}>
+                সাবমিট করুন
               </button>
             </div>
           </form>

@@ -58,7 +58,7 @@ const Reviews = () => {
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-          Total review: {totalReview}{" "}
+          মোট রিভিউ: {totalReview}
         </h3>
         {/* show reviews */}
         {reviews.map((refs) => (
@@ -66,8 +66,8 @@ const Reviews = () => {
             key={reviews._id}
             className="card w-full bg-base-100 shadow-xl my-4" >
             <div className="card-body text-left text-black">
-              <h2 className="card-title "> Name: {refs.name} </h2>
-              <h2 className="card-title"> Email: {refs.email} </h2>
+              <h2 className="card-title "> নাম: {refs.name} </h2>
+              <h2 className="card-title"> ইমেইল: {refs.email} </h2>
               <p> {refs.comments} </p>
               <Rating
                 style={{ maxWidth: 150 }}

@@ -62,7 +62,7 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
           style={{ backgroundColor: "#016A4E" }}
         >
           <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">
-            Profile details
+            প্রোফাইল বিস্তারিত
           </h1>
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">
@@ -75,7 +75,7 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>
               <span style={{ color: "#016A4E", fontWeight: "bold" }}>
-                Edit profile
+                আপডেট প্রোফাইল
               </span>
             </Link>
           </div>
@@ -102,6 +102,9 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
               <span className="font-bold pr-3">ইমেইল: </span>
               {userInfo?.email || "N/A"}
             </p>
+            <p className="mb-4">
+              <span className="font-bold pr-3">ইউজার রোল: </span> <span style={{color: "green"}} className="font-bold " > {userInfo?.role || 'user' } </span> 
+            </p>
           </div>
         </div>
       </div>
@@ -113,11 +116,11 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
             স্ট্যাটিস্টিক্স 
           </h1>
           <div>
-            <p> <span className="font-bold">মোট হটলাইন নাম্বার: </span> {stats.hotline}</p>
-            <p> <span className="font-bold">মোট ইউজার সংখ্যা: </span> {stats.users} </p>
-            <p> <span className="font-bold">মোট রিভিউ সংখ্যা: </span> {stats.reviews} </p>
-            <p> <span className="font-bold">মোট হোমরিভিউ সংখ্যা: </span> {stats.homereview} </p>
-            <p> <span className="font-bold">মোট অভিযোগ সংখ্যা: </span> {stats.complains} </p> 
+            <p className="mb-3"> <span className="font-bold">মোট হটলাইন নাম্বার: </span> {stats.hotline}</p>
+            <p className="mb-3"> <span className="font-bold">মোট ইউজার সংখ্যা: </span> {stats.users} </p>
+            <p className="mb-3"> <span className="font-bold">মোট রিভিউ সংখ্যা: </span> {stats.reviews} </p>
+            <p className="mb-3"> <span className="font-bold">মোট হোমরিভিউ সংখ্যা: </span> {stats.homereview} </p>
+            <p className="mb-3"> <span className="font-bold">মোট অভিযোগ সংখ্যা: </span> {stats.complains} </p> 
           </div>
 
         </div>

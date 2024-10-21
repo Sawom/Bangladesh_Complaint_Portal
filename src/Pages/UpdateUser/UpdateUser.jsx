@@ -65,9 +65,9 @@ const UpdateUser = ({ setUserInfo }) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Updated!",
+          title: "প্রোফাইল আপডেট করা হয়েছে!",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
         });
         // Reset the form after update
         useEffect(() => {
@@ -104,12 +104,12 @@ const UpdateUser = ({ setUserInfo }) => {
           className="card w-full max-w-lg shrink-0 p-5 "
           style={{ backgroundColor: "#FFFFFF" }}
         >
-          <h2 className="text-xl"> Update your profile </h2>
+          <h2 className="text-xl">আপনার প্রোফাইল আপডেট করুন </h2>
           <form className="card-body" onSubmit={handleSubmit(handleUpdate)}>
             {/* web id */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text"> Web ID </span>
+                <span className="label-text"> ওয়েব আইডি </span>
               </label>
               <input
                 type="text"
@@ -124,7 +124,7 @@ const UpdateUser = ({ setUserInfo }) => {
             {/* name */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Update Name</span>
+                <span className="label-text">নাম আপডেট করুন</span>
               </label>
               <input
                 type="text"
@@ -139,7 +139,7 @@ const UpdateUser = ({ setUserInfo }) => {
             {/* address */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text"> Update Address </span>
+                <span className="label-text"> এড্রস আপডেট করুন </span>
               </label>
               <input
                 type="text"
@@ -154,7 +154,7 @@ const UpdateUser = ({ setUserInfo }) => {
             {/* img */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text"> Update your picture </span>
+                <span className="label-text"> ছবি আপডেট করুন </span>
               </label>
               <input
                 type="file"
@@ -169,7 +169,7 @@ const UpdateUser = ({ setUserInfo }) => {
             {/* nid */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text"> Update NID no </span>
+                <span className="label-text"> জাতীয় পরিচয়পত্র আপডেট করুন </span>
               </label>
               <input
                 type="number"
@@ -184,7 +184,7 @@ const UpdateUser = ({ setUserInfo }) => {
             {/* email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">ইমেইল আপডেট করুন </span>
               </label>
               <input
                 type="email"
@@ -207,7 +207,7 @@ const UpdateUser = ({ setUserInfo }) => {
                   fontStyle: "bold",
                 }}
               >
-                Update profile
+                প্রোফাইল আপডেট করুন
               </button>
             </div>
           </form>

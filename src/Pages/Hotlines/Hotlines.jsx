@@ -31,9 +31,9 @@ const Hotlines = () => {
             {/* table head */}
             <Table.Head className="bg-base-content "  >
               <Table.HeadCell> # </Table.HeadCell>
-              <Table.HeadCell> Weblink </Table.HeadCell>
-              <Table.HeadCell> Hotline Number </Table.HeadCell>
-              <Table.HeadCell> Details </Table.HeadCell>
+              <Table.HeadCell> ওয়েবসাইট লিংক </Table.HeadCell>
+              <Table.HeadCell> হটলাইন নাম্বার </Table.HeadCell>
+              <Table.HeadCell> বিস্তারিত </Table.HeadCell>
             </Table.Head>
 
             {/* table body. map operation */}

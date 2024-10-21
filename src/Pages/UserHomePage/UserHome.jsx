@@ -86,6 +86,9 @@ const UserHome = ({ userInfo, setUserInfo }) => {
               <span className="font-bold pr-3">ইমেইল: </span>
               {userInfo?.email || "N/A"}
             </p>
+            <p className="mb-4">
+              <span className="font-bold pr-3">ইউজার রোল: </span> {userInfo?.role || 'user' }
+            </p>
           </div>
         </div>
       </div>
