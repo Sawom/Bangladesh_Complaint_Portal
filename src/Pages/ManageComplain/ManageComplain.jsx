@@ -367,7 +367,7 @@ const ManageComplain = () => {
               <p className="card-title "> নাম: {coms.name} </p>
               <p > <span className="font-bold">ইমেইল:</span>  {coms.email} </p>
               <p>
-                <span className="font-bold">অভিযোগ: </span> {coms.complain}{" "}
+                <span className="font-bold">অভিযোগ: </span> {coms.complain}
               </p>
 
               <p>
@@ -391,7 +391,7 @@ const ManageComplain = () => {
                 </span>
               </p>
               <p>
-                <span className="font-bold">সমস্যার ধরন: </span>{" "}
+                <span className="font-bold">সমস্যার ধরন: </span>
                 {coms.problem}
               </p>
               <p>
@@ -405,7 +405,7 @@ const ManageComplain = () => {
               </p>
               <p>
                 <span className="font-bold">উপজেলা: </span>
-                {coms.subDistrict}{" "}
+                {coms.subDistrict}
               </p>
               {/* delete btn */}
               <Button

@@ -79,7 +79,7 @@ const MyComplain = () => {
             </p>
             {/* complain status */}
             <p>
-              <span className="font-bold">অভিযোগ আপডেট: </span>{" "}
+              <span className="font-bold">অভিযোগ আপডেট: </span>
               <span
                 className="font-bold"
                 style={{ color: complains?.status ? "green" : "black" }}

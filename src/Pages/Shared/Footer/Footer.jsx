@@ -31,13 +31,13 @@ const Footer = () => {
               </a>
             </div>
             <p style={{ color: "#05694E", fontWeight: "bold" }}>
-              ইমেইল: {user?.email && user.email}{" "}
+              ইমেইল: {user?.email && user.email}
             </p>
           </aside>
           {/* logos */}
           <nav>
             <h6 style={{ fontWeight: "bold" }}>
-              যোগাযোগ <br /> support@demo.com{" "}
+              যোগাযোগ <br /> support@demo.com
             </h6>
             <h6 className="footer-title " style={{ fontWeight: "bold" }}>
               সাথে থাকুন

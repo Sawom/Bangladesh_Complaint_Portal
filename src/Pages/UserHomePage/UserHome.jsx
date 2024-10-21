@@ -79,7 +79,7 @@ const UserHome = ({ userInfo, setUserInfo }) => {
               {userInfo?.address || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">এনআইডি: </span>{" "}
+              <span className="font-bold pr-3">এনআইডি: </span>
               {userInfo?.nid || "N/A"}
             </p>
             <p className="mb-4">
