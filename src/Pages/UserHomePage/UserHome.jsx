@@ -46,7 +46,7 @@ const UserHome = ({ userInfo, setUserInfo }) => {
           style={{ backgroundColor: "#016A4E" }}
         >
           <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">
-            Profile details
+            প্রোফাইল বিস্তারিত
           </h1>
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">
@@ -59,7 +59,7 @@ const UserHome = ({ userInfo, setUserInfo }) => {
             />
             <Link className="text-sm" to={`/userhome/update/${userInfo?._id}`}>
               <span style={{ color: "#016A4E", fontWeight: "bold" }}>
-                Edit profile
+                আপডেট প্রোফাইল
               </span>
             </Link>
           </div>
@@ -67,23 +67,23 @@ const UserHome = ({ userInfo, setUserInfo }) => {
           {/* User Information */}
           <div className=" lg:text-lg md:text-lg text-sm ">
             <p className="mb-4 flex">
-              <span className="font-bold pr-3">Web id:</span>
+              <span className="font-bold pr-3">ওয়েব আইডি: </span>
               {userInfo?._id || "N/A"}
             </p>
             <p className="mb-4 flex">
-              <span className="font-bold pr-3">Name:</span>
+              <span className="font-bold pr-3">নাম: </span>
               {userInfo?.name || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Address:</span>
+              <span className="font-bold pr-3">এড্রেস: </span>
               {userInfo?.address || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Nid:</span>{" "}
+              <span className="font-bold pr-3">এনআইডি: </span>{" "}
               {userInfo?.nid || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Email:</span>
+              <span className="font-bold pr-3">ইমেইল: </span>
               {userInfo?.email || "N/A"}
             </p>
           </div>
@@ -94,15 +94,15 @@ const UserHome = ({ userInfo, setUserInfo }) => {
       <div className="container mx-auto mt-10">
         <div style={{ backgroundColor: "#FFFFFF" }} className="p-3">
           <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
-            timeline
+            টাইমলাইন
           </h1>
           {/* nested routes tabs */}
           <div role="tablist" className="tabs tabs-bordered ">
             <Link to="/userhome" role="tab" className="tab ">
-              My Reviews
+              আমার রিভিউ
             </Link>
             <Link to="/userhome/mycomplain" role="tab" className="tab ">
-              My Complain
+              আমার অভিযোগ
             </Link>
           </div>
         </div>

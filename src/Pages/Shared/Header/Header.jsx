@@ -165,7 +165,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                           className=" w-[40px] h-[40px] rounded-full object-cover"
                           alt="Tailwind CSS Navbar component"
                           src={
-                            userInfo?.img || "https://via.placeholder.com/200"
+                            userInfo.img || "https://via.placeholder.com/200"
                           }
                         />
                       </label>
@@ -232,8 +232,8 @@ const Header = ({ userInfo, setUserInfo }) => {
                                     <span
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
-                                    >     
-                                    সব রিভিউ
+                                    >
+                                      সব রিভিউ
                                     </span>
                                   </Link>
                                 </Sidebar.Item>

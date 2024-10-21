@@ -83,23 +83,23 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
           {/* User Information */}
           <div className=" lg:text-lg md:text-lg text-sm ">
             <p className="mb-4 flex">
-              <span className="font-bold pr-3">Web id:</span>
+              <span className="font-bold pr-3">ওয়েব আইডি: </span>
               {userInfo?._id || "N/A"}
             </p>
             <p className="mb-4 flex">
-              <span className="font-bold pr-3">Name:</span>
+              <span className="font-bold pr-3">নাম: </span>
               {userInfo?.name || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Address:</span>
+              <span className="font-bold pr-3">এড্রেস: </span>
               {userInfo?.address || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Nid:</span>{" "}
+              <span className="font-bold pr-3">এনআইডি: </span>{" "}
               {userInfo?.nid || "N/A"}
             </p>
             <p className="mb-4">
-              <span className="font-bold pr-3">Email:</span>
+              <span className="font-bold pr-3">ইমেইল: </span>
               {userInfo?.email || "N/A"}
             </p>
           </div>
@@ -110,14 +110,14 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
       <div className="container mx-auto mt-10">
         <div style={{ backgroundColor: "#FFFFFF" }} className="p-3">
           <h1 className="text-center font-bold lg:text-2xl md:text-2xl text-xl mb-5 mt-5">
-            Statistic
+            স্ট্যাটিস্টিক্স 
           </h1>
           <div>
-            <p> <span className="font-bold">Number of total hotline: </span> {stats.hotline}</p>
-            <p> <span className="font-bold">Number of total users: </span> {stats.users} </p>
-            <p> <span className="font-bold">Number of total reviews: </span> {stats.reviews} </p>
-            <p> <span className="font-bold">Number of total homereview: </span> {stats.homereview} </p>
-            <p> <span className="font-bold">Number of total complains: </span> {stats.complains} </p> 
+            <p> <span className="font-bold">মোট হটলাইন নাম্বার: </span> {stats.hotline}</p>
+            <p> <span className="font-bold">মোট ইউজার সংখ্যা: </span> {stats.users} </p>
+            <p> <span className="font-bold">মোট রিভিউ সংখ্যা: </span> {stats.reviews} </p>
+            <p> <span className="font-bold">মোট হোমরিভিউ সংখ্যা: </span> {stats.homereview} </p>
+            <p> <span className="font-bold">মোট অভিযোগ সংখ্যা: </span> {stats.complains} </p> 
           </div>
 
         </div>
