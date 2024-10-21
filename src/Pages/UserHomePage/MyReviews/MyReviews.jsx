@@ -28,13 +28,14 @@ const MyReviews = () => {
   // delete review
   const handleDeleteReview = (review) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, ডিলেট করুন!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
@@ -46,7 +47,7 @@ const MyReviews = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Review has been deleted!",
+                title: "রিভিউ ডিলেট করা হয়েছে!",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -59,7 +60,7 @@ const MyReviews = () => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Failed to delete review.",
+              title: "রিভিউ ডিলেট করা সম্ভব হয় নি",
               showConfirmButton: false,
               timer: 1500,
             });
