@@ -97,13 +97,14 @@ const ManageComplain = () => {
   // handle received
   const handleReceived = (comp) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Confirm received!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, নিশ্চিত!",
     }).then((result) => {
       if (result.isConfirmed) {
         axios
@@ -115,9 +116,9 @@ const ManageComplain = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `Confirmed for processing!`,
+                text: `প্রক্রিয়াকরণের জন্য নিশ্চিত করা হয়েছে!`,
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 2000,
               });
             }
           });
@@ -128,13 +129,14 @@ const ManageComplain = () => {
   // delete user
   const handleDeleteComplain = (delcomplains) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, ডিলেট করুন!"
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
@@ -148,7 +150,7 @@ const ManageComplain = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Complain has been deleted!",
+                title: "অভিযোগটি ডিলেট করা হয়েছে!",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -161,7 +163,7 @@ const ManageComplain = () => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Failed to delete Complain.",
+              title: "অভিযোগটি ডিলেট করা সম্ভব না",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -184,16 +186,16 @@ const ManageComplain = () => {
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <h3 className="lg:text-3xl mb-5 md:text-2xl text-xl font-bold ml-4 ">
-          Total Complains: {totalComplains}
+          মোট অভিযোগ: {totalComplains}
         </h3>
-        <p className="text-xl font-bold px-5">Filter</p>
+        <p className="text-xl font-bold px-5">ফিল্টার করুন</p>
         <div>
           <form onSubmit={handleSubmit(onSubmitFilter)}>
             {/* grid */}
             <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-5 gap-5">
               {/* category filter */}
               <div>
-                <label>problem category</label>
+                <label>সমস্যার ধরন</label>
                 <br />
                 <select
                   {...register("problem")}
@@ -216,7 +218,7 @@ const ManageComplain = () => {
                     e.target.style.boxShadow = "none";
                   }}
                 >
-                  <option value="">Select category</option>
+                  <option value="">সমস্যার ধরন সিলেক্ট করুন</option>
                   {problemCategory.map((problems, idx) => (
                     <option key={idx} value={problems.category}>
                       {problems.category}
@@ -227,7 +229,7 @@ const ManageComplain = () => {
 
               {/* Division Filter */}
               <div>
-                <label>Division</label>
+                <label>বিভাগ</label>
                 <br />
                 <select
                   {...register("division")}
@@ -250,7 +252,7 @@ const ManageComplain = () => {
                     e.target.style.boxShadow = "none";
                   }}
                 >
-                  <option value="">Select Division</option>
+                  <option value="">বিভাগ সিলেক্ট করুন</option>
                   {divisionsData.map((division, idx) => (
                     <option key={idx} value={division.division}>
                       {division.division}
@@ -261,7 +263,7 @@ const ManageComplain = () => {
 
               {/* District Filter */}
               <div>
-                <label>District</label>
+                <label>জেলা (প্রথমে বিভাগ নির্বাচন করুন) </label>
                 {watchDivision && (
                   <div>
                     <select
@@ -285,7 +287,7 @@ const ManageComplain = () => {
                         e.target.style.boxShadow = "none";
                       }}
                     >
-                      <option value="">Select District</option>
+                      <option value="">জেলা নির্বাচন করুন</option>
                       {selectedDivisionData?.district.map((district, idx) => (
                         <option key={idx} value={district.districtname}>
                           {district.districtname}
@@ -298,7 +300,7 @@ const ManageComplain = () => {
 
               {/* Subdistrict Filter */}
               <div>
-                <label>Subdistrict</label>
+                <label>উপজেলা (প্রথমে জেলা নির্বাচন করুন) </label>
                 {watchDistrict && (
                   <div>
                     <select
@@ -322,7 +324,7 @@ const ManageComplain = () => {
                         e.target.style.boxShadow = "none";
                       }}
                     >
-                      <option value="">Select Subdistrict</option>
+                      <option value="">উপজেলা নির্বাচন করুন</option>
                       {selectedDistrictData?.subdistrict.map(
                         (subDistrict, idx) => (
                           <option key={idx} value={subDistrict}>
@@ -341,9 +343,8 @@ const ManageComplain = () => {
             <Button
               type="submit"
               className="ml-2"
-              style={{ backgroundColor: "#01864C", color: "white" }}
-            >
-              Filter
+              style={{ backgroundColor: "#01864C", color: "white" }}>
+              ফিল্টার 
             </Button>
           </form>
         </div>
@@ -355,14 +356,14 @@ const ManageComplain = () => {
             className="card w-full bg-base-100 shadow-lg my-4"
           >
             <div className="card-body text-left text-black">
-              <p className="card-title "> Name: {coms.name} </p>
-              <p > <span className="font-bold">Email:</span>  {coms.email} </p>
+              <p className="card-title "> নাম: {coms.name} </p>
+              <p > <span className="font-bold">ইমেইল:</span>  {coms.email} </p>
               <p>
-                <span className="font-bold">Complain: </span> {coms.complain}{" "}
+                <span className="font-bold">অভিযোগ: </span> {coms.complain}{" "}
               </p>
 
               <p>
-                <span className="font-bold">Provelink:</span>
+                <span className="font-bold">প্রমান (যদি থাকে) লিংক:</span>
                 <span>
                   <a
                     style={{
@@ -382,20 +383,20 @@ const ManageComplain = () => {
                 </span>
               </p>
               <p>
-                <span className="font-bold">Problem Category: </span>{" "}
+                <span className="font-bold">সমস্যার ধরন: </span>{" "}
                 {coms.problem}
               </p>
               <p>
-                <span className="font-bold">Submission Date:</span> {coms.date}
+                <span className="font-bold">অভিযোগ জমা দেওয়ার তারিখ:</span> {coms.date}
               </p>
               <p>
-                <span className="font-bold">Division:</span> {coms.division}
+                <span className="font-bold">বিভাগ:</span> {coms.division}
               </p>
               <p>
-                <span className="font-bold">District:</span> {coms.district}
+                <span className="font-bold">জেলা:</span> {coms.district}
               </p>
               <p>
-                <span className="font-bold">Sub District: </span>
+                <span className="font-bold">উপজেলা: </span>
                 {coms.subDistrict}{" "}
               </p>
               {/* delete btn */}

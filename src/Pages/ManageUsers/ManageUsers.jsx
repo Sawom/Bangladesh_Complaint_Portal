@@ -64,13 +64,13 @@ const ManageUsers = () => {
   // make admin
   const handleMakeAdmin = (user) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি এটিকে ফিরিয়ে আনতে পারবেন না!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Make Admin!",
+      confirmButtonText: "হ্যাঁ, এডমিন করা হোক",
     }).then((result) => {
       if (result.isConfirmed) {
         axios
@@ -98,7 +98,7 @@ const ManageUsers = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "সুপার অ্যাডমিন রিমুভ করা যাবে না!",
+        title: "সুপার অ্যাডমিন ডিলেট করা যাবে না!",
         showConfirmButton: false,
         timer: 2000,
       });
@@ -125,7 +125,7 @@ const ManageUsers = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "User has been deleted!",
+                title: "ইউজার ডিলেট করা হয়েছে!",
                 showConfirmButton: false,
                 timer: 2000,
               });
@@ -138,7 +138,7 @@ const ManageUsers = () => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Failed to delete User.",
+              title: "ইউজার ডিলেট করা সম্ভব না!",
               showConfirmButton: false,
               timer: 1500,
             });

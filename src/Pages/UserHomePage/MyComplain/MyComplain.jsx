@@ -60,11 +60,11 @@ const MyComplain = () => {
               </span>
             </p>
             <p>
-              <span className="font-bold">সমস্যার ধরন:</span>
+              <span className="font-bold">সমস্যার ধরন: </span>
               {complains.problem}
             </p>
             <p>
-              <span className="font-bold">অভিযোগ জমা দেওয়ার তারিখ:</span>
+              <span className="font-bold">অভিযোগ জমা দেওয়ার তারিখ: </span>
               {complains.date}
             </p>
             <p>

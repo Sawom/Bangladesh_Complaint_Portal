@@ -60,13 +60,14 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
     console.log("Selected Data:", data);
 
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to edit or delete this. Check again!",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি অভিযোগটি ডিলেট অথবা ইডিট করতে পারবেন না। পুনরায় চেক করুন",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, confirm!",
+      cancelButtonText: "ক্যানসেল",
+      confirmButtonText: "হ্যাঁ, নিশ্চিত!",
     }).then((result) => {
       if (result.isConfirmed) {
         const formData = new FormData();
@@ -87,9 +88,9 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Thanks!",
+              text: "ধন্যবাদ! আপনার অভিযোগ গ্রহণ করা হলো",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 2000,
             });
           }
         });
