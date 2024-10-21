@@ -187,7 +187,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                         >
                           {/* User menu */}
                           <span className=" flex justify-between px-5">
-                            <p className="text-2xl ">Menus</p>{" "}
+                            <p className="text-2xl "> সাইডবার </p>
                             <p className="text-3xl">&times;</p>
                           </span>
                         </label>
@@ -209,7 +209,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      Admin Home
+                                      এডমিন হোম
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -221,7 +221,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      Manage User
+                                      সকল ইউজার
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -232,8 +232,8 @@ const Header = ({ userInfo, setUserInfo }) => {
                                     <span
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
-                                    >
-                                      Manage Review
+                                    >     
+                                    সব রিভিউ
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -245,7 +245,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      Manage Complain
+                                      সব অভিযোগ
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -259,7 +259,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      User Home
+                                      ইউজার হোম
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -271,7 +271,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      Add Review
+                                      রিভিউ দিন
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
@@ -283,21 +283,21 @@ const Header = ({ userInfo, setUserInfo }) => {
                                       style={{ color: "#016A4E" }}
                                       className="font-bold"
                                     >
-                                      Post Complain
+                                      অভিযোগ দিন
                                     </span>
                                   </Link>
                                 </Sidebar.Item>
                               </>
                             )}
 
-                            {/* 5 */}
+                            {/* Logout */}
                             <Sidebar.Item icon={HiTable}>
                               <button onClick={logoutFunction}>
                                 <span
                                   style={{ color: "#016A4E" }}
                                   className="font-bold"
                                 >
-                                  Logout
+                                  লগআউট
                                 </span>
                               </button>
                             </Sidebar.Item>
@@ -313,7 +313,7 @@ const Header = ({ userInfo, setUserInfo }) => {
           ) : (
             <Link to="/login">
               <span style={{ color: "#016A4E" }} className="font-bold">
-                Login
+                লগইন
               </span>
             </Link>
           )}
