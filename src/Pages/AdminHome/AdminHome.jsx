@@ -62,7 +62,7 @@ const AdminHome = ({ userInfo, setUserInfo }) => {
           style={{ backgroundColor: "#016A4E" }}
         >
           <h1 className="lg:text-lg md:text-lg text-sm text-white font-bold">
-            প্রোফাইল বিস্তারিত
+            এডমিন প্রোফাইল 
           </h1>
         </div>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-6">

@@ -1,6 +1,10 @@
 import { Sidebar } from "flowbite-react";
 import React, { useEffect } from "react";
-import { HiChartPie, HiTable, HiUser } from "react-icons/hi";
+import { HiTable, HiUser } from "react-icons/hi";
+import { FaHome } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
+import { SiGoogledocs } from "react-icons/si";
+import { IoLogOut,IoLogIn } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../../assets/logo/logo.png";
@@ -203,7 +207,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                             {isAdmin ? (
                               <>
                                 {/* admin home */}
-                                <Sidebar.Item icon={HiUser}>
+                                <Sidebar.Item icon={FaHome}>
                                   <Link to="/adminhome">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -227,7 +231,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                 </Sidebar.Item>
 
                                 {/* manage review */}
-                                <Sidebar.Item icon={HiUser}>
+                                <Sidebar.Item icon={MdRateReview}>
                                   <Link to="/managereview">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -239,7 +243,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                 </Sidebar.Item>
 
                                 {/* manage complain */}
-                                <Sidebar.Item icon={HiUser}>
+                                <Sidebar.Item icon={SiGoogledocs}>
                                   <Link to="/managecomplain">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -253,7 +257,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                             ) : (
                               <>
                                 {/* 1 user home */}
-                                <Sidebar.Item icon={HiChartPie}>
+                                <Sidebar.Item icon={FaHome}>
                                   <Link to="/userhome">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -265,7 +269,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                 </Sidebar.Item>
 
                                 {/*  add review */}
-                                <Sidebar.Item icon={HiUser}>
+                                <Sidebar.Item icon={SiGoogledocs}>
                                   <Link to="/addreview">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -277,7 +281,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                                 </Sidebar.Item>
 
                                 {/* post complains */}
-                                <Sidebar.Item icon={HiUser}>
+                                <Sidebar.Item icon={SiGoogledocs}>
                                   <Link to="/postcomplains">
                                     <span
                                       style={{ color: "#016A4E" }}
@@ -291,7 +295,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                             )}
 
                             {/* Logout */}
-                            <Sidebar.Item icon={HiTable}>
+                            <Sidebar.Item icon={IoLogOut}>
                               <button onClick={logoutFunction}>
                                 <span
                                   style={{ color: "#016A4E" }}
