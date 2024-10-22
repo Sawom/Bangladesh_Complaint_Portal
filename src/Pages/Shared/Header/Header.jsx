@@ -22,7 +22,7 @@ const Header = ({ userInfo, setUserInfo }) => {
     if (showSwal === "true") {
       // Show the Swal message after page reload
       Swal.fire({
-        text: "Now you are registered. Congratulations! Check your email to verify your email address.",
+        text: "এখন আপনি নিবন্ধিত, অভিনন্দন! আপনার ইমেল যাচাই করতে আপনার ইমেল চেক করুন",
         showClass: {
           popup: "animate__animated animate__fadeInDown",
         },
@@ -39,17 +39,17 @@ const Header = ({ userInfo, setUserInfo }) => {
   // logout function
   const logoutFunction = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You will be signed out.",
+      title: "আপনি কি নিশ্চিত ?",
+      text: "আপনি সাইন আউট হবেন",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Signed Out!",
+      confirmButtonText: "হ্যাঁ, সাইন আউট!",
     }).then((result) => {
       if (result.isConfirmed) {
         logoutUser();
-        Swal.fire("Signed out!", "You are signed out.", "success");
+        Swal.fire("সাইন আউট!", "আপনি সাইন আউট হয়ে গেছেন", "ঠিক আছে");
       }
     });
   };
