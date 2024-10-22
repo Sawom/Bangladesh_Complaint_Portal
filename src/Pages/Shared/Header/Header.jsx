@@ -45,6 +45,7 @@ const Header = ({ userInfo, setUserInfo }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
+      cancelButtonText: "ক্যানসেল",
       confirmButtonText: "হ্যাঁ, সাইন আউট!",
     }).then((result) => {
       if (result.isConfirmed) {
