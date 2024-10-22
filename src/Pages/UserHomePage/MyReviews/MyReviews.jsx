@@ -15,7 +15,10 @@ const MyReviews = () => {
   //  for fetch data load
   useEffect(() => {
     if (user && user.email) {
-      axios.get(`http://localhost:5000/reviews?email=${user.email}`)
+      axios
+        .get(
+          `https://bangladesh-complaint-portal-server.onrender.com/reviews?email=${user.email}`
+        )
         .then((response) => {
           setReviewInfo(response.data);
         })
@@ -40,7 +43,9 @@ const MyReviews = () => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
         axios
-          .delete(`http://localhost:5000/reviews/${review._id}`)
+          .delete(
+            `https://bangladesh-complaint-portal-server.onrender.com/reviews/${review._id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -87,7 +92,10 @@ const MyReviews = () => {
           <div className="card-body text-left text-black">
             <h2 className="card-title "> নাম: {refs.name} </h2>
             <h2 className="card-title"> ইমেইল: {refs.email} </h2>
-            <p> <span className="font-bold">রিভিউ: </span> {refs.comments} </p>
+            <p>
+              {" "}
+              <span className="font-bold">রিভিউ: </span> {refs.comments}{" "}
+            </p>
             <Rating
               style={{ maxWidth: 150 }}
               itemStyles={myStyles}

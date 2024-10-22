@@ -36,7 +36,11 @@ const useFirebase = () => {
       if (currentUser) {
         // get token and store client
         const userInfo = { email: currentUser.email };
-        axios.post("http://localhost:5000/jwt", userInfo)
+        axios
+          .post(
+            "https://bangladesh-complaint-portal-server.onrender.com/jwt",
+            userInfo
+          )
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
@@ -49,9 +53,8 @@ const useFirebase = () => {
       } else {
         // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
         localStorage.removeItem("access-token");
-        setLoading(false)
+        setLoading(false);
       }
-      
     });
     return () => {
       return unsubscribe();

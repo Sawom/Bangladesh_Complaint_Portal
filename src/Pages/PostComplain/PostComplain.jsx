@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Controller, useForm } from "react-hook-form";
+import { IoCloudDone } from "react-icons/io5";
 import Swal from "sweetalert2";
-import { divisionsData, problemCategory } from "./bdData";
 import useAuth from "../../Authentication/useAuth/useAuth";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
-import { IoCloudDone } from "react-icons/io5";
+import { divisionsData, problemCategory } from "./bdData";
 
 const PostComplain = ({ userInfo, setUserInfo }) => {
   const { handleSubmit, control, watch, register, reset } = useForm();
@@ -26,7 +26,8 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
   // load single user by email
   useEffect(() => {
     if (user && user?.email) {
-      axiosSecure.get(`/users?email=${user?.email}`)
+      axiosSecure
+        .get(`/users?email=${user?.email}`)
         .then((response) => {
           if (response.data.length > 0) {
             setUserInfo(response.data[0]); // user data is in the first index
@@ -40,7 +41,7 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
           setLoading(false); // Set loading to false after fetching
         });
     }
-  }, [user,setUserInfo]);
+  }, [user, setUserInfo]);
 
   // Get the selected division and district data dynamically
   const selectedDivisionData = divisionsData.find(
@@ -83,18 +84,23 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
           provelink,
           date,
         } = data;
-        axios.post("http://localhost:5000/complains", data).then((data) => {
-          if (data.data.insertedId) {
-            reset();
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              text: "ধন্যবাদ! আপনার অভিযোগ গ্রহণ করা হলো",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          }
-        });
+        axios
+          .post(
+            "https://bangladesh-complaint-portal-server.onrender.com/complains",
+            data
+          )
+          .then((data) => {
+            if (data.data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                text: "ধন্যবাদ! আপনার অভিযোগ গ্রহণ করা হলো",
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            }
+          });
       }
     });
   };
@@ -341,7 +347,8 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
               <label className="label">
                 <span className="label-text">
                   প্রমান (যদি থাকে) লিংক* <br />
-                  প্রমান হতে পারে কোন ছবি, ভিডিও। আপনার গুগল ড্রাইভে আপলোড করে সেই লিংক বক্সে শেয়ার করুন।
+                  প্রমান হতে পারে কোন ছবি, ভিডিও। আপনার গুগল ড্রাইভে আপলোড করে
+                  সেই লিংক বক্সে শেয়ার করুন।
                 </span>
               </label>
               <input
@@ -383,8 +390,12 @@ const PostComplain = ({ userInfo, setUserInfo }) => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}>
-                <span className="flex gap-4"> <IoCloudDone /> সাবমিট করুন </span>  
+                }}
+              >
+                <span className="flex gap-4">
+                  {" "}
+                  <IoCloudDone /> সাবমিট করুন{" "}
+                </span>
               </button>
             </div>
           </form>

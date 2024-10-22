@@ -3,9 +3,9 @@ import "@smastrom/react-rating/style.css";
 import axios from "axios";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Helmet } from 'react-helmet-async';
 
 const ManageReview = () => {
   const [reviews, setReview] = useState([]);
@@ -21,7 +21,7 @@ const ManageReview = () => {
     try {
       // Include page and limit parameters and limit per page data in the request
       const response = await axios.get(
-        `http://localhost:5000/reviews?page=${page}&limit=${limit}`
+        `https://bangladesh-complaint-portal-server.onrender.com/reviews?page=${page}&limit=${limit}`
       );
       setReview(response.data.reviews); // collect user data
       // handle pagination data as well
@@ -58,7 +58,9 @@ const ManageReview = () => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
         axios
-          .delete(`http://localhost:5000/reviews/${review._id}`)
+          .delete(
+            `https://bangladesh-complaint-portal-server.onrender.com/reviews/${review._id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // refetch data load
@@ -96,7 +98,7 @@ const ManageReview = () => {
   return (
     <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
       <Helmet>
-            <title> Manage Review </title>
+        <title> Manage Review </title>
       </Helmet>
       <br />
       <div style={{ backgroundColor: "#E5E5E5" }} className="p-3">
@@ -117,8 +119,14 @@ const ManageReview = () => {
             >
               <div className="card-body text-left text-black">
                 <p className="card-title "> নাম: {refs.name} </p>
-                <p > <span className="font-bold">ইমেইল: </span> {refs.email} </p>
-                <p> <span className="font-bold">রিভিউ: </span> {refs.comments} </p>
+                <p>
+                  {" "}
+                  <span className="font-bold">ইমেইল: </span> {refs.email}{" "}
+                </p>
+                <p>
+                  {" "}
+                  <span className="font-bold">রিভিউ: </span> {refs.comments}{" "}
+                </p>
                 <Rating
                   style={{ maxWidth: 150 }}
                   itemStyles={myStyles}
@@ -148,7 +156,8 @@ const ManageReview = () => {
                   currentPage === index + 1
                     ? "bg-green-600 text-white"
                     : "bg-gray-500"
-                }`} >
+                }`}
+              >
                 {index + 1}
               </Button>
             ))}

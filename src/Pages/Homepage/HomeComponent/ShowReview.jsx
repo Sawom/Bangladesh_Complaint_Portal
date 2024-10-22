@@ -16,7 +16,8 @@ const ShowReview = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/homereview")
+    axios
+      .get("https://bangladesh-complaint-portal-server.onrender.com/homereview")
       .then((response) => {
         setReview(response.data);
       })
@@ -50,8 +51,8 @@ const ShowReview = () => {
           className="mySwiper"
         >
           {review.map((refs) => (
-            <div key={refs._id} >
-              <SwiperSlide >
+            <div key={refs._id}>
+              <SwiperSlide>
                 <div className="card w-full bg-base-100 my-4 flex items-center ">
                   <div className="card-body text-black">
                     <h2 className="card-title "> Name: {refs.name} </h2>
@@ -67,7 +68,6 @@ const ShowReview = () => {
                 </div>
               </SwiperSlide>
             </div>
-            
           ))}
         </Swiper>
       </div>

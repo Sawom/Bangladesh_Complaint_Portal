@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useEffect } from "react";
 import useAuth from "./../useAuth/useAuth";
-import { useNavigate } from "react-router-dom";
 
 const useAxiosSecure = () => {
   const { logoutUser } = useAuth();
   // const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://bangladesh-complaint-portal-server.onrender.com",
   });
 
   // request interceptor to add authorization header for every secure call to teh api
@@ -29,7 +28,7 @@ const useAxiosSecure = () => {
           (error.response.status === 401 || error.response.status === 403)
         ) {
           await logoutUser();
-          //   navigate("/login");
+          // navigate("/login");
         }
         return Promise.reject(error);
       }

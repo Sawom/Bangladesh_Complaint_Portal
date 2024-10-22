@@ -1,76 +1,85 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import useFirebase from "../../Authentication/useFirebase/useFirebase";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Helmet } from 'react-helmet-async';
 
 const UpdateReview = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [updateReview, setUpdateReview] = useState(null);
   const [rating, setRating] = useState(null);
   const { id } = useParams();
 
-   // Fetch existing review data by ID
-    useEffect(() => {
-        const fetchReview = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/reviews/${id}`);
-                setUpdateReview(response.data);
-                // Populate form with fetched data
-                reset({
-                    comments: response.data.comments,
-                    rating: response.data.rating
-                });
-            } catch (error) {
-                console.error('Failed to fetch review data:', error);
-            }
-        };
+  // Fetch existing review data by ID
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        const response = await axios.get(
+          `https://bangladesh-complaint-portal-server.onrender.com/reviews/${id}`
+        );
+        setUpdateReview(response.data);
+        // Populate form with fetched data
+        reset({
+          comments: response.data.comments,
+          rating: response.data.rating,
+        });
+      } catch (error) {
+        console.error("Failed to fetch review data:", error);
+      }
+    };
 
-        fetchReview();
-    }, [id, reset]);
+    fetchReview();
+  }, [id, reset]);
 
-    // handle form submit
-    const onSubmit = async(data)=>{
-        try{
-            const response = await axios.put(`http://localhost:5000/reviews/${id}`, data) ;
-            
-            if (response.data.modifiedCount > 0) {
-        
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "রিভিউ আপডেট করা হয়েছে!",
-                    showConfirmButton: false,
-                    timer: 2000,
-                });
-                // Reset the form after update 
-                useEffect(() => {
-                if (updateReview) {
-                    reset({
-                        comments: updateReview.comments || "",
-                        rating: updateReview.rating || "",
-                    });
-                }
-                }, [updateReview, reset]); 
-                // update user info in reset function
-            }
-        }catch (error) {
-            console.error('Error updating review:', error);
-        }
+  // handle form submit
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.put(
+        `https://bangladesh-complaint-portal-server.onrender.com/reviews/${id}`,
+        data
+      );
+
+      if (response.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "রিভিউ আপডেট করা হয়েছে!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        // Reset the form after update
+        useEffect(() => {
+          if (updateReview) {
+            reset({
+              comments: updateReview.comments || "",
+              rating: updateReview.rating || "",
+            });
+          }
+        }, [updateReview, reset]);
+        // update user info in reset function
+      }
+    } catch (error) {
+      console.error("Error updating review:", error);
     }
+  };
 
   if (!updateReview) return <p>Loading...</p>;
 
   return (
     <div
       style={{ backgroundColor: "#E5E5E5", minHeight: "70vh" }}
-      className="p-3">
-        <Helmet>
-            <title> Update Review </title>
-        </Helmet>
-    <br />
+      className="p-3"
+    >
+      <Helmet>
+        <title> Update Review </title>
+      </Helmet>
+      <br />
       <div className="container mx-auto mt-4 mb-4 flex justify-center items-center">
         {/* update form */}
         <div
@@ -78,7 +87,7 @@ const UpdateReview = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <h2 className="text-lg"> রিভিউ আপডেট করুন </h2>
-          <form className="card-body" onSubmit={handleSubmit(onSubmit)} >
+          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             {/* name */}
             <div className="form-control">
               <label className="label">
@@ -91,7 +100,6 @@ const UpdateReview = () => {
                 name="name"
                 defaultValue={updateReview.name}
                 readOnly
-                
               />
             </div>
 
@@ -129,49 +137,48 @@ const UpdateReview = () => {
                 <span className="label-text">রেটিং</span>
               </label>
               {/* Radio buttons for 5-star rating */}
-               <div className="flex">
-                    <input
-                        type="radio"
-                        name="rating"
-                        value="1"
-                        className="mask mask-star-2 bg-green-500"
-                        {...register("rating", { required: true })}
-                        defaultChecked={updateReview.rating === 1}
-                    />
-                    <input
-                        type="radio"
-                        name="rating"
-                        value="2"
-                        className="mask mask-star-2 bg-green-500"
-                        {...register("rating", { required: true })}
-                        defaultChecked={updateReview.rating === 2}
-                    />
-                    <input
-                        type="radio"
-                        name="rating"
-                        value="3"
-                        className="mask mask-star-2 bg-green-500"
-                        {...register("rating", { required: true })}
-                        defaultChecked={updateReview.rating === 3}
-                    />
-                    <input
-                        type="radio"
-                        name="rating"
-                        value="4"
-                        className="mask mask-star-2 bg-green-500"
-                        {...register("rating", { required: true })}
-                        defaultChecked={updateReview.rating === 4}
-                    />
-                    <input
-                        type="radio"
-                        name="rating"
-                        value="5"
-                        className="mask mask-star-2 bg-green-500"
-                        {...register("rating", { required: true })}
-                        defaultChecked={updateReview.rating === 5}
-                    />
-                </div>
-
+              <div className="flex">
+                <input
+                  type="radio"
+                  name="rating"
+                  value="1"
+                  className="mask mask-star-2 bg-green-500"
+                  {...register("rating", { required: true })}
+                  defaultChecked={updateReview.rating === 1}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="2"
+                  className="mask mask-star-2 bg-green-500"
+                  {...register("rating", { required: true })}
+                  defaultChecked={updateReview.rating === 2}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="3"
+                  className="mask mask-star-2 bg-green-500"
+                  {...register("rating", { required: true })}
+                  defaultChecked={updateReview.rating === 3}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="4"
+                  className="mask mask-star-2 bg-green-500"
+                  {...register("rating", { required: true })}
+                  defaultChecked={updateReview.rating === 4}
+                />
+                <input
+                  type="radio"
+                  name="rating"
+                  value="5"
+                  className="mask mask-star-2 bg-green-500"
+                  {...register("rating", { required: true })}
+                  defaultChecked={updateReview.rating === 5}
+                />
+              </div>
             </div>
 
             {/* sign up button */}
@@ -182,7 +189,8 @@ const UpdateReview = () => {
                   backgroundColor: "#016A4E",
                   color: "white",
                   fontStyle: "bold",
-                }}>
+                }}
+              >
                 সাবমিট করুন
               </button>
             </div>
@@ -190,7 +198,7 @@ const UpdateReview = () => {
         </div>
       </div>
 
-    <br />
+      <br />
     </div>
   );
 };

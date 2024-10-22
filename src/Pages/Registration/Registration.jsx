@@ -3,12 +3,12 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { MdAppRegistration } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import eyeClosed from "../../assets/others/eye_closed.svg";
 import eyeOpen from "../../assets/others/eye_open.svg";
 import reg from "../../assets/others/signup.png";
 import useAuth from "../../Authentication/useAuth/useAuth";
-import { MdAppRegistration } from "react-icons/md";
 
 const img_hosting_url = `https://api.imgbb.com/1/upload?key=32fbe21a538bf8adb6c7b5b1d0abe993`;
 
@@ -73,7 +73,10 @@ const Registration = () => {
                 email: email,
               };
               axios
-                .post("http://localhost:5000/users", newUser)
+                .post(
+                  "https://bangladesh-complaint-portal-server.onrender.com/users",
+                  newUser
+                )
                 .then((data) => {
                   if (data.data.insertedId) {
                     setUser(data);
@@ -260,15 +263,18 @@ const Registration = () => {
                     backgroundColor: "#016A4E",
                     color: "white",
                     fontStyle: "bold",
-                  }}>
-                    <span className="flex gap-4"> <MdAppRegistration /> সাইনআপ করুন </span> 
-                     
+                  }}
+                >
+                  <span className="flex gap-4">
+                    {" "}
+                    <MdAppRegistration /> সাইনআপ করুন{" "}
+                  </span>
                 </button>
               </div>
               {/* error */}
               <p className="text-red-600"> {error} </p>
-              <p >
-                <p>আগেই রেজিষ্ট্রেশন করেছেন ? </p> 
+              <p>
+                <p>আগেই রেজিষ্ট্রেশন করেছেন ? </p>
                 <Link to="/login">
                   <span className="font-bold" style={{ color: "#016A4E" }}>
                     লগইন করুন

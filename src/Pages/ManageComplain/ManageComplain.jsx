@@ -33,7 +33,7 @@ const ManageComplain = () => {
   //step 1: Fetch users initially to search and pagination
   const fetchComplains = async (page = 1, filters = {}) => {
     try {
-      let apiUrl = `http://localhost:5000/complains?page=${page}&limit=${limit}`;
+      let apiUrl = `https://bangladesh-complaint-portal-server.onrender.com/complains?page=${page}&limit=${limit}`;
 
       const queryParams = new URLSearchParams();
       queryParams.append("page", page);
@@ -108,7 +108,9 @@ const ManageComplain = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/complains/received/${comp._id}`)
+          .patch(
+            `https://bangladesh-complaint-portal-server.onrender.com/complains/received/${comp._id}`
+          )
           .then((response) => {
             const data = response.data;
             if (data.modifiedCount) {
@@ -136,12 +138,14 @@ const ManageComplain = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       cancelButtonText: "ক্যানসেল",
-      confirmButtonText: "হ্যাঁ, ডিলেট করুন!"
+      confirmButtonText: "হ্যাঁ, ডিলেট করুন!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
         axios
-          .delete(`http://localhost:5000/complains/${delcomplains._id}`)
+          .delete(
+            `https://bangladesh-complaint-portal-server.onrender.com/complains/${delcomplains._id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // refetch data load
@@ -343,20 +347,28 @@ const ManageComplain = () => {
             <Button
               type="submit"
               className="ml-2 mb-4"
-              style={{ backgroundColor: "#01864C", color: "white" }}>
-              <span className="flex gap-4"> <FaFilter /> ফিল্টার </span>  
+              style={{ backgroundColor: "#01864C", color: "white" }}
+            >
+              <span className="flex gap-4">
+                {" "}
+                <FaFilter /> ফিল্টার{" "}
+              </span>
             </Button>
           </form>
           {/* reset button */}
           <Button
-            onClick={ ()=> fetchComplains(currentPage)}
+            onClick={() => fetchComplains(currentPage)}
             type="submit"
             className="ml-2"
-            style={{ backgroundColor: "#01864C", color: "white" }}>
-            <span className="flex gap-4"> <FaFilter /> রিসেট </span>  
+            style={{ backgroundColor: "#01864C", color: "white" }}
+          >
+            <span className="flex gap-4">
+              {" "}
+              <FaFilter /> রিসেট{" "}
+            </span>
           </Button>
         </div>
-      
+
         {/* show complains */}
         {complains.map((coms) => (
           <div
@@ -365,7 +377,10 @@ const ManageComplain = () => {
           >
             <div className="card-body text-left text-black">
               <p className="card-title "> নাম: {coms.name} </p>
-              <p > <span className="font-bold">ইমেইল:</span>  {coms.email} </p>
+              <p>
+                {" "}
+                <span className="font-bold">ইমেইল:</span> {coms.email}{" "}
+              </p>
               <p>
                 <span className="font-bold">অভিযোগ: </span> {coms.complain}
               </p>
@@ -395,7 +410,8 @@ const ManageComplain = () => {
                 {coms.problem}
               </p>
               <p>
-                <span className="font-bold">অভিযোগ জমা দেওয়ার তারিখ:</span> {coms.date}
+                <span className="font-bold">অভিযোগ জমা দেওয়ার তারিখ:</span>{" "}
+                {coms.date}
               </p>
               <p>
                 <span className="font-bold">বিভাগ:</span> {coms.division}
@@ -417,15 +433,19 @@ const ManageComplain = () => {
                 <FaTrashAlt></FaTrashAlt>
               </Button>
 
-              {coms.status === "received" ? <p className="font-bold " style={{color: "green"}} >Status : Received</p>
-               : 
+              {coms.status === "received" ? (
+                <p className="font-bold " style={{ color: "green" }}>
+                  Status : Received
+                </p>
+              ) : (
                 <Button
                   className="w-20 mt-2"
                   style={{ backgroundColor: "#01864C", color: "white" }}
-                  onClick={() => handleReceived(coms)}>
+                  onClick={() => handleReceived(coms)}
+                >
                   Received
                 </Button>
-              }
+              )}
             </div>
           </div>
         ))}

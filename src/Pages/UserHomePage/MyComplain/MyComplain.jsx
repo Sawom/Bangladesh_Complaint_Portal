@@ -11,7 +11,9 @@ const MyComplain = () => {
   useEffect(() => {
     if (user && user?.email) {
       axios
-        .get(`http://localhost:5000/complains?email=${user.email}`)
+        .get(
+          `https://bangladesh-complaint-portal-server.onrender.com/complains?email=${user.email}`
+        )
         .then((response) => {
           setComplainInfo(response.data);
         })

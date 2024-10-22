@@ -2,10 +2,9 @@ import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FaTrashAlt, FaUserShield } from "react-icons/fa";
+import { FaSearch, FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Authentication/useAxiosSecure/useAxiosSecure";
-import { FaSearch } from "react-icons/fa";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -49,7 +48,7 @@ const ManageUsers = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/search/${searchQuery}`
+        `https://bangladesh-complaint-portal-server.onrender.com/search/${searchQuery}`
       );
       setUsers(response.data); // Update the users state with search results
     } catch (error) {
@@ -75,7 +74,9 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/users/admin/${user._id}`)
+          .patch(
+            `https://bangladesh-complaint-portal-server.onrender.com/users/admin/${user._id}`
+          )
           .then((response) => {
             const data = response.data;
             if (data.modifiedCount) {
@@ -119,7 +120,9 @@ const ManageUsers = () => {
       if (result.isConfirmed) {
         // Perform Axios delete operation
         axios
-          .delete(`http://localhost:5000/users/${delUser._id}`)
+          .delete(
+            `https://bangladesh-complaint-portal-server.onrender.com/users/${delUser._id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // Show success message
@@ -178,9 +181,12 @@ const ManageUsers = () => {
           <Button
             onClick={handleSearch}
             className="ml-2"
-            style={{ backgroundColor: "#01864C", color: "white" }} >
-            <span className="flex gap-4"> <FaSearch /> সার্চ </span>
-            
+            style={{ backgroundColor: "#01864C", color: "white" }}
+          >
+            <span className="flex gap-4">
+              {" "}
+              <FaSearch /> সার্চ{" "}
+            </span>
           </Button>
         </div>
 

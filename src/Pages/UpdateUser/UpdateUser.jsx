@@ -15,7 +15,9 @@ const UpdateUser = ({ setUserInfo }) => {
   // single user data load
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${id}`)
+      .get(
+        `https://bangladesh-complaint-portal-server.onrender.com/users/${id}`
+      )
       .then((response) => setUpdate(response.data))
       .catch((err) => console.error("Error loading user data:", err));
   }, [id]);
@@ -54,7 +56,7 @@ const UpdateUser = ({ setUserInfo }) => {
 
       // Perform the PUT operation
       const response = await axios.put(
-        `http://localhost:5000/users/${id}`,
+        `https://bangladesh-complaint-portal-server.onrender.com/users/${id}`,
         updatedUser
       );
 
